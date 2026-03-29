@@ -1713,3 +1713,94 @@ class PolymorphicOnExprTest(
             eq_(obj, [Foo(type_id=foo_type.id, foo_attr="foo value")])
 
         self.assert_sql_count(testing.db, go, 0 if use_load != "none" else 1)
+
+
+class PolymorphicLoadBaseClassRelationship(fixtures.DeclarativeMappedTest):
+
+    @classmethod
+    def setup_classes(cls):
+        Base = cls.DeclarativeBasic
+
+        class A(Base):
+            __tablename__ = "a"
+            id = Column(Integer, primary_key=True)
+            adata = Column(String(50))
+            bs = relationship("B")
+            type = Column(String(50))
+
+            __mapper_args__ = {
+                "polymorphic_on": type,
+                "polymorphic_identity": "a",
+            }
+
+        class ASub(A):
+            __tablename__ = "asub"
+            id = Column(ForeignKey("a.id"), primary_key=True)
+            asubdata = Column(String(50))
+
+            cs = relationship("C")
+
+            __mapper_args__ = {"polymorphic_identity": "asub"}
+
+        class ASub2(A):
+            __tablename__ = "asub2"
+            id = Column(ForeignKey("a.id"), primary_key=True)
+            asubdata2 = Column(String(50))
+
+            __mapper_args__ = {"polymorphic_identity": "asub2"}
+
+        class B(Base):
+            __tablename__ = "b"
+            id = Column(Integer, primary_key=True)
+            a_id = Column(ForeignKey("a.id"))
+
+        class C(Base):
+            __tablename__ = "c"
+            id = Column(Integer, primary_key=True)
+            a_sub_id = Column(ForeignKey("asub.id"))
+
+    @classmethod
+    def insert_data(cls, connection):
+        A, B, ASub, ASub2, C = cls.classes("A", "B", "ASub", "ASub2", "C")
+        s = Session(connection)
+        s.add(A(id=1, adata="adata", bs=[B(), B()]))
+        s.add(
+            ASub(
+                id=2,
+                adata="adata",
+                asubdata="asubdata",
+                bs=[B(), B()],
+                cs=[C(), C()],
+            )
+        )
+        s.add(ASub2(id=3, adata="adata", asubdata2="asubdata2", bs=[B(), B()]))
+
+        s.commit()
+
+    @testing.combinations(
+        selectinload, joinedload, subqueryload, argnames="fn"
+    )
+    @testing.variation("subclass_option", [True, False])
+    @testing.variation("subclass_select", [True, False])
+    @testing.variation("use_poly", [True, False])
+    def test_load(self, fn, use_poly, subclass_select, subclass_option):
+        A, ASub = self.classes("A", "ASub")
+        if use_poly:
+            alias = with_polymorphic(A, "*", flat=True)
+            base = alias
+            sub = alias.ASub
+        else:
+            base = A
+            sub = ASub
+
+        s = fixture_session()
+        stmt = select(sub if subclass_select else base).options(
+            fn((sub if subclass_option else base).bs)
+        )
+        if subclass_select:
+            stmt = stmt.where(sub.asubdata.is_not(None))
+
+        result = s.scalars(stmt).unique().all()
+        with self.assert_statement_count(testing.db, 0):
+            for obj in result:
+                obj.bs

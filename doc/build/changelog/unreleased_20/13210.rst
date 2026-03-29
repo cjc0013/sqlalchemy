@@ -1,0 +1,7 @@
+.. change::
+    :tags: bug, orm
+    :tickets: 13210
+
+    Fixed issue where using a loader option to load a parent relationship
+    from a subclass paired with :func:`_orm.with_polymorphic` would not
+    apply the loader option correctly.
