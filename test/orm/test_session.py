@@ -2936,8 +2936,13 @@ class NewStyleExecutionTest(_fixtures.FixtureTest):
         for u1 in result:
             u1.addresses
 
-        for elem in catch_opts:
-            eq_(elem, opts)
+        eq_(catch_opts[0], opts)
+        secondary_opts = {
+            **opts,
+            "log_note": f"{loader_fn.__name__} User.addresses",
+        }
+        for elem in catch_opts[1:]:
+            eq_(elem, secondary_opts)
 
 
 class FlushWarningsTest(fixtures.MappedTest):

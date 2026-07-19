@@ -3237,6 +3237,51 @@ class PendingOrphanTestTwoLevel(fixtures.MappedTest):
         assert i1 not in s
         assert a1 not in o1.items
 
+    def test_multilevel_remove_without_expunge_cascade(self):
+        """test #9348"""
+
+        Item, Attribute, order, item, attribute, Order = (
+            self.classes.Item,
+            self.classes.Attribute,
+            self.tables.order,
+            self.tables.item,
+            self.tables.attribute,
+            self.classes.Order,
+        )
+        cascade = "save-update, merge, delete, delete-orphan"
+
+        self.mapper_registry.map_imperatively(
+            Order,
+            order,
+            properties={"items": relationship(Item, cascade=cascade)},
+        )
+        self.mapper_registry.map_imperatively(
+            Item,
+            item,
+            properties={
+                "attributes": relationship(Attribute, cascade=cascade)
+            },
+        )
+        self.mapper_registry.map_imperatively(Attribute, attribute)
+
+        session = fixture_session()
+        order_instance = Order()
+        item_instance = Item()
+        attribute_instance = Attribute()
+        item_instance.attributes.append(attribute_instance)
+        order_instance.items.append(item_instance)
+        session.add(order_instance)
+
+        order_instance.items.remove(item_instance)
+
+        assert item_instance not in session
+        assert attribute_instance not in session
+        eq_(list(session.new), [order_instance])
+
+        session.commit()
+        eq_(session.query(Item).count(), 0)
+        eq_(session.query(Attribute).count(), 0)
+
 
 class DoubleParentO2MOrphanTest(fixtures.MappedTest):
     """Test orphan behavior on an entity that requires

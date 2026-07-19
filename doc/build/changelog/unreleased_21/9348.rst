@@ -1,0 +1,9 @@
+.. change::
+    :tags: bug, orm, unitofwork
+    :tickets: 9348
+
+    Fixed removal of a pending delete-orphan object so that pending descendants
+    connected through their own ``delete-orphan`` cascades are also removed
+    from the :class:`_orm.Session`.  The cleanup no longer requires users to
+    add the broader ``expunge`` cascade merely to prevent those descendants
+    from being inserted during the next flush.

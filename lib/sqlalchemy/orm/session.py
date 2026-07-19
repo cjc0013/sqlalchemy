@@ -3442,6 +3442,18 @@ class Session(_SessionClassMethods, EventTarget):
             states, self, to_transient=to_transient
         )
 
+    def _expunge_pending_orphan(self, state: InstanceState[Any]) -> None:
+        """Detach a pending orphan and its pending delete-orphan graph."""
+
+        cascaded = (
+            st
+            for obj, mapper, st, instance_dict in state.manager.mapper.cascade_iterator(
+                "delete-orphan", state
+            )
+            if st in self._new
+        )
+        self._expunge_states([state, *cascaded])
+
     def _register_persistent(self, states: Set[InstanceState[Any]]) -> None:
         """Register all persistent objects from a flush.
 

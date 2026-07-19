@@ -95,7 +95,7 @@ def _track_cascade_events(descriptor, prop):
 
             if prop.mapper._is_orphan(item_state):
                 if sess and item_state in sess._new:
-                    sess.expunge(item)
+                    sess._expunge_pending_orphan(item_state)
                 else:
                     # the related item may or may not itself be in a
                     # Session, however the parent for which we are catching
@@ -136,7 +136,7 @@ def _track_cascade_events(descriptor, prop):
                 if oldvalue_state in sess._new and prop.mapper._is_orphan(
                     oldvalue_state
                 ):
-                    sess.expunge(oldvalue)
+                    sess._expunge_pending_orphan(oldvalue_state)
         return newvalue
 
     event.listen(
