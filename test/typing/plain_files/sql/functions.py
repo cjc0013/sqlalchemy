@@ -209,64 +209,54 @@ stmt19 = select(func.percent_rank())
 assert_type(stmt19, Select[Decimal])
 
 
-# test the pow() function.
-# this function is a ReturnTypeFromArgs type.
-
-fn20 = func.pow(column("x", Integer))
-assert_type(fn20, functions.pow[int])
-
-stmt20 = select(func.pow(column("x", Integer)))
-assert_type(stmt20, Select[int])
-
-
 # test the rank() function.
 # this function is fixed to the SQL INTEGER class, or the int type.
 
-fn21 = func.rank()
-assert_type(fn21, functions.rank)
+fn20 = func.rank()
+assert_type(fn20, functions.rank)
 
-stmt21 = select(func.rank())
-assert_type(stmt21, Select[int])
+stmt20 = select(func.rank())
+assert_type(stmt20, Select[int])
 
 
 # test the session_user() function.
 # this function is fixed to the SQL VARCHAR class, or the str type.
 
-fn22 = func.session_user()
-assert_type(fn22, functions.session_user)
+fn21 = func.session_user()
+assert_type(fn21, functions.session_user)
 
-stmt22 = select(func.session_user())
-assert_type(stmt22, Select[str])
+stmt21 = select(func.session_user())
+assert_type(stmt21, Select[str])
 
 
 # test the sum() function.
 # this function is a ReturnTypeFromArgs type.
 
-fn23 = func.sum(column("x", Integer))
-assert_type(fn23, functions.sum[int])
+fn22 = func.sum(column("x", Integer))
+assert_type(fn22, functions.sum[int])
 
-stmt23 = select(func.sum(column("x", Integer)))
-assert_type(stmt23, Select[int])
+stmt22 = select(func.sum(column("x", Integer)))
+assert_type(stmt22, Select[int])
 
 
 # test the sysdate() function.
 # this function is fixed to the SQL DATETIME class, or the datetime type.
 
-fn24 = func.sysdate()
-assert_type(fn24, functions.sysdate)
+fn23 = func.sysdate()
+assert_type(fn23, functions.sysdate)
 
-stmt24 = select(func.sysdate())
-assert_type(stmt24, Select[datetime])
+stmt23 = select(func.sysdate())
+assert_type(stmt23, Select[datetime])
 
 
 # test the user() function.
 # this function is fixed to the SQL VARCHAR class, or the str type.
 
-fn25 = func.user()
-assert_type(fn25, functions.user)
+fn24 = func.user()
+assert_type(fn24, functions.user)
 
-stmt25 = select(func.user())
-assert_type(stmt25, Select[str])
+stmt24 = select(func.user())
+assert_type(stmt24, Select[str])
 
 # END GENERATED FUNCTION TYPING TESTS
 

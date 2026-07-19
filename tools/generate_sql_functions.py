@@ -66,11 +66,12 @@ def process_functions(filename: str, cmd: code_writer_cmd) -> str:
 
                     class_name = f"_{fn_class.__name__}_func"
                     if issubclass(fn_class, ReturnTypeFromArgs):
+                        type_var = "_N" if fn_class.__name__ == "avg" else "_T"
                         guess_its_generic = True
                         if issubclass(fn_class, ReturnTypeFromOptionalArgs):
-                            _TEE = "Optional[_T]"
+                            _TEE = f"Optional[{type_var}]"
                         else:
-                            _TEE = "_T"
+                            _TEE = type_var
 
                         buf.write(
                             textwrap.indent(
@@ -84,10 +85,10 @@ def process_functions(filename: str, cmd: code_writer_cmd) -> str:
 @overload
 def {key}( {'  # noqa: A001' if is_reserved_word else ''}
     self,
-    col: ColumnElement[_T],
+    col: ColumnElement[{type_var}],
     *args: _ColumnExpressionOrLiteralArgument[Any],
     **kwargs: Any,
-) -> {class_name}[_T]:
+) -> {class_name}[{type_var}]:
     ...
 
 @overload
@@ -96,7 +97,7 @@ def {key}( {'  # noqa: A001' if is_reserved_word else ''}
     col: _ColumnExpressionArgument[{_TEE}],
     *args: _ColumnExpressionOrLiteralArgument[Any],
     **kwargs: Any,
-) -> {class_name}[_T]:
+) -> {class_name}[{type_var}]:
         ...
 
 @overload
@@ -105,7 +106,7 @@ def {key}( {'  # noqa: A001' if is_reserved_word else ''}
     col: {_TEE},
     *args: _ColumnExpressionOrLiteralArgument[Any],
     **kwargs: Any,
-) -> {class_name}[_T]:
+) -> {class_name}[{type_var}]:
         ...
 
 def {key}( {'  # noqa: A001' if is_reserved_word else ''}
@@ -113,7 +114,7 @@ def {key}( {'  # noqa: A001' if is_reserved_word else ''}
     col: _ColumnExpressionOrLiteralArgument[{_TEE}],
     *args: _ColumnExpressionOrLiteralArgument[Any],
     **kwargs: Any,
-) -> {class_name}[_T]:
+) -> {class_name}[{type_var}]:
     ...
 
     """,
@@ -154,7 +155,9 @@ def {key}(self) -> Type[{_type}]:{_reserved_word}
                     orig_name = fn_class.__name__
                     alias_name = class_name
                     if guess_its_generic:
-                        orig_name += "[_T]"
+                        orig_name += (
+                            "[_N]" if fn_class.__name__ == "avg" else "[_T]"
+                        )
                     alias_mapping[orig_name] = alias_name
 
             m = re.match(
@@ -189,10 +192,18 @@ def {key}(self) -> Type[{_type}]:{_reserved_word}
                         (rtype,) = typing.get_args(orig_base)
                         # The origin type, if rtype is a generic
                         orig_type = typing.get_origin(rtype)
-                        if orig_type is not None:
+                        if fn_class.__name__ == "avg":
+                            coltype = "float"
+                            column_sql_type = "Float"
+                            generic_type = "float"
+                        elif orig_type is not None:
                             coltype = rf"{orig_type.__name__}[int]"
+                            column_sql_type = "Integer"
+                            generic_type = "int"
                         else:
                             coltype = "int"
+                            column_sql_type = "Integer"
+                            generic_type = "int"
 
                         buf.write(
                             textwrap.indent(
@@ -201,10 +212,10 @@ def {key}(self) -> Type[{_type}]:{_reserved_word}
 # test the {key}() function.
 # this function is a ReturnTypeFromArgs type.
 
-fn{count} = func.{key}(column('x', Integer))
-assert_type(fn{count}, functions.{key}[int])
+fn{count} = func.{key}(column('x', {column_sql_type}))
+assert_type(fn{count}, functions.{key}[{generic_type}])
 
-stmt{count} = select(func.{key}(column('x', Integer)))
+stmt{count} = select(func.{key}(column('x', {column_sql_type})))
 assert_type(stmt{count}, Select[{coltype}])
 
 

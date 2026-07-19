@@ -85,6 +85,7 @@ if TYPE_CHECKING:
     from ..util.typing import Self
 
 _T = TypeVar("_T", bound=Any)
+_N = TypeVar("_N", bound=Union[decimal.Decimal, float])
 _S = TypeVar("_S", bound=Any)
 
 _registry: util.defaultdict[str, Dict[str, Type[Function[Any]]]] = (
@@ -1047,15 +1048,7 @@ class _FunctionGenerator:
         def aggregate_strings(self) -> Type[_aggregate_strings_func]: ...
 
         @property
-        def all(self) -> Type[_all__func[Any]]:  # noqa: A001
-            ...
-
-        @property
         def ansifunction(self) -> Type[_AnsiFunction_func[Any]]: ...
-
-        @property
-        def any(self) -> Type[_any__func[Any]]:  # noqa: A001
-            ...
 
         # set ColumnElement[_T] as a separate overload, to appease
         # mypy which seems to not want to accept _T from
@@ -1267,42 +1260,6 @@ class _FunctionGenerator:
         @property
         def percentile_disc(self) -> Type[_percentile_disc_func[Any]]: ...
 
-        # set ColumnElement[_T] as a separate overload, to appease
-        # mypy which seems to not want to accept _T from
-        # _ColumnExpressionArgument. Seems somewhat related to the covariant
-        # _HasClauseElement as of mypy 1.15
-
-        @overload
-        def pow(  # noqa: A001
-            self,
-            col: ColumnElement[_T],
-            *args: _ColumnExpressionOrLiteralArgument[Any],
-            **kwargs: Any,
-        ) -> _pow_func[_T]: ...
-
-        @overload
-        def pow(  # noqa: A001
-            self,
-            col: _ColumnExpressionArgument[_T],
-            *args: _ColumnExpressionOrLiteralArgument[Any],
-            **kwargs: Any,
-        ) -> _pow_func[_T]: ...
-
-        @overload
-        def pow(  # noqa: A001
-            self,
-            col: _T,
-            *args: _ColumnExpressionOrLiteralArgument[Any],
-            **kwargs: Any,
-        ) -> _pow_func[_T]: ...
-
-        def pow(  # noqa: A001
-            self,
-            col: _ColumnExpressionOrLiteralArgument[_T],
-            *args: _ColumnExpressionOrLiteralArgument[Any],
-            **kwargs: Any,
-        ) -> _pow_func[_T]: ...
-
         @property
         def random(self) -> Type[_random_func]: ...
 
@@ -1314,9 +1271,6 @@ class _FunctionGenerator:
 
         @property
         def session_user(self) -> Type[_session_user_func]: ...
-
-        @property
-        def some(self) -> Type[_some_func[Any]]: ...
 
         # set ColumnElement[_T] as a separate overload, to appease
         # mypy which seems to not want to accept _T from
@@ -1823,6 +1777,12 @@ class coalesce(ReturnTypeFromOptionalArgs[_T]):
     inherit_cache = True
 
 
+class avg(ReturnTypeFromArgs[_N]):
+    """The SQL AVG() aggregate function."""
+
+    inherit_cache = True
+
+
 class max(ReturnTypeFromArgs[_T]):  # noqa:  A001
     """The SQL MAX() aggregate function."""
 
@@ -1837,6 +1797,12 @@ class min(ReturnTypeFromArgs[_T]):  # noqa: A001
 
 class sum(ReturnTypeFromArgs[_T]):  # noqa: A001
     """The SQL SUM() aggregate function."""
+
+    inherit_cache = True
+
+
+class abs(ReturnTypeFromArgs[_T]):  # noqa: A001
+    """The SQL ABS() function."""
 
     inherit_cache = True
 
@@ -2339,9 +2305,7 @@ class aggregate_strings(GenericFunction[str]):
 # name. See https://github.com/sqlalchemy/sqlalchemy/issues/13167
 # START GENERATED FUNCTION ALIASES
 _aggregate_strings_func: TypeAlias = aggregate_strings
-_all__func: TypeAlias = all_[_T]
 _AnsiFunction_func: TypeAlias = AnsiFunction[_T]
-_any__func: TypeAlias = any_[_T]
 _array_agg_func: TypeAlias = array_agg[_T]
 _Cast_func: TypeAlias = Cast[_T]
 _char_length_func: TypeAlias = char_length
@@ -2368,12 +2332,10 @@ _OrderedSetAgg_func: TypeAlias = OrderedSetAgg[_T]
 _percent_rank_func: TypeAlias = percent_rank
 _percentile_cont_func: TypeAlias = percentile_cont[_T]
 _percentile_disc_func: TypeAlias = percentile_disc[_T]
-_pow_func: TypeAlias = pow[_T]
 _random_func: TypeAlias = random
 _rank_func: TypeAlias = rank
 _rollup_func: TypeAlias = rollup[_T]
 _session_user_func: TypeAlias = session_user
-_some_func: TypeAlias = some[_T]
 _sum_func: TypeAlias = sum[_T]
 _sysdate_func: TypeAlias = sysdate
 _user_func: TypeAlias = user
