@@ -304,6 +304,17 @@ class DeclarativeBaseSetupsTest(fixtures.TestBase):
         else:
             argument.fail()
 
+    def test_string_version_id_col(self, decl_base):
+        class A(decl_base):
+            __tablename__ = "a"
+
+            id: Mapped[int] = mapped_column(primary_key=True)
+            version: Mapped[int] = mapped_column("version_id")
+
+            __mapper_args__ = {"version_id_col": "version"}
+
+        is_(A.__mapper__.version_id_col, A.__table__.c.version_id)
+
     @testing.variation(
         "pk_type", ["single", "tuple", "list", "single_str", "list_str"]
     )

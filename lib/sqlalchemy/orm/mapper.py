@@ -204,7 +204,9 @@ class Mapper(
             Sequence[_ORMColumnExprArgument[Any]]
         ] = None,
         always_refresh: bool = False,
-        version_id_col: Optional[_ORMColumnExprArgument[Any]] = None,
+        version_id_col: Optional[
+            Union[_ORMColumnExprArgument[Any], str]
+        ] = None,
         version_id_generator: Optional[
             Union[Literal[False], Callable[[Any], Any]]
         ] = None,
@@ -646,7 +648,8 @@ class Mapper(
 
                 :ref:`mapper_primary_key` - background and example use
 
-        :param version_id_col: A :class:`_schema.Column`
+        :param version_id_col: A :class:`_schema.Column`, or a string attribute
+           name which resolves to a single mapped column,
            that will be used to keep a running version id of rows
            in the table.  This is used to detect concurrent updates or
            the presence of stale data in a flush.  The methodology is to
@@ -714,7 +717,11 @@ class Mapper(
 
         self.always_refresh = always_refresh
 
-        if isinstance(version_id_col, MapperProperty):
+        self._version_id_col_key: Optional[str] = None
+        if isinstance(version_id_col, str):
+            self._version_id_col_key = version_id_col
+            self.version_id_col = None
+        elif isinstance(version_id_col, MapperProperty):
             self.version_id_prop = version_id_col
             self.version_id_col = None
         else:
@@ -840,6 +847,7 @@ class Mapper(
             self._configure_inheritance()
             self._configure_class_instrumentation()
             self._configure_properties()
+            self._configure_version_id_col()
             self._configure_polymorphic_setter()
             self._configure_pks()
             self.registry._flag_new_mapper(self)
@@ -1249,11 +1257,15 @@ class Mapper(
             else:
                 self._identity_class = self.inherits._identity_class
 
-            if self.version_id_col is None:
+            if (
+                self.version_id_col is None
+                and self._version_id_col_key is None
+            ):
                 self.version_id_col = self.inherits.version_id_col
                 self.version_id_generator = self.inherits.version_id_generator
             elif (
-                self.inherits.version_id_col is not None
+                self.version_id_col is not None
+                and self.inherits.version_id_col is not None
                 and self.version_id_col is not self.inherits.version_id_col
             ):
                 util.warn(
@@ -1490,6 +1502,12 @@ class Mapper(
         try:
             prop = self._props[key]
         except KeyError as err:
+            class_attr = self.class_.__dict__.get(key)
+            if (
+                isinstance(class_attr, Column)
+                and class_attr in self._columntoproperty
+            ):
+                return class_attr
             raise sa_exc.ArgumentError(
                 f"Can't determine {argname} column '{key}' - "
                 "no attribute is mapped to this name."
@@ -1508,6 +1526,32 @@ class Mapper(
                 "mapped Column"
             )
         return expr
+
+    def _configure_version_id_col(self) -> None:
+        if self._version_id_col_key is None:
+            return
+
+        self.version_id_col = self._str_arg_to_mapped_col(
+            "version_id_col", self._version_id_col_key
+        )
+        self._version_id_col_key = None
+
+        if (
+            self.inherits is not None
+            and self.inherits.version_id_col is not None
+            and self.version_id_col is not self.inherits.version_id_col
+        ):
+            util.warn(
+                "Inheriting version_id_col '%s' does not match inherited "
+                "version_id_col '%s' and will not automatically populate "
+                "the inherited versioning column. "
+                "version_id_col should only be specified on "
+                "the base-most mapper that includes versioning."
+                % (
+                    self.version_id_col.description,
+                    self.inherits.version_id_col.description,
+                )
+            )
 
     def _configure_pks(self) -> None:
         self.tables = sql_util.find_tables(self.persist_selectable)

@@ -1,0 +1,9 @@
+.. change::
+    :tags: orm, feature
+    :tickets: 6084
+
+    The :paramref:`_orm.Mapper.version_id_col` mapper argument now accepts a
+    string mapped-attribute name, consistent with ``polymorphic_on`` and the
+    explicit ``primary_key`` mapper argument.  The name is resolved only after
+    mapper properties have been configured, so it also works with mappings
+    where the Python attribute and database column names differ.
