@@ -1,0 +1,8 @@
+.. change::
+    :tags: bug, orm, declarative
+    :tickets: 10380
+
+    Fixed annotated dataclass composites so that ``Mapped[Optional[Point]]``
+    makes inferred constituent columns nullable while retaining the dataclass
+    field types.  Explicit ``nullable`` settings on constituent
+    :func:`_orm.mapped_column` constructs continue to take precedence.

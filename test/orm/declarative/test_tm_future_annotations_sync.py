@@ -4391,6 +4391,39 @@ class CompositeTest(fixtures.TestBase, testing.AssertsCompiledSQL):
                     None,
                 )
 
+    def test_optional_composite_sets_nonoptional_fields_nullable(
+        self, decl_base
+    ):
+        """test #10380"""
+
+        @dataclasses.dataclass
+        class Point:
+            x: int
+            y: int
+
+        class Edge(decl_base):
+            __tablename__ = "edge"
+            id: Mapped[int] = mapped_column(primary_key=True)
+            start: Mapped[Point] = composite(
+                mapped_column("x1"), mapped_column("y1")
+            )
+            end: Mapped[Optional[Point]] = composite(
+                mapped_column("x2"), mapped_column("y2")
+            )
+            required_end: Mapped[Optional[Point]] = composite(
+                mapped_column("x3", nullable=False),
+                mapped_column("y3", nullable=False),
+            )
+
+        eq_(Edge.__table__.c.x1.type._type_affinity, Integer)
+        eq_(Edge.__table__.c.y1.type._type_affinity, Integer)
+        eq_(Edge.__table__.c.x2.type._type_affinity, Integer)
+        eq_(Edge.__table__.c.y2.type._type_affinity, Integer)
+        is_true(Edge.__table__.c.x2.nullable)
+        is_true(Edge.__table__.c.y2.nullable)
+        is_false(Edge.__table__.c.x3.nullable)
+        is_false(Edge.__table__.c.y3.nullable)
+
 
 class AllYourFavoriteHitsTest(fixtures.TestBase, testing.AssertsCompiledSQL):
     """try a bunch of common mappings using the new style"""

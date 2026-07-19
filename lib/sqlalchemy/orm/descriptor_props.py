@@ -396,6 +396,10 @@ class CompositeProperty(
         if is_pep593(argument):
             argument = get_args(argument)[0]
 
+        composite_nullable = bool(
+            argument and is_union(argument) and includes_none(argument)
+        )
+
         if argument and self.composite_class is None:
             if isinstance(argument, str) or is_fwd_ref(
                 argument, check_generic=True
@@ -425,7 +429,12 @@ class CompositeProperty(
 
         if is_dataclass(self.composite_class):
             self._setup_for_dataclass(
-                decl_scan, registry, cls, originating_module, key
+                decl_scan,
+                registry,
+                cls,
+                originating_module,
+                key,
+                composite_nullable,
             )
         else:
             for attr in self.attrs:
@@ -475,6 +484,7 @@ class CompositeProperty(
         cls: Type[Any],
         originating_module: Optional[str],
         key: str,
+        composite_nullable: bool,
     ) -> None:
         MappedColumn = util.preloaded.orm_properties.MappedColumn
 
@@ -506,6 +516,8 @@ class CompositeProperty(
                     param.name,
                     param.annotation,
                 )
+                if composite_nullable and not attr._has_nullable:
+                    attr.column.nullable = True
             elif isinstance(attr, schema.Column):
                 decl_base._undefer_column_name(param.name, attr)
 
