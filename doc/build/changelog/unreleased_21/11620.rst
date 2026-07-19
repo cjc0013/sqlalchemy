@@ -1,0 +1,11 @@
+.. change::
+    :tags: sql server, feature
+    :tickets: 11620
+
+    Added the ``mssql_enable_identity_insert`` execution option as the
+    explicit replacement for SQL Server's automatic ``IDENTITY_INSERT``
+    detection.  The legacy behavior remains enabled by default through the
+    ``legacy_identity_insert`` dialect option and now emits a deprecation
+    warning when it activates.  Setting ``legacy_identity_insert=False``
+    disables the automatic behavior without affecting explicitly opted-in
+    statements.

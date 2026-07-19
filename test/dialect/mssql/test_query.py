@@ -10,6 +10,7 @@ from sqlalchemy import func
 from sqlalchemy import Identity
 from sqlalchemy import Integer
 from sqlalchemy import literal
+from sqlalchemy import MetaData
 from sqlalchemy import Numeric
 from sqlalchemy import or_
 from sqlalchemy import PrimaryKeyConstraint
@@ -24,6 +25,7 @@ from sqlalchemy.testing import config
 from sqlalchemy.testing import engines
 from sqlalchemy.testing import eq_
 from sqlalchemy.testing import fixtures
+from sqlalchemy.testing import expect_deprecated
 from sqlalchemy.testing.assertsql import CursorSQL
 from sqlalchemy.testing.assertsql import DialectSQL
 
@@ -152,6 +154,92 @@ class IdentityInsertTest(fixtures.TablesTest, AssertsCompiledSQL):
         conn.execute(t.insert().values({"id": 1, "description": "descrip"}))
 
         eq_(conn.execute(select(t)).first(), (1, "descrip"))
+
+
+class IdentityInsertControlTest(fixtures.TestBase):
+    def _context(
+        self,
+        *,
+        legacy_identity_insert=True,
+        explicit_identity_insert=False,
+        include_identity=True,
+    ):
+        dialect = mssql.MSDialect(
+            legacy_identity_insert=legacy_identity_insert
+        )
+        table = Table(
+            "identity_control",
+            MetaData(),
+            Column("id", Integer, primary_key=True),
+            Column("data", String(30)),
+        )
+        parameters = {"data": "value"}
+        insert_keys = ["data"]
+        if include_identity:
+            parameters["id"] = 1
+            insert_keys.append("id")
+
+        compiled = testing.mock.Mock()
+        compiled.schema_translate_map = None
+        compiled.compile_state.dml_table = table
+        compiled.dml_compile_state._dict_parameters = True
+        compiled.dml_compile_state._insert_col_keys = insert_keys
+        compiled.inline = False
+        compiled.effective_returning = False
+
+        context = object.__new__(mssql.MSExecutionContext)
+        context.isinsert = True
+        context.compiled = compiled
+        context.compiled_parameters = [parameters]
+        context.execution_options = (
+            {"mssql_enable_identity_insert": True}
+            if explicit_identity_insert
+            else {}
+        )
+        context.root_connection = testing.mock.Mock()
+        context.cursor = testing.mock.Mock()
+        context.identifier_preparer = dialect.identifier_preparer
+        context.dialect = dialect
+        context.parameters = [parameters]
+        context.statement = "INSERT"
+        return context
+
+    def test_legacy_path_warns_and_enables(self):
+        context = self._context()
+
+        with expect_deprecated("Automatic SQL Server identity insert"):
+            context.pre_exec()
+
+        assert context._enable_identity_insert
+        eq_(context.root_connection._cursor_execute.call_count, 1)
+
+    def test_legacy_path_can_be_disabled(self):
+        context = self._context(legacy_identity_insert=False)
+        context.pre_exec()
+
+        assert not context._enable_identity_insert
+        assert not context._select_lastrowid
+        eq_(context.root_connection._cursor_execute.call_count, 0)
+
+    def test_execution_option_explicitly_enables(self):
+        context = self._context(
+            legacy_identity_insert=False,
+            explicit_identity_insert=True,
+        )
+        context.pre_exec()
+
+        assert context._enable_identity_insert
+        eq_(context.root_connection._cursor_execute.call_count, 1)
+
+    def test_generated_identity_keeps_lastrowid_path(self):
+        context = self._context(
+            legacy_identity_insert=False,
+            include_identity=False,
+        )
+        context.pre_exec()
+
+        assert not context._enable_identity_insert
+        assert context._select_lastrowid
 
 
 class QueryTest(testing.AssertsExecutionResults, fixtures.TestBase):

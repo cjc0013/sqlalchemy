@@ -1873,22 +1873,45 @@ class MSExecutionContext(default.DefaultExecutionContext):
             ):
                 insert_has_identity = True
                 compile_state = self.compiled.dml_compile_state
-                self._enable_identity_insert = (
+                identity_value_present = (
                     id_column.key in self.compiled_parameters[0]
                 ) or (
                     compile_state._dict_parameters
                     and (id_column.key in compile_state._insert_col_keys)
                 )
+                explicit_identity_insert = self.execution_options.get(
+                    "mssql_enable_identity_insert", False
+                )
+                self._enable_identity_insert = bool(
+                    identity_value_present
+                    and (
+                        self.dialect.legacy_identity_insert
+                        or explicit_identity_insert
+                    )
+                )
+                if (
+                    self._enable_identity_insert
+                    and self.dialect.legacy_identity_insert
+                    and not explicit_identity_insert
+                ):
+                    util.warn_deprecated(
+                        "Automatic SQL Server identity insert is deprecated; "
+                        "use the mssql_enable_identity_insert execution "
+                        "option, or disable legacy_identity_insert on the "
+                        "dialect.",
+                        "2.1",
+                    )
 
             else:
                 insert_has_identity = False
+                identity_value_present = False
                 self._enable_identity_insert = False
 
             self._select_lastrowid = (
                 not self.compiled.inline
                 and insert_has_identity
+                and not identity_value_present
                 and not self.compiled.effective_returning
-                and not self._enable_identity_insert
                 and not self.executemany
             )
 
@@ -3124,7 +3147,10 @@ class MSDialect(default._BackendsMultiReflection, default.DefaultDialect):
     }
 
     engine_config_types = default.DefaultDialect.engine_config_types.union(
-        {"legacy_schema_aliasing": util.asbool}
+        {
+            "legacy_identity_insert": util.asbool,
+            "legacy_schema_aliasing": util.asbool,
+        }
     )
 
     ischema_names = ischema_names
@@ -3201,6 +3227,7 @@ class MSDialect(default._BackendsMultiReflection, default.DefaultDialect):
         json_serializer=None,
         json_deserializer=None,
         legacy_schema_aliasing=None,
+        legacy_identity_insert=True,
         ignore_no_transaction_on_rollback=False,
         **opts,
     ):
@@ -3208,6 +3235,7 @@ class MSDialect(default._BackendsMultiReflection, default.DefaultDialect):
         self.schema_name = schema_name
 
         self.use_scope_identity = use_scope_identity
+        self.legacy_identity_insert = legacy_identity_insert
         self.deprecate_large_types = deprecate_large_types
         self.ignore_no_transaction_on_rollback = (
             ignore_no_transaction_on_rollback
