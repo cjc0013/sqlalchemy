@@ -1021,6 +1021,31 @@ class OperatorClassTest(fixtures.TestBase, testing.AssertsCompiledSQL):
 class ExtensionOperatorTest(fixtures.TestBase, testing.AssertsCompiledSQL):
     __dialect__ = "default"
 
+    @testing.combinations(
+        (True, operator.and_, "x = 1"),
+        (False, operator.and_, "0 = 1"),
+        (True, operator.or_, "1 = 1"),
+        (False, operator.or_, "x = 1"),
+        argnames="value,op,expected",
+    )
+    def test_reverse_boolean_operator(self, value, op, expected):
+        self.assert_compile(op(value, column("x", Boolean)), expected)
+
+    def test_reverse_boolean_operator_custom_type(self):
+        class MyType(UserDefinedType):
+            cache_ok = True
+
+            class comparator_factory(UserDefinedType.Comparator):
+                def __rand__(self, other):
+                    return self.expr.op("reverse_and")(other)
+
+                def __ror__(self, other):
+                    return self.expr.op("reverse_or")(other)
+
+        col = Column("x", MyType())
+        self.assert_compile(True & col, "x reverse_and :x_1")
+        self.assert_compile(False | col, "x reverse_or :x_1")
+
     def test_contains(self):
         class MyType(UserDefinedType):
             cache_ok = True

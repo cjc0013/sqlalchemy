@@ -220,6 +220,13 @@ class Operators:
         """
         return self.operate(and_, other)
 
+    def __rand__(self, other: Any) -> Operators:
+        """Implement the ``&`` operator in reverse.
+
+        See :meth:`.Operators.__and__`.
+        """
+        return self.reverse_operate(and_, other)
+
     def __or__(self, other: Any) -> Operators:
         """Implement the ``|`` operator.
 
@@ -244,6 +251,13 @@ class Operators:
 
         """
         return self.operate(or_, other)
+
+    def __ror__(self, other: Any) -> Operators:
+        """Implement the ``|`` operator in reverse.
+
+        See :meth:`.Operators.__or__`.
+        """
+        return self.reverse_operate(or_, other)
 
     def __invert__(self) -> Operators:
         """Implement the ``~`` operator.

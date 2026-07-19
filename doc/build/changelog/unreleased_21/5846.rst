@@ -1,0 +1,8 @@
+.. change::
+    :tags: sql, feature
+    :tickets: 5846
+
+    Added reverse ``&`` and ``|`` operator support for SQL expressions,
+    including custom comparator implementations.  Expressions such as
+    ``True & boolean_column`` now behave consistently with the corresponding
+    forward operation.

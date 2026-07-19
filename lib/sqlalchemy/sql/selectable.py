@@ -2359,6 +2359,51 @@ class CTE(
             _suffixes=self._suffixes,
         )
 
+    def limit(self, limit: _LimitOffsetType) -> CTE[_KeyColCC_co]:
+        r"""Return a new :class:`_expression.CTE` with a SQL ``LIMIT``
+        applied to its SELECT statement.
+
+        This is particularly useful for applying a limit to the complete
+        compound statement of a recursive CTE.
+
+        :param limit: an integer LIMIT parameter, or a SQL expression that
+         provides an integer result. Pass ``None`` to reset it.
+        """
+        assert isinstance(
+            self.element, GenerativeSelect
+        ), f"CTE element f{self.element} does not support limit()"
+
+        return CTE._construct(
+            self.element.limit(limit),
+            name=self.name,
+            recursive=self.recursive,
+            nesting=self.nesting,
+            _restates=self._get_reference_cte(),
+            _prefixes=self._prefixes,
+            _suffixes=self._suffixes,
+        )
+
+    def offset(self, offset: _LimitOffsetType) -> CTE[_KeyColCC_co]:
+        r"""Return a new :class:`_expression.CTE` with a SQL ``OFFSET``
+        applied to its SELECT statement.
+
+        :param offset: an integer OFFSET parameter, or a SQL expression that
+         provides an integer result. Pass ``None`` to reset it.
+        """
+        assert isinstance(
+            self.element, GenerativeSelect
+        ), f"CTE element f{self.element} does not support offset()"
+
+        return CTE._construct(
+            self.element.offset(offset),
+            name=self.name,
+            recursive=self.recursive,
+            nesting=self.nesting,
+            _restates=self._get_reference_cte(),
+            _prefixes=self._prefixes,
+            _suffixes=self._suffixes,
+        )
+
     def _get_reference_cte(self) -> CTE[_KeyColCC_co]:
         """
         A recursive CTE is updated to attach the recursive part.

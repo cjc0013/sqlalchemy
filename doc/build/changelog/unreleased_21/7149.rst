@@ -1,0 +1,8 @@
+.. change::
+    :tags: orm, feature
+    :tickets: 7149
+
+    Added opt-in :func:`_automap.snake_case_scalar_relationship` and
+    :func:`_automap.snake_case_collection_relationship` naming functions for
+    Automap relationships.  Existing default relationship names are
+    unchanged.

@@ -19,4 +19,8 @@ API Reference
 
 .. autofunction:: name_for_collection_relationship
 
+.. autofunction:: snake_case_scalar_relationship
+
+.. autofunction:: snake_case_collection_relationship
+
 .. autofunction:: generate_relationship

@@ -278,6 +278,19 @@ class CTETest(fixtures.TestBase, AssertsCompiledSQL):
             "SELECT cte.x FROM cte",
         )
 
+    def test_recursive_union_limit_offset(self):
+        cte = select(literal(0).label("x")).cte("cte", recursive=True)
+        cte = cte.union_all(select(cte.c.x + 1)).limit(30).offset(2)
+
+        self.assert_compile(
+            select(cte),
+            "WITH RECURSIVE cte(x) AS "
+            "(SELECT :param_1 AS x UNION ALL "
+            "SELECT cte.x + :x_1 AS anon_1 FROM cte "
+            "LIMIT :param_2 OFFSET :param_3) "
+            "SELECT cte.x FROM cte",
+        )
+
     def test_recursive_union_alias_one(self):
         s1 = select(literal(0).label("x"))
         cte = s1.cte(name="cte", recursive=True)

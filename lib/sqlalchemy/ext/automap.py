@@ -714,6 +714,7 @@ be applied as::
 from __future__ import annotations
 
 import dataclasses
+import re
 from typing import Any
 from typing import Callable
 from typing import cast
@@ -880,6 +881,41 @@ def name_for_collection_relationship(
 
     """
     return referred_cls.__name__.lower() + "_collection"
+
+
+def _camel_to_snake_case(name: str) -> str:
+    name = re.sub(r"(.)([A-Z][a-z]+)", r"\1_\2", name)
+    return re.sub(r"([a-z0-9])([A-Z])", r"\1_\2", name).lower()
+
+
+def snake_case_scalar_relationship(
+    base: Type[Any],
+    local_cls: Type[Any],
+    referred_cls: Type[Any],
+    constraint: ForeignKeyConstraint,
+) -> str:
+    """Return a snake_case relationship name for a scalar reference.
+
+    This function may be passed to
+    :paramref:`.AutomapBase.prepare.name_for_scalar_relationship` as an
+    opt-in alternative to the default naming function.
+    """
+    return _camel_to_snake_case(referred_cls.__name__)
+
+
+def snake_case_collection_relationship(
+    base: Type[Any],
+    local_cls: Type[Any],
+    referred_cls: Type[Any],
+    constraint: ForeignKeyConstraint,
+) -> str:
+    """Return a snake_case relationship name for a collection reference.
+
+    This function may be passed to
+    :paramref:`.AutomapBase.prepare.name_for_collection_relationship` as an
+    opt-in alternative to the default naming function.
+    """
+    return _camel_to_snake_case(referred_cls.__name__) + "_collection"
 
 
 class GenerateRelationshipType(Protocol):

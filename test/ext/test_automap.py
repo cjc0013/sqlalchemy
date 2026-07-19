@@ -264,6 +264,26 @@ class AutomapTest(fixtures.MappedTest):
         u1.coll_cls_addresses.append(a1)
         assert a1.scalar_cls_users is u1
 
+    def test_snake_case_relationship_naming_schemes(self):
+        from sqlalchemy.ext.automap import snake_case_collection_relationship
+        from sqlalchemy.ext.automap import snake_case_scalar_relationship
+
+        Base = automap_base(metadata=self.tables_test_metadata)
+
+        class ProcessStatus(Base):
+            __table__ = self.tables.users
+
+        Base.prepare(
+            name_for_scalar_relationship=snake_case_scalar_relationship,
+            name_for_collection_relationship=(
+                snake_case_collection_relationship
+            ),
+        )
+
+        Address = Base.classes.addresses
+        assert "process_status" in Address.__mapper__.relationships
+        assert "addresses_collection" in ProcessStatus.__mapper__.relationships
+
     def test_relationship_m2m(self):
         Base = automap_base(metadata=self.tables_test_metadata)
 

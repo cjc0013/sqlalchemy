@@ -1,0 +1,8 @@
+.. change::
+    :tags: sql, feature
+    :tickets: 5564
+
+    Added :meth:`_sql.CTE.limit` and :meth:`_sql.CTE.offset`, allowing limits
+    and offsets to be applied to the complete SELECT or compound SELECT held
+    by a CTE.  Recursive CTE identity is preserved when either method is
+    chained after :meth:`_sql.CTE.union` or :meth:`_sql.CTE.union_all`.
