@@ -1,0 +1,9 @@
+.. change::
+    :tags: bug, orm, declarative
+    :tickets: 9147
+
+    Fixed a memory leak in declarative mappings that use
+    ``__declare_first__`` or ``__declare_last__``.  Declarative now installs
+    one shared pair of mapper-configuration listeners and keeps only weak
+    references to participating mapped classes, instead of installing a new
+    global listener that strongly retained every such class.

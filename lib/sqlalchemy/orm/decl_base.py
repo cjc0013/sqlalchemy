@@ -119,6 +119,47 @@ class _DeclMappedClassProtocol(MappedClassProtocol[_O], Protocol):
     def __declare_last__(self) -> None: ...
 
 
+_declared_first_classes: weakref.WeakKeyDictionary[
+    _RegistryType, List[weakref.ReferenceType[Type[Any]]]
+] = weakref.WeakKeyDictionary()
+_declared_last_classes: weakref.WeakKeyDictionary[
+    _RegistryType, List[weakref.ReferenceType[Type[Any]]]
+] = weakref.WeakKeyDictionary()
+def _run_declared_event(
+    classes_by_registry: weakref.WeakKeyDictionary[
+        _RegistryType, List[weakref.ReferenceType[Type[Any]]]
+    ],
+    method_name: str,
+) -> None:
+    for registry, class_refs in list(classes_by_registry.items()):
+        live_refs: List[weakref.ReferenceType[Type[Any]]] = []
+        for class_ref in class_refs:
+            cls = class_ref()
+            if cls is None:
+                continue
+            live_refs.append(class_ref)
+            getattr(cls, method_name)()
+        if live_refs:
+            classes_by_registry[registry] = live_refs
+        else:
+            classes_by_registry.pop(registry, None)
+
+
+def _run_declare_first() -> None:
+    _run_declared_event(_declared_first_classes, "__declare_first__")
+
+
+def _run_declare_last() -> None:
+    _run_declared_event(_declared_last_classes, "__declare_last__")
+
+
+def _install_declared_event_listeners() -> None:
+    if not event.contains(Mapper, "before_configured", _run_declare_first):
+        event.listen(Mapper, "before_configured", _run_declare_first)
+    if not event.contains(Mapper, "after_configured", _run_declare_last):
+        event.listen(Mapper, "after_configured", _run_declare_last)
+
+
 def _declared_mapping_info(
     cls: Type[Any],
 ) -> Optional[Union[_DeferredDeclarativeConfig, Mapper[Any]]]:
@@ -1028,20 +1069,16 @@ class _DeclarativeMapperConfig(_MapperConfig, _ClassScanAbstractConfig):
 
     def _setup_declared_events(self) -> None:
         if _get_immediate_cls_attr(self.cls, "__declare_last__"):
-
-            @event.listens_for(Mapper, "after_configured")
-            def after_configured() -> None:
-                cast(
-                    "_DeclMappedClassProtocol[Any]", self.cls
-                ).__declare_last__()
+            _install_declared_event_listeners()
+            _declared_last_classes.setdefault(self.registry, []).append(
+                weakref.ref(self.cls)
+            )
 
         if _get_immediate_cls_attr(self.cls, "__declare_first__"):
-
-            @event.listens_for(Mapper, "before_configured")
-            def before_configured() -> None:
-                cast(
-                    "_DeclMappedClassProtocol[Any]", self.cls
-                ).__declare_first__()
+            _install_declared_event_listeners()
+            _declared_first_classes.setdefault(self.registry, []).append(
+                weakref.ref(self.cls)
+            )
 
     def _scan_attributes(self) -> None:
         cls = self.cls

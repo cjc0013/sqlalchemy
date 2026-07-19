@@ -1,5 +1,6 @@
 from operator import is_not
 from typing import Annotated
+import weakref
 
 import sqlalchemy as sa
 from sqlalchemy import ForeignKey
@@ -1023,6 +1024,28 @@ class DeclarativeMixinTest(DeclarativeTestBase):
                 mock.call.declare_last__(MyOtherModel),
             ],
         )
+
+    @testing.requires.predictable_gc
+    def test_declare_events_do_not_retain_mapped_class(self):
+        class MyModel(Base):
+            __tablename__ = "test"
+            id = Column(Integer, primary_key=True)
+
+            @classmethod
+            def __declare_first__(cls):
+                pass
+
+            @classmethod
+            def __declare_last__(cls):
+                pass
+
+        class_ref = weakref.ref(MyModel)
+        configure_mappers()
+        clear_mappers()
+        del MyModel
+        gc_collect()
+
+        is_(class_ref(), None)
 
     def test_mapper_args_declared_attr(self):
         class ComputedMapperArgs:
