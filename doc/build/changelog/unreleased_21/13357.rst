@@ -1,0 +1,9 @@
+.. change::
+    :tags: documentation, typing
+    :tickets: 13357
+
+    Clarified that a plain Python sequence passed to :func:`_sql.any_` or
+    :func:`_sql.all_` may be wrapped in :func:`_sql.literal` when a backend's
+    DBAPI supports adapting the sequence as a single array parameter.  This
+    keeps the SQL expression explicit and type-checkable without promising
+    sequence adaptation on drivers that do not provide it.

@@ -5,11 +5,14 @@ from typing import assert_type
 from typing import List
 
 from sqlalchemy import ARRAY
+from sqlalchemy import all_ as all_op
+from sqlalchemy import any_ as any_op
 from sqlalchemy import BigInteger
 from sqlalchemy import column
 from sqlalchemy import ColumnElement
 from sqlalchemy import func
 from sqlalchemy import Integer
+from sqlalchemy import literal
 from sqlalchemy import select
 from sqlalchemy import String
 from sqlalchemy.orm import DeclarativeBase
@@ -134,6 +137,9 @@ desc: "ColumnElement[int]" = A.id.desc()
 asc: "ColumnElement[int]" = A.id.asc()
 any_: "ColumnElement[bool]" = A.id.any_()
 all_: "ColumnElement[bool]" = A.id.all_()
+names = ["wendy", "jack"]
+any_sequence_literal: "ColumnElement[bool]" = A.string == any_op(literal(names))
+all_sequence_literal: "ColumnElement[bool]" = A.string == all_op(literal(names))
 nulls_first: "ColumnElement[int]" = A.id.nulls_first()
 nulls_last: "ColumnElement[int]" = A.id.nulls_last()
 collate: "ColumnElement[str]" = A.string.collate("somelang")

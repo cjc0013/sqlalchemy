@@ -110,6 +110,17 @@ def all_(expr: _ColumnExpressionArgument[_T]) -> CollectionAggregate[bool]:
 
         5 == mytable.c.somearray.all_()
 
+    A plain Python sequence is not itself a SQL expression.  For DBAPI
+    drivers that adapt sequences to array parameters, wrap the sequence in
+    :func:`_sql.literal` to make the single bound parameter explicit::
+
+        names = ["wendy", "jack"]
+        stmt = select(user_table).where(
+            user_table.c.name == all_(literal(names))
+        )
+
+    Whether a driver can adapt the sequence remains backend-specific.
+
     .. seealso::
 
         :meth:`_sql.ColumnOperators.all_`
@@ -292,6 +303,17 @@ def any_(expr: _ColumnExpressionArgument[_T]) -> CollectionAggregate[bool]:
     ``any_(col)``::
 
         5 = mytable.c.somearray.any_()
+
+    A plain Python sequence is not itself a SQL expression.  For DBAPI
+    drivers that adapt sequences to array parameters, wrap the sequence in
+    :func:`_sql.literal` to make the single bound parameter explicit::
+
+        names = ["wendy", "jack"]
+        stmt = select(user_table).where(
+            user_table.c.name == any_(literal(names))
+        )
+
+    Whether a driver can adapt the sequence remains backend-specific.
 
     .. seealso::
 
