@@ -309,6 +309,21 @@ class BackendDialectTest(
 class DialectTest(fixtures.TestBase):
     __backend__ = True
 
+    def test_recover_twophase_uses_mapping_rows(self):
+        connection = mock.Mock()
+        result = connection.exec_driver_sql.return_value
+        result.mappings.return_value = [
+            {"data": b"transaction-one-extra", "gtrid_length": 15},
+            {"data": b"xid2suffix", "gtrid_length": 4},
+        ]
+
+        eq_(
+            mysql.dialect().do_recover_twophase(connection),
+            [b"transaction-one", b"xid2"],
+        )
+        connection.exec_driver_sql.assert_called_once_with("XA RECOVER")
+        result.mappings.assert_called_once_with()
+
     @testing.combinations(
         (None, "cONnection was kILLEd", "InternalError", "pymysql", True),
         (None, "cONnection aLREady closed", "InternalError", "pymysql", True),
