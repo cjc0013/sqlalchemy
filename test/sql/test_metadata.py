@@ -5970,6 +5970,21 @@ class NamingConventionTest(fixtures.TestBase, AssertsCompiledSQL):
             dialect="default",
         )
 
+    def test_uq_conv_name_is_still_truncated(self):
+        u1 = self._fixture(naming_convention={})
+        uq = UniqueConstraint(
+            u1.c.data, name=naming.conv("this_is_a_very_long_constraint_name")
+        )
+        dialect = default.DefaultDialect()
+        dialect.max_identifier_length = 20
+
+        self.assert_compile(
+            schema.AddConstraint(uq),
+            'ALTER TABLE "user" ADD CONSTRAINT this_is_a_ve_45c0 '
+            "UNIQUE (data)",
+            dialect=dialect,
+        )
+
     def test_uq_defer_name_convention(self):
         u1 = self._fixture(
             naming_convention={"uq": "uq_%(table_name)s_%(column_0_name)s"}

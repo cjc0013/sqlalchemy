@@ -1,0 +1,8 @@
+.. change::
+    :tags: documentation, schema
+    :tickets: 11284
+
+    Documented and added regression coverage for the established behavior that
+    names wrapped in :func:`_schema.conv` are exempt from a second naming
+    convention transformation but still receive deterministic truncation when
+    a dialect's identifier limit requires it.

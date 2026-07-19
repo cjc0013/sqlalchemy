@@ -5952,6 +5952,12 @@ class conv(_truncated_label):
     name here is final, and the name will render as ``"ck_t_x5"`` and not
     ``"ck_t_ck_t_x5"``
 
+    Although :func:`_schema.conv` prevents another naming-convention
+    transformation, the resulting identifier still participates in the
+    dialect's deterministic identifier-length truncation.  This allows an
+    already-converted name to remain portable to backends with shorter
+    identifier limits.
+
     .. seealso::
 
         :ref:`constraint_naming_conventions`
