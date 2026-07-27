@@ -2375,6 +2375,17 @@ can be configured on a per-:class:`.Engine` as well as a per-statement
 basis.   The parameter limit on the other hand is fixed based on the known
 characteristics of the database in use.
 
+Network characteristics can change this tradeoff.  The ``insertmanyvalues``
+form places multiple value sets directly into each SQL statement, which can
+increase the amount of SQL text sent over the network.  On a bandwidth-limited
+or high-latency connection, particularly with a driver or backend that has an
+efficient executemany path, a smaller batch size or disabling
+``insertmanyvalues`` may perform better.  Applications that send large batches
+over remote connections should measure both approaches under representative
+network conditions rather than assuming that a larger batch is always faster.
+The feature can be disabled as described at :ref:`engine_insertmanyvalues`
+under "Disabling the feature".
+
 The batch size defaults to 1000 for most backends, with an additional
 per-dialect "max number of parameters" limiting factor that may reduce the
 batch size further on a per-statement basis. The max number of parameters

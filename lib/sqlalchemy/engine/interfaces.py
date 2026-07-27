@@ -221,9 +221,7 @@ class DBAPICursor(Protocol):
 
     def setoutputsize(self, size: Any, column: Any) -> None: ...
 
-    def callproc(
-        self, procname: str, parameters: Sequence[Any] = ...
-    ) -> Any: ...
+    def callproc(self, procname: str, parameters: Sequence[Any] = ...) -> Any: ...
 
     def nextset(self) -> Optional[bool]: ...
 
@@ -233,18 +231,12 @@ class DBAPICursor(Protocol):
 _CoreSingleExecuteParams = Mapping[str, Any]
 _MutableCoreSingleExecuteParams = MutableMapping[str, Any]
 _CoreMultiExecuteParams = Sequence[_CoreSingleExecuteParams]
-_CoreAnyExecuteParams = Union[
-    _CoreMultiExecuteParams, _CoreSingleExecuteParams
-]
+_CoreAnyExecuteParams = Union[_CoreMultiExecuteParams, _CoreSingleExecuteParams]
 
 _DBAPISingleExecuteParams = Union[Sequence[Any], _CoreSingleExecuteParams]
 
-_DBAPIMultiExecuteParams = Union[
-    Sequence[Sequence[Any]], _CoreMultiExecuteParams
-]
-_DBAPIAnyExecuteParams = Union[
-    _DBAPIMultiExecuteParams, _DBAPISingleExecuteParams
-]
+_DBAPIMultiExecuteParams = Union[Sequence[Sequence[Any]], _CoreMultiExecuteParams]
+_DBAPIAnyExecuteParams = Union[_DBAPIMultiExecuteParams, _DBAPISingleExecuteParams]
 _DBAPICursorDescription = Sequence[
     Tuple[
         str,
@@ -297,9 +289,7 @@ class _CoreKnownExecutionOptions(TypedDict, total=False):
 
 
 _ExecuteOptions = immutabledict[str, Any]
-CoreExecuteOptionsParameter = Union[
-    _CoreKnownExecutionOptions, Mapping[str, Any]
-]
+CoreExecuteOptionsParameter = Union[_CoreKnownExecutionOptions, Mapping[str, Any]]
 
 
 class ReflectedIdentity(TypedDict):
@@ -419,7 +409,14 @@ class ReflectedColumn(TypedDict):
 
     dialect_options: NotRequired[Dict[str, Any]]
     """Additional dialect-specific options detected for this reflected
-    object"""
+    column.
+
+    Keys use the flattened dialect keyword form ``<dialect>_<option>``, such
+    as ``"mssql_identity_start"``.  This form allows the dictionary to be
+    passed as keyword arguments to :class:`_schema.Column` when a reflected
+    table is reconstructed.  Third-party dialects should preserve this format
+    for compatibility with reflection consumers.
+    """
 
 
 class ReflectedConstraint(TypedDict):
@@ -791,9 +788,7 @@ class Dialect(EventTarget):
     execution_ctx_cls: Type[ExecutionContext]
     """a :class:`.ExecutionContext` class used to handle statement execution"""
 
-    execute_sequence_format: Union[
-        Type[Tuple[Any, ...]], Type[Tuple[List[Any]]]
-    ]
+    execute_sequence_format: Union[Type[Tuple[Any, ...]], Type[Tuple[List[Any]]]]
     """either the 'tuple' or 'list' type, depending on what cursor.execute()
     accepts for the second argument (they vary)."""
 
@@ -1984,9 +1979,7 @@ class Dialect(EventTarget):
 
         raise NotImplementedError()
 
-    def has_schema(
-        self, connection: Connection, schema_name: str, **kw: Any
-    ) -> bool:
+    def has_schema(self, connection: Connection, schema_name: str, **kw: Any) -> bool:
         """Check the existence of a particular schema name in the database.
 
         Given a :class:`_engine.Connection` object, a string
@@ -2153,9 +2146,7 @@ class Dialect(EventTarget):
 
         raise NotImplementedError()
 
-    def do_rollback_to_savepoint(
-        self, connection: Connection, name: str
-    ) -> None:
+    def do_rollback_to_savepoint(self, connection: Connection, name: str) -> None:
         """Rollback a connection to the named savepoint.
 
         :param connection: a :class:`_engine.Connection`.
@@ -2517,9 +2508,7 @@ class Dialect(EventTarget):
 
         raise NotImplementedError()
 
-    def get_isolation_level(
-        self, dbapi_connection: DBAPIConnection
-    ) -> IsolationLevel:
+    def get_isolation_level(self, dbapi_connection: DBAPIConnection) -> IsolationLevel:
         """Given a DBAPI connection, return its isolation level.
 
         When working with a :class:`_engine.Connection` object,
@@ -3199,9 +3188,7 @@ class ExecutionContext:
 
         raise NotImplementedError()
 
-    def get_out_parameter_values(
-        self, out_param_names: Sequence[str]
-    ) -> Sequence[Any]:
+    def get_out_parameter_values(self, out_param_names: Sequence[str]) -> Sequence[Any]:
         """Return a sequence of OUT parameter values from a cursor.
 
         For dialects that support OUT parameters, this method will be called
