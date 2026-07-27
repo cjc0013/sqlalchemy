@@ -78,6 +78,7 @@ from sqlalchemy.sql import ddl
 from sqlalchemy.sql import elements
 from sqlalchemy.sql import null
 from sqlalchemy.sql import operators
+from sqlalchemy.sql import quoted_name
 from sqlalchemy.sql import sqltypes
 from sqlalchemy.sql import table
 from sqlalchemy.sql import type_api
@@ -3649,7 +3650,7 @@ class ExpressionTest(
         (lambda c1: c1.like("qpr"), "q LIKE :q_1->BINDCAST->[TEXT]"),
         (
             lambda c2: c2.like("qpr"),
-            'q LIKE :q_1->BINDCAST->[TEXT COLLATE "xyz"]',
+            "q LIKE :q_1->BINDCAST->[TEXT COLLATE xyz]",
         ),
         (
             # new behavior, a type with no collation passed into collate()
@@ -3657,11 +3658,11 @@ class ExpressionTest(
             # on the right side bind-cast. previous to #11576 we'd only
             # get TEXT for the bindcast.
             lambda c1: collate(c1, "abc").like("qpr"),
-            '(q COLLATE abc) LIKE :param_1->BINDCAST->[TEXT COLLATE "abc"]',
+            "(q COLLATE abc) LIKE :param_1->BINDCAST->[TEXT COLLATE abc]",
         ),
         (
             lambda c2: collate(c2, "abc").like("qpr"),
-            '(q COLLATE abc) LIKE :param_1->BINDCAST->[TEXT COLLATE "abc"]',
+            "(q COLLATE abc) LIKE :param_1->BINDCAST->[TEXT COLLATE abc]",
         ),
         argnames="testcase,expected",
     )
@@ -3706,7 +3707,7 @@ class ExpressionTest(
         )
         self.assert_compile(
             c2.like("qpr"),
-            'q LIKE :q_1->BINDCAST->[TEXT COLLATE "xyz"]',
+            "q LIKE :q_1->BINDCAST->[TEXT COLLATE xyz]",
             dialect=renders_bind_cast,
         )
 
