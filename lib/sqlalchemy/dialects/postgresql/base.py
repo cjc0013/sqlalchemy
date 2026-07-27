@@ -2772,6 +2772,25 @@ class PGDDLCompiler(compiler.DDLCompiler):
         preparer = self.preparer
         index = create.element
         self._verify_index_table(index)
+        unnamed = index.dialect_options["postgresql"]["unnamed"]
+
+        if unnamed and create.if_not_exists:
+            raise exc.CompileError(
+                "Can't use if_not_exists together with "
+                "postgresql_unnamed=True; CREATE INDEX IF NOT EXISTS "
+                "requires the index to have a name"
+            )
+        if (
+            unnamed
+            and index.name is not None
+            and not isinstance(index.name, elements.conv)
+        ):
+            raise exc.CompileError(
+                "Can't use postgresql_unnamed=True together with an "
+                "explicit index name; got postgresql_unnamed=True and "
+                "name=%r" % (index.name,)
+            )
+
         text = "CREATE "
         if index.unique:
             text += "UNIQUE "
@@ -2786,10 +2805,13 @@ class PGDDLCompiler(compiler.DDLCompiler):
         if create.if_not_exists:
             text += "IF NOT EXISTS "
 
-        text += "%s ON %s " % (
-            self._prepared_index_name(index, include_schema=False),
-            preparer.format_table(index.table),
-        )
+        if unnamed:
+            text += "ON %s " % preparer.format_table(index.table)
+        else:
+            text += "%s ON %s " % (
+                self._prepared_index_name(index, include_schema=False),
+                preparer.format_table(index.table),
+            )
 
         using = index.dialect_options["postgresql"]["using"]
         if using:
@@ -2866,6 +2888,13 @@ class PGDDLCompiler(compiler.DDLCompiler):
 
     def visit_drop_index(self, drop, **kw):
         index = drop.element
+
+        if index.dialect_options["postgresql"]["unnamed"]:
+            raise exc.CompileError(
+                "Can't drop an index created with postgresql_unnamed=True "
+                "by name; the real name assigned by the server is unknown "
+                "to SQLAlchemy"
+            )
 
         text = "\nDROP INDEX "
 
@@ -3603,6 +3632,7 @@ class PGDialect(default._BackendsMultiReflection, default.DefaultDialect):
                 "with": {},
                 "tablespace": None,
                 "nulls_not_distinct": None,
+                "unnamed": False,
             },
         ),
         (

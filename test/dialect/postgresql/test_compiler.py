@@ -44,6 +44,7 @@ from sqlalchemy import types as sqltypes
 from sqlalchemy import UniqueConstraint
 from sqlalchemy import update
 from sqlalchemy import VARCHAR
+from sqlalchemy.dialects import mysql
 from sqlalchemy.dialects import postgresql
 from sqlalchemy.dialects.postgresql import aggregate_order_by
 from sqlalchemy.dialects.postgresql import ARRAY as PG_ARRAY
@@ -1297,6 +1298,127 @@ class CompileTest(fixtures.TestBase, AssertsCompiledSQL):
             dialect=dialect_8_1,
         )
 
+    def test_create_index_unnamed(self):
+        m = MetaData()
+        tbl = Table("testtbl", m, Column("data", String))
+
+        idx = Index(None, tbl.c.data, postgresql_unnamed=True)
+        self.assert_compile(
+            schema.CreateIndex(idx),
+            "CREATE INDEX ON testtbl (data)",
+        )
+
+    def test_create_index_unnamed_unique(self):
+        m = MetaData()
+        tbl = Table("testtbl", m, Column("data", String))
+
+        idx = Index(None, tbl.c.data, unique=True, postgresql_unnamed=True)
+        self.assert_compile(
+            schema.CreateIndex(idx),
+            "CREATE UNIQUE INDEX ON testtbl (data)",
+        )
+
+    def test_create_index_unnamed_concurrently(self):
+        m = MetaData()
+        tbl = Table("testtbl", m, Column("data", String))
+
+        idx = Index(
+            None,
+            tbl.c.data,
+            postgresql_unnamed=True,
+            postgresql_concurrently=True,
+        )
+        self.assert_compile(
+            schema.CreateIndex(idx),
+            "CREATE INDEX CONCURRENTLY ON testtbl (data)",
+        )
+
+    def test_create_index_unnamed_noop_on_other_dialect(self):
+        m = MetaData()
+        tbl = Table("testtbl", m, Column("data", String))
+
+        idx = Index(None, tbl.c.data, postgresql_unnamed=True)
+        self.assert_compile(
+            schema.CreateIndex(idx),
+            "CREATE INDEX ix_testtbl_data ON testtbl (data)",
+            dialect=mysql.dialect(),
+        )
+
+    def test_create_index_unnamed_kwarg_defaults_false(self):
+        m = MetaData()
+        tbl = Table("testtbl", m, Column("data", String))
+
+        idx = Index("plain_idx", tbl.c.data, postgresql_unnamed=False)
+        self.assert_compile(
+            schema.CreateIndex(idx),
+            "CREATE INDEX plain_idx ON testtbl (data)",
+        )
+
+    def test_create_index_unnamed_construction_does_not_raise(self):
+        m = MetaData()
+        tbl = Table("testtbl", m, Column("data", String))
+
+        Index(None, tbl.c.data, postgresql_unnamed=True)
+        Index("idx1", tbl.c.data, postgresql_unnamed=True)
+
+    def test_create_index_unnamed_with_if_not_exists_raises(self):
+        m = MetaData()
+        tbl = Table("testtbl", m, Column("data", String))
+
+        idx = Index(None, tbl.c.data, postgresql_unnamed=True)
+        assert_raises_message(
+            exc.CompileError,
+            r"(?:.*postgresql_unnamed.*if_not_exists.*"
+            r"|.*if_not_exists.*postgresql_unnamed.*)",
+            schema.CreateIndex(idx, if_not_exists=True).compile,
+            dialect=postgresql.dialect(),
+        )
+
+    def test_create_index_unnamed_with_if_not_exists_noop_on_other_dialect(
+        self,
+    ):
+        m = MetaData()
+        tbl = Table("testtbl", m, Column("data", String))
+
+        idx = Index(None, tbl.c.data, postgresql_unnamed=True)
+        self.assert_compile(
+            schema.CreateIndex(idx, if_not_exists=True),
+            "CREATE INDEX IF NOT EXISTS ix_testtbl_data ON testtbl (data)",
+            dialect=mysql.dialect(),
+        )
+
+    def test_create_index_unnamed_with_explicit_name_raises(self):
+        m = MetaData()
+        tbl = Table("testtbl", m, Column("data", String))
+
+        idx = Index("idx1", tbl.c.data, postgresql_unnamed=True)
+        assert_raises_message(
+            exc.CompileError,
+            r"(?:.*postgresql_unnamed.*idx1.*|.*idx1.*postgresql_unnamed.*)",
+            schema.CreateIndex(idx).compile,
+            dialect=postgresql.dialect(),
+        )
+
+    def test_create_index_named_without_unnamed_is_unaffected(self):
+        m = MetaData()
+        tbl = Table("testtbl", m, Column("data", String))
+
+        idx = Index("idx1", tbl.c.data)
+        self.assert_compile(
+            schema.CreateIndex(idx),
+            "CREATE INDEX idx1 ON testtbl (data)",
+        )
+
+    def test_create_index_none_name_without_unnamed_still_autonames(self):
+        m = MetaData()
+        tbl = Table("testtbl", m, Column("data", String))
+
+        idx = Index(None, tbl.c.data)
+        self.assert_compile(
+            schema.CreateIndex(idx),
+            "CREATE INDEX ix_testtbl_data ON testtbl (data)",
+        )
+
     def test_drop_index_concurrently(self):
         m = MetaData()
         tbl = Table("testtbl", m, Column("data", Integer))
@@ -1310,6 +1432,39 @@ class CompileTest(fixtures.TestBase, AssertsCompiledSQL):
         dialect_9_1._supports_drop_index_concurrently = False
         self.assert_compile(
             schema.DropIndex(idx1), "DROP INDEX test_idx1", dialect=dialect_9_1
+        )
+
+    def test_drop_index_unnamed_raises(self):
+        m = MetaData()
+        tbl = Table("testtbl", m, Column("data", String))
+
+        idx = Index(None, tbl.c.data, postgresql_unnamed=True)
+        assert_raises_message(
+            exc.CompileError,
+            r".*postgresql_unnamed.*",
+            schema.DropIndex(idx).compile,
+            dialect=postgresql.dialect(),
+        )
+
+    def test_drop_index_named_without_unnamed_is_unaffected(self):
+        m = MetaData()
+        tbl = Table("testtbl", m, Column("data", String))
+
+        idx = Index("idx1", tbl.c.data)
+        self.assert_compile(
+            schema.DropIndex(idx),
+            "DROP INDEX idx1",
+        )
+
+    def test_drop_index_unnamed_noop_on_other_dialect(self):
+        m = MetaData()
+        tbl = Table("testtbl", m, Column("data", String))
+
+        idx = Index(None, tbl.c.data, postgresql_unnamed=True)
+        self.assert_compile(
+            schema.DropIndex(idx),
+            "DROP INDEX ix_testtbl_data ON testtbl",
+            dialect=mysql.dialect(),
         )
 
     def test_create_check_constraint_not_valid(self):
