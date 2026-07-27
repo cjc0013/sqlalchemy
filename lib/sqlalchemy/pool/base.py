@@ -14,7 +14,6 @@ from collections import deque
 import dataclasses
 from enum import Enum
 import threading
-import time
 import typing
 from typing import Any
 from typing import Callable
@@ -133,8 +132,7 @@ class _ConnDialect:
 
     def _do_ping_w_event(self, dbapi_connection: DBAPIConnection) -> bool:
         raise NotImplementedError(
-            "The ping feature requires that a dialect is "
-            "passed to the connection pool."
+            "The ping feature requires that a dialect is passed to the connection pool."
         )
 
     def get_driver_connection(self, connection: DBAPIConnection) -> Any:
@@ -310,9 +308,7 @@ class Pool(log.Identified, event.EventTarget):
         return self._creator_arg
 
     @_creator.setter
-    def _creator(
-        self, creator: Union[_CreatorFnType, _CreatorWRecFnType]
-    ) -> None:
+    def _creator(self, creator: Union[_CreatorFnType, _CreatorWRecFnType]) -> None:
         self._creator_arg = creator
 
         # mypy seems to get super confused assigning functions to
@@ -373,8 +369,7 @@ class Pool(log.Identified, event.EventTarget):
                 self._dialect.do_close(connection)
         except BaseException as e:
             self.logger.error(
-                f"Exception {'terminating' if terminate else 'closing'} "
-                f"connection %r",
+                f"Exception {'terminating' if terminate else 'closing'} connection %r",
                 connection,
                 exc_info=True,
             )
@@ -404,7 +399,7 @@ class Pool(log.Identified, event.EventTarget):
         """
         rec = getattr(connection, "_connection_record", None)
         if not rec or self._invalidate_time < rec.starttime:
-            self._invalidate_time = time.monotonic()
+            self._invalidate_time = util.compat.highres_clock()
         if _checkin and getattr(connection, "is_valid", False):
             connection.invalidate(exception)
 
@@ -574,9 +569,7 @@ class ManagesConnection:
         """
         raise NotImplementedError()
 
-    def invalidate(
-        self, e: Optional[BaseException] = None, soft: bool = False
-    ) -> None:
+    def invalidate(self, e: Optional[BaseException] = None, soft: bool = False) -> None:
         """Mark the managed connection as invalidated.
 
         :param e: an exception object indicating a reason for the invalidation.
@@ -679,9 +672,7 @@ class _ConnectionRecord(ConnectionPoolEntry):
         if self.dbapi_connection is None:
             return None
         else:
-            return self.__pool._dialect.get_driver_connection(
-                self.dbapi_connection
-            )
+            return self.__pool._dialect.get_driver_connection(self.dbapi_connection)
 
     @property
     @util.deprecated(
@@ -724,18 +715,14 @@ class _ConnectionRecord(ConnectionPoolEntry):
         rec.fairy_ref = ref = weakref.ref(
             fairy,
             lambda ref: (
-                _finalize_fairy(
-                    None, rec, pool, ref, echo, transaction_was_reset=False
-                )
+                _finalize_fairy(None, rec, pool, ref, echo, transaction_was_reset=False)
                 if _finalize_fairy is not None
                 else None
             ),
         )
         _strong_ref_connection_records[ref] = rec
         if echo:
-            pool.logger.debug(
-                "Connection %r checked out from pool", dbapi_connection
-            )
+            pool.logger.debug("Connection %r checked out from pool", dbapi_connection)
         return fairy
 
     def _checkin_failed(
@@ -781,16 +768,12 @@ class _ConnectionRecord(ConnectionPoolEntry):
         if self.dbapi_connection is not None:
             self.__close()
 
-    def invalidate(
-        self, e: Optional[BaseException] = None, soft: bool = False
-    ) -> None:
+    def invalidate(self, e: Optional[BaseException] = None, soft: bool = False) -> None:
         # already invalidated
         if self.dbapi_connection is None:
             return
         if soft:
-            self.__pool.dispatch.soft_invalidate(
-                self.dbapi_connection, self, e
-            )
+            self.__pool.dispatch.soft_invalidate(self.dbapi_connection, self, e)
         else:
             self.__pool.dispatch.invalidate(self.dbapi_connection, self, e)
         if e is not None:
@@ -809,7 +792,7 @@ class _ConnectionRecord(ConnectionPoolEntry):
             )
 
         if soft:
-            self._soft_invalidate_time = time.monotonic()
+            self._soft_invalidate_time = util.compat.highres_clock()
         else:
             self.__close(terminate=True)
             self.dbapi_connection = None
@@ -817,20 +800,17 @@ class _ConnectionRecord(ConnectionPoolEntry):
     def get_connection(self) -> DBAPIConnection:
         recycle = False
 
-        # NOTE: the various comparisons here compare time.monotonic()
-        # values which are guaranteed to be monotonic and have
-        # sub-millisecond precision across all platforms. This resolves
-        # the issue where time.time() could have ~16 ms granularity
-        # on Windows, causing comparisons like _soft_invalidate_time >
-        # starttime to fail when both timestamps were captured within
-        # the same timer quantum.
+        # NOTE: the comparisons here use a monotonic high-resolution clock.
+        # Keep ``>`` rather than ``>=``: equal timestamps can defer an
+        # invalidation until the clock advances, but ``>=`` could reconnect
+        # repeatedly if the clock does not advance between attempts.
 
         if self.dbapi_connection is None:
             self.info.clear()
             self.__connect()
         elif (
             self.__pool._recycle > -1
-            and time.monotonic() - self.starttime > self.__pool._recycle
+            and util.compat.highres_clock() - self.starttime > self.__pool._recycle
         ):
             self.__pool.logger.info(
                 "Connection %r exceeded timeout; recycling",
@@ -839,8 +819,7 @@ class _ConnectionRecord(ConnectionPoolEntry):
             recycle = True
         elif self.__pool._invalidate_time > self.starttime:
             self.__pool.logger.info(
-                "Connection %r invalidated due to pool invalidation; "
-                + "recycling",
+                "Connection %r invalidated due to pool invalidation; " + "recycling",
                 self.dbapi_connection,
             )
             recycle = True
@@ -873,9 +852,7 @@ class _ConnectionRecord(ConnectionPoolEntry):
         if self.__pool.dispatch.close:
             self.__pool.dispatch.close(self.dbapi_connection, self)
         assert self.dbapi_connection is not None
-        self.__pool._close_connection(
-            self.dbapi_connection, terminate=terminate
-        )
+        self.__pool._close_connection(self.dbapi_connection, terminate=terminate)
         self.dbapi_connection = None
 
     def __connect(self) -> None:
@@ -885,7 +862,7 @@ class _ConnectionRecord(ConnectionPoolEntry):
         # creator fails, this attribute stays None
         self.dbapi_connection = None
         try:
-            self.starttime = time.monotonic()
+            self.starttime = util.compat.highres_clock()
             self.dbapi_connection = connection = pool._invoke_creator(self)
             pool.logger.debug("Created new connection %r", connection)
             self.fresh = True
@@ -902,9 +879,9 @@ class _ConnectionRecord(ConnectionPoolEntry):
 
             # init of the dialect now takes place within the connect
             # event, so ensure a mutex is used on the first run
-            pool.dispatch.connect.for_modify(
-                pool.dispatch
-            )._exec_w_sync_on_first_run(self.dbapi_connection, self)
+            pool.dispatch.connect.for_modify(pool.dispatch)._exec_w_sync_on_first_run(
+                self.dbapi_connection, self
+            )
 
 
 def _finalize_fairy(
@@ -961,9 +938,7 @@ def _finalize_fairy(
 
     if dbapi_connection is not None:
         if connection_record and echo:
-            pool.logger.debug(
-                "Connection %r being returned to pool", dbapi_connection
-            )
+            pool.logger.debug("Connection %r being returned to pool", dbapi_connection)
 
         try:
             if not fairy:
@@ -998,9 +973,7 @@ def _finalize_fairy(
                     )
 
         except BaseException as e:
-            pool.logger.error(
-                "Exception during reset or similar", exc_info=True
-            )
+            pool.logger.error("Exception during reset or similar", exc_info=True)
             if connection_record:
                 connection_record.invalidate(e=e)
             if not isinstance(e, Exception):
@@ -1011,9 +984,9 @@ def _finalize_fairy(
                     "The garbage collector is trying to clean up "
                     f"non-checked-in connection {dbapi_connection!r}, "
                     f"""which will be {
-                        'dropped, as it cannot be safely terminated'
+                        "dropped, as it cannot be safely terminated"
                         if not can_close_or_terminate_connection
-                        else 'terminated'
+                        else "terminated"
                     }.  """
                     "Please ensure that SQLAlchemy pooled connections are "
                     "returned to "
@@ -1169,9 +1142,7 @@ class _AdhocProxiedConnection(PoolProxiedConnection):
         """
         return self._is_valid
 
-    def invalidate(
-        self, e: Optional[BaseException] = None, soft: bool = False
-    ) -> None:
+    def invalidate(self, e: Optional[BaseException] = None, soft: bool = False) -> None:
         self._is_valid = False
 
     @util.ro_non_memoized_property
@@ -1267,17 +1238,15 @@ class _ConnectionFairy(PoolProxiedConnection):
             if threadconns is not None:
                 threadconns.current = weakref.ref(fairy)
 
-        assert (
-            fairy._connection_record is not None
-        ), "can't 'checkout' a detached connection fairy"
-        assert (
-            fairy.dbapi_connection is not None
-        ), "can't 'checkout' an invalidated connection fairy"
+        assert fairy._connection_record is not None, (
+            "can't 'checkout' a detached connection fairy"
+        )
+        assert fairy.dbapi_connection is not None, (
+            "can't 'checkout' an invalidated connection fairy"
+        )
 
         fairy._counter += 1
-        if (
-            not pool.dispatch.checkout and not pool._pre_ping
-        ) or fairy._counter != 1:
+        if (not pool.dispatch.checkout and not pool._pre_ping) or fairy._counter != 1:
             return fairy
 
         # Pool listeners can trigger a reconnection on checkout, as well
@@ -1299,9 +1268,7 @@ class _ConnectionFairy(PoolProxiedConnection):
                                 "Pool pre-ping on connection %s",
                                 fairy.dbapi_connection,
                             )
-                        result = pool._dialect._do_ping_w_event(
-                            fairy.dbapi_connection
-                        )
+                        result = pool._dialect._do_ping_w_event(fairy.dbapi_connection)
                         if not result:
                             if fairy._echo:
                                 pool.logger.debug(
@@ -1339,9 +1306,7 @@ class _ConnectionFairy(PoolProxiedConnection):
                     )
                     fairy._connection_record.invalidate(e)
                 try:
-                    fairy.dbapi_connection = (
-                        fairy._connection_record.get_connection()
-                    )
+                    fairy.dbapi_connection = fairy._connection_record.get_connection()
                 except BaseException as err:
                     with util.safe_reraise():
                         fairy._connection_record._checkin_failed(
@@ -1466,9 +1431,7 @@ class _ConnectionFairy(PoolProxiedConnection):
         else:
             return self._connection_record.record_info
 
-    def invalidate(
-        self, e: Optional[BaseException] = None, soft: bool = False
-    ) -> None:
+    def invalidate(self, e: Optional[BaseException] = None, soft: bool = False) -> None:
         if self.dbapi_connection is None:
             util.warn("Can't invalidate an already-closed connection.")
             return

@@ -19,6 +19,7 @@ import operator
 import platform
 import sys
 import sysconfig
+import time
 import typing
 from typing import Any
 from typing import Callable
@@ -41,6 +42,8 @@ pypy = platform.python_implementation() == "PyPy"
 cpython = platform.python_implementation() == "CPython"
 freethreading = bool(sysconfig.get_config_var("Py_GIL_DISABLED"))
 
+highres_clock = time.perf_counter
+
 win32 = sys.platform.startswith("win")
 osx = sys.platform.startswith("darwin")
 arm = "aarch" in platform.machine().lower()
@@ -53,7 +56,6 @@ dottedgetter = operator.attrgetter
 
 # use sys.version_info to enable mypy version narrowing
 if sys.version_info >= (3, 14):
-
     import annotationlib
     from string.templatelib import Template as Template
 

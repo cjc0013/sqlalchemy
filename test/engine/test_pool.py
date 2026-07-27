@@ -64,9 +64,7 @@ def MockDBAPI():  # noqa
             db.connect = Mock(side_effect=connect)
         db.is_shutdown = value
 
-    db = Mock(
-        connect=Mock(side_effect=connect), shutdown=shutdown, is_shutdown=False
-    )
+    db = Mock(connect=Mock(side_effect=connect), shutdown=shutdown, is_shutdown=False)
     return db
 
 
@@ -102,9 +100,7 @@ class PoolTestBase(fixtures.TestBase):
 
 
 class PoolTest(PoolTestBase):
-    @testing.fails_on(
-        "+pyodbc", "pyodbc cursor doesn't implement tuple __eq__"
-    )
+    @testing.fails_on("+pyodbc", "pyodbc cursor doesn't implement tuple __eq__")
     @testing.fails_on("+pg8000", "returns [1], not (1,)")
     def test_cursor_iterable(self):
         conn = testing.db.raw_connection()
@@ -478,8 +474,7 @@ class PoolEventsTest(PoolTestBase):
         @event.listens_for(p, "reset")
         def reset(conn, rec, state):
             canary.append(
-                "reset_"
-                f"{'rollback_ok' if state.asyncio_safe else 'no_rollback'}"
+                f"reset_{'rollback_ok' if state.asyncio_safe else 'no_rollback'}"
             )
 
         @event.listens_for(p, "checkin")
@@ -757,9 +752,7 @@ class PoolEventsTest(PoolTestBase):
     @testing.variation("is_asyncio", [(True, testing.requires.asyncio), False])
     @testing.variation("has_terminate", [True, False])
     @testing.variation("invalidate_conn_rec", [True, False])
-    def test_checkin_event_gc(
-        self, is_asyncio, has_terminate, invalidate_conn_rec
-    ):
+    def test_checkin_event_gc(self, is_asyncio, has_terminate, invalidate_conn_rec):
         """tests for #8419, which have been modified for 2.0 in #9237"""
 
         p, canary = self._checkin_event_fixture(
@@ -857,9 +850,7 @@ class PoolEventsTest(PoolTestBase):
 
         with engine.connect() as conn:
             conn.execute(select(1))
-        eq_(
-            canary, ["listen_one", "listen_four", "listen_two", "listen_three"]
-        )
+        eq_(canary, ["listen_one", "listen_four", "listen_two", "listen_three"])
 
     def test_listen_targets_per_subclass(self):
         """test that listen() called on a subclass remains specific to
@@ -1119,9 +1110,7 @@ class QueuePoolTest(PoolTestBase):
             return times.pop(0)
 
         with mock.patch("sqlalchemy.util.queue._time", mock_time):
-            p = self._queuepool_fixture(
-                pool_size=1, max_overflow=0, timeout=0.5
-            )
+            p = self._queuepool_fixture(pool_size=1, max_overflow=0, timeout=0.5)
             c1 = p.connect()  # noqa
             with expect_raises(tsa.exc.TimeoutError):
                 p.connect()
@@ -1274,9 +1263,7 @@ class QueuePoolTest(PoolTestBase):
             threading.Thread(target=run_test, args=("success_two", p, False)),
             threading.Thread(target=run_test, args=("overflow_one", p, True)),
             threading.Thread(target=run_test, args=("overflow_two", p, False)),
-            threading.Thread(
-                target=run_test, args=("overflow_three", p, False)
-            ),
+            threading.Thread(target=run_test, args=("overflow_three", p, False)),
         ]
         for t in threads:
             t.start()
@@ -1331,9 +1318,7 @@ class QueuePoolTest(PoolTestBase):
 
                 threads = []
                 for i in range(2):
-                    t = threading.Thread(
-                        target=waiter, args=(p, timeout, max_overflow)
-                    )
+                    t = threading.Thread(target=waiter, args=(p, timeout, max_overflow))
                     t.daemon = True
                     t.start()
                     threads.append(t)
@@ -1400,9 +1385,7 @@ class QueuePoolTest(PoolTestBase):
             canary.append(1)
             return dbapi.connect()
 
-        p1 = pool.QueuePool(
-            creator=creator, pool_size=1, timeout=None, max_overflow=0
-        )
+        p1 = pool.QueuePool(creator=creator, pool_size=1, timeout=None, max_overflow=0)
 
         def waiter(p):
             conn = p.connect()
@@ -1513,12 +1496,10 @@ class QueuePoolTest(PoolTestBase):
         )
 
     def test_recycle(self):
-        with patch("sqlalchemy.pool.base.time.time") as mock:
+        with patch("sqlalchemy.pool.base.util.compat.highres_clock") as mock:
             mock.return_value = 10000
 
-            p = self._queuepool_fixture(
-                pool_size=1, max_overflow=0, recycle=30
-            )
+            p = self._queuepool_fixture(pool_size=1, max_overflow=0, recycle=30)
             c1 = p.connect()
             c_ref = weakref.ref(c1.dbapi_connection)
             c1.close()
@@ -1582,12 +1563,8 @@ class QueuePoolTest(PoolTestBase):
             connection, connection_record, pool, ref, echo, fairy=None
         ):
             if fairy is None:
-                raise AssertionError(
-                    "finalize fairy was called as a weakref callback"
-                )
-            return finalize_fairy(
-                connection, connection_record, pool, ref, echo, fairy
-            )
+                raise AssertionError("finalize fairy was called as a weakref callback")
+            return finalize_fairy(connection, connection_record, pool, ref, echo, fairy)
 
         return patch.object(pool, "_finalize_fairy", assert_no_wr_callback)
 
@@ -1626,9 +1603,7 @@ class QueuePoolTest(PoolTestBase):
 
     @testing.requires.timing_intensive
     def test_error_on_pooled_reconnect_cleanup_recycle(self):
-        dbapi, p = self._queuepool_dbapi_fixture(
-            pool_size=1, max_overflow=2, recycle=1
-        )
+        dbapi, p = self._queuepool_dbapi_fixture(pool_size=1, max_overflow=2, recycle=1)
         c1 = p.connect()
         c1.close()
         time.sleep(1.5)
@@ -1856,9 +1831,7 @@ class QueuePoolTest(PoolTestBase):
         def attempt(conn):
             time.sleep(random.random())
             try:
-                conn._handle_dbapi_exception(
-                    Error(), "statement", {}, Mock(), Mock()
-                )
+                conn._handle_dbapi_exception(Error(), "statement", {}, Mock(), Mock())
             except tsa.exc.DBAPIError:
                 pass
 
@@ -1901,9 +1874,7 @@ class QueuePoolTest(PoolTestBase):
         assert c1.dbapi_connection.id != c_id
 
     def test_recreate(self):
-        p = self._queuepool_fixture(
-            reset_on_return=None, pool_size=1, max_overflow=0
-        )
+        p = self._queuepool_fixture(reset_on_return=None, pool_size=1, max_overflow=0)
         p2 = p.recreate()
         assert p2.size() == 1
         assert p2._reset_on_return is pool.reset_none
@@ -2157,9 +2128,7 @@ class ResetOnReturnTest(PoolTestBase):
 
     @testing.combinations(True, False, argnames="assert_w_event")
     @testing.combinations(True, False, argnames="use_engine_transaction")
-    def test_plain_rollback_via_engine(
-        self, assert_w_event, use_engine_transaction
-    ):
+    def test_plain_rollback_via_engine(self, assert_w_event, use_engine_transaction):
         dbapi, engine = self._engine_fixture(reset_on_return="rollback")
 
         if assert_w_event:
@@ -2332,9 +2301,7 @@ class NullPoolTest(PoolTestBase):
         c1 = None
 
         c1 = p.connect()
-        dbapi.connect.assert_has_calls(
-            [call("foo.db"), call("foo.db")], any_order=True
-        )
+        dbapi.connect.assert_has_calls([call("foo.db"), call("foo.db")], any_order=True)
 
 
 class StaticPoolTest(PoolTestBase):
