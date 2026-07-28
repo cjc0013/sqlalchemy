@@ -224,6 +224,43 @@ class ExcludedDefaultsTest(fixtures.MappedTest):
         eq_(sess.connection().execute(dt.select()).fetchall(), [(1, "hello")])
 
 
+class MapperPrimaryKeyDefaultsTest(fixtures.MappedTest):
+    __requires__ = ("insert_returning",)
+
+    @classmethod
+    def define_tables(cls, metadata):
+        Table(
+            "mapper_pk_defaults",
+            metadata,
+            Column("created_at", sa.DateTime, server_default=sa.func.now()),
+            Column("data", String(20)),
+        )
+
+    @classmethod
+    def setup_classes(cls):
+        class A(cls.Basic):
+            pass
+
+    @classmethod
+    def setup_mappers(cls):
+        table = cls.tables.mapper_pk_defaults
+        cls.mapper_registry.map_imperatively(
+            cls.classes.A,
+            table,
+            primary_key=[table.c.created_at],
+            eager_defaults=False,
+        )
+
+    def test_server_default_mapper_primary_key_is_returned(self):
+        a = self.classes.A(data="value")
+        session = fixture_session()
+        session.add(a)
+        session.flush()
+
+        assert a.created_at is not None
+        assert sa.inspect(a).persistent
+
+
 class ComputedDefaultsOnUpdateTest(fixtures.MappedTest):
     """test that computed columns are recognized as server
     oninsert/onupdate defaults."""

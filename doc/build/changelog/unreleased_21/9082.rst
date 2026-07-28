@@ -1,0 +1,8 @@
+.. change::
+    :tags: bug, orm
+    :tickets: 9082
+
+    Fixed ORM flushes for mappings whose configured primary-key columns are
+    server-generated but are not marked as primary keys on the underlying
+    :class:`_schema.Table`.  These mapper-level primary-key values are now
+    fetched with ``RETURNING`` independently of the ``eager_defaults`` setting.

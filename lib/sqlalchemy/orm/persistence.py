@@ -1120,6 +1120,11 @@ def _emit_insert_statements(
                 do_executemany = False
 
             if use_orm_insert_stmt is None:
+                if not has_all_pks:
+                    statement = statement.return_defaults(
+                        *mapper._pks_by_table[table],
+                        sort_by_parameter_order=bookkeeping,
+                    )
                 if (
                     not has_all_defaults
                     and base_mapper._prefer_eager_defaults(
