@@ -1,0 +1,11 @@
+.. change::
+    :tags: bug, orm
+    :tickets: 10888
+
+    Fixed :class:`.OrderingList` assignment outside ORM instrumentation so
+    slice assignment accepts any iterable, correctly grows or shrinks the
+    list, and supports extended slices using normal Python list semantics.
+    ORM collection instrumentation now also consumes iterable extended-slice
+    values before validating their length.  Integer-like indexes are
+    normalized through :func:`operator.index` before updating an item's
+    ordering value.
