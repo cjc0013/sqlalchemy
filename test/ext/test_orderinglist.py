@@ -3,6 +3,7 @@ from sqlalchemy import Integer
 from sqlalchemy import MetaData
 from sqlalchemy import String
 from sqlalchemy import testing
+from sqlalchemy.ext.orderinglist import OrderingList
 from sqlalchemy.ext.orderinglist import ordering_list
 from sqlalchemy.orm import clear_mappers
 from sqlalchemy.orm import relationship
@@ -356,6 +357,26 @@ class OrderingListTest(fixtures.MappedTest):
             self.assert_(srt.bullets[i].position == i)
             self.assert_(srt.bullets[i].text == text)
 
+    def test_uninstrumented_setitem_list_semantics(self):
+        ordered = OrderingList("order")
+        for _ in range(3):
+            ordered.append(DummyItem())
+
+        replacement = DummyItem()
+        ordered[MockIndex(-1)] = replacement
+        eq_(replacement.order, 2)
+
+        ordered[1:2] = (DummyItem() for _ in range(3))
+        eq_(len(ordered), 5)
+        eq_([item.order for item in ordered], [0, 1, 2, 3, 4])
+
+        ordered[1:4] = []
+        eq_(len(ordered), 2)
+        eq_([item.order for item in ordered], [0, 1])
+
+        ordered[::2] = (DummyItem() for _ in ordered[::2])
+        eq_([item.order for item in ordered], [0, 1])
+
     def test_replace(self):
         self._setup(ordering_list("position"))
 
@@ -497,3 +518,6 @@ class MockIndex:
 
     def __index__(self):
         return self.value
+
+    def __int__(self):
+        return self.value + 100

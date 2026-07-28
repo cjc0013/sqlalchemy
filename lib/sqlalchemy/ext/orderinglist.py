@@ -129,6 +129,7 @@ start numbering at 1 or some other integer, provide ``count_from=1``.
 
 from __future__ import annotations
 
+import operator
 from typing import Any
 from typing import Callable
 from typing import Dict
@@ -393,19 +394,16 @@ class OrderingList(List[_T]):
         entity: Union[_T, Iterable[_T]],
     ) -> None:
         if isinstance(index, slice):
-            step = index.step or 1
-            start = index.start or 0
-            if start < 0:
-                start += len(self)
-            stop = index.stop or len(self)
-            if stop < 0:
-                stop += len(self)
-            entities = list(entity)  # type: ignore[arg-type]
-            for i in range(start, stop, step):
-                self.__setitem__(i, entities[i])
+            super().__setitem__(index, entity)  # type: ignore[index]
+            self._reorder()
         else:
-            self._order_entity(int(index), entity, True)  # type: ignore[arg-type] # noqa: E501
+            normalized_index = operator.index(index)
             super().__setitem__(index, entity)  # type: ignore[assignment]
+            if normalized_index < 0:
+                normalized_index += len(self)
+            self._order_entity(
+                normalized_index, entity, True  # type: ignore[arg-type]
+            )
 
     def __delitem__(self, index: Union[SupportsIndex, slice]) -> None:
         super().__delitem__(index)

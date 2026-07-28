@@ -1191,35 +1191,25 @@ def _list_decorators() -> Dict[str, Callable[[_FN], _FN]]:
                 fn(self, index, value)
             else:
                 # slice assignment requires __delitem__, insert, __len__
-                step = index.step or 1
-                start = index.start or 0
-                if start < 0:
-                    start += len(self)
-                if index.stop is not None:
-                    stop = index.stop
-                else:
-                    stop = len(self)
-                if stop < 0:
-                    stop += len(self)
+                start, stop, step = index.indices(len(self))
+                values = list(value)
 
                 if step == 1:
-                    if value is self:
-                        return
                     for i in range(start, stop, step):
                         if len(self) > start:
                             del self[start]
 
-                    for i, item in enumerate(value):
+                    for i, item in enumerate(values):
                         self.insert(i + start, item)
                 else:
                     rng = list(range(start, stop, step))
-                    if len(value) != len(rng):
+                    if len(values) != len(rng):
                         raise ValueError(
                             "attempt to assign sequence of size %s to "
                             "extended slice of size %s"
-                            % (len(value), len(rng))
+                            % (len(values), len(rng))
                         )
-                    for i, item in zip(rng, value):
+                    for i, item in zip(rng, values):
                         self.__setitem__(i, item)
 
         _tidy(__setitem__)
