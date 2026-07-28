@@ -1062,7 +1062,7 @@ class Query(
         alternative="The method is now available as :meth:`_orm.Session.get`",
     )
     def get(self, ident: _PKIdentityArgument) -> Optional[_T]:
-        """Return an instance based on the given primary key identifier,
+        """Return an instance based on the given primary key identity,
         or ``None`` if not found.
 
         E.g.::
@@ -1075,8 +1075,8 @@ class Query(
 
         :meth:`_query.Query.get` is special in that it provides direct
         access to the identity map of the owning :class:`.Session`.
-        If the given primary key identifier is present
-        in the local identity map, the object is returned
+        If the :term:`identity key` constructed from the given primary key
+        identity is present in the local identity map, the object is returned
         directly from this collection and no SQL is emitted,
         unless the object has been marked fully expired.
         If not present,

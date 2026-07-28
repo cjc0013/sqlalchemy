@@ -3728,7 +3728,7 @@ class Session(_SessionClassMethods, EventTarget):
         execution_options: OrmExecuteOptionsParameter = util.EMPTY_DICT,
         bind_arguments: Optional[_BindArguments] = None,
     ) -> Optional[_O]:
-        """Return an instance based on the given primary key identifier,
+        """Return an instance based on the given primary key identity,
         or ``None`` if not found.
 
         E.g.::
@@ -3744,8 +3744,8 @@ class Session(_SessionClassMethods, EventTarget):
 
         :meth:`_orm.Session.get` is special in that it provides direct
         access to the identity map of the :class:`.Session`.
-        If the given primary key identifier is present
-        in the local identity map, the object is returned
+        If the :term:`identity key` constructed from the given primary key
+        identity is present in the local identity map, the object is returned
         directly from this collection and no SQL is emitted,
         unless the object has been marked fully expired.
         If not present,

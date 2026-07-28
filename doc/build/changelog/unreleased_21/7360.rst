@@ -1,0 +1,8 @@
+.. change::
+    :tags: bug, orm, documentation
+    :tickets: 7360
+
+    Updated the ORM ``get()`` documentation to distinguish the primary key
+    identity supplied by the caller from the complete :term:`identity key`
+    used by the identity map, and linked the latter term to its glossary
+    definition.

@@ -146,8 +146,8 @@ class ObjectDeletedError(sa_exc.InvalidRequestError):
     exception is raised.
 
     The true meaning of this exception is simply that
-    no row exists for the primary key identifier associated
-    with a persistent object.   The row may have been
+        no row exists for the :term:`identity key` associated with a
+        persistent object.   The row may have been
     deleted, or in some cases the primary key updated
     to a new value, outside of the ORM's management of the target
     object.
