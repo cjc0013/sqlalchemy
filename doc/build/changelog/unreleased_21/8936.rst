@@ -1,0 +1,8 @@
+.. change::
+    :tags: postgresql, usecase
+    :tickets: 8936
+
+    Added optional PostgreSQL datatype metadata to :class:`.Range`, along
+    with named constructors for each built-in single-range datatype.  This
+    allows empty and fully unbounded range values to retain their exact SQL
+    datatype and participate in literal type resolution.

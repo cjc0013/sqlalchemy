@@ -4737,6 +4737,25 @@ class BitTests(fixtures.TestBase):
 
 class RangeMiscTests(fixtures.TestBase):
     @testing.combinations(
+        ("new_int4range", INT4RANGE),
+        ("new_int8range", INT8RANGE),
+        ("new_numrange", NUMRANGE),
+        ("new_daterange", DATERANGE),
+        ("new_tsrange", TSRANGE),
+        ("new_tstzrange", TSTZRANGE),
+    )
+    def test_named_constructor_retains_type(self, constructor, type_):
+        obj = getattr(Range, constructor)(empty=True)
+
+        is_(obj.type.__class__, type_)
+        is_(literal(obj).type.__class__, type_)
+
+    def test_explicit_type_overrides_bound_inference(self):
+        obj = Range(1, 2, type=INT8RANGE())
+
+        is_(literal(obj).type.__class__, INT8RANGE)
+
+    @testing.combinations(
         (Range(2, 7), INT4RANGE),
         (Range(-10, 7), INT4RANGE),
         (Range(None, -7), INT4RANGE),

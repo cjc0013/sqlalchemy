@@ -67,6 +67,8 @@ class Range(Generic[_T]):
      ``"()"``, ``"[)"``, ``"(]"``, ``"[]"``.  Defaults to ``"[)"``.
     :param empty: keyword-only, optional bool indicating this is an "empty"
      range
+    :param type: keyword-only, optional PostgreSQL range datatype.  This may
+     be used to retain the exact datatype for empty or unbounded ranges.
 
     .. versionadded:: 2.0
 
@@ -80,6 +82,87 @@ class Range(Generic[_T]):
 
     bounds: _BoundsType = dataclasses.field(default="[)", kw_only=True)
     empty: bool = dataclasses.field(default=False, kw_only=True)
+    type: Optional[AbstractSingleRange[_T]] = dataclasses.field(
+        default=None, kw_only=True, compare=False, repr=False
+    )
+
+    @classmethod
+    def new_int4range(
+        cls,
+        lower: Optional[int] = None,
+        upper: Optional[int] = None,
+        *,
+        bounds: _BoundsType = "[)",
+        empty: bool = False,
+    ) -> Range[int]:
+        """Construct a :class:`.Range` with an :class:`.INT4RANGE` type."""
+
+        return cls(lower, upper, bounds=bounds, empty=empty, type=INT4RANGE())
+
+    @classmethod
+    def new_int8range(
+        cls,
+        lower: Optional[int] = None,
+        upper: Optional[int] = None,
+        *,
+        bounds: _BoundsType = "[)",
+        empty: bool = False,
+    ) -> Range[int]:
+        """Construct a :class:`.Range` with an :class:`.INT8RANGE` type."""
+
+        return cls(lower, upper, bounds=bounds, empty=empty, type=INT8RANGE())
+
+    @classmethod
+    def new_numrange(
+        cls,
+        lower: Optional[Decimal] = None,
+        upper: Optional[Decimal] = None,
+        *,
+        bounds: _BoundsType = "[)",
+        empty: bool = False,
+    ) -> Range[Decimal]:
+        """Construct a :class:`.Range` with a :class:`.NUMRANGE` type."""
+
+        return cls(lower, upper, bounds=bounds, empty=empty, type=NUMRANGE())
+
+    @classmethod
+    def new_daterange(
+        cls,
+        lower: Optional[date] = None,
+        upper: Optional[date] = None,
+        *,
+        bounds: _BoundsType = "[)",
+        empty: bool = False,
+    ) -> Range[date]:
+        """Construct a :class:`.Range` with a :class:`.DATERANGE` type."""
+
+        return cls(lower, upper, bounds=bounds, empty=empty, type=DATERANGE())
+
+    @classmethod
+    def new_tsrange(
+        cls,
+        lower: Optional[datetime] = None,
+        upper: Optional[datetime] = None,
+        *,
+        bounds: _BoundsType = "[)",
+        empty: bool = False,
+    ) -> Range[datetime]:
+        """Construct a :class:`.Range` with a :class:`.TSRANGE` type."""
+
+        return cls(lower, upper, bounds=bounds, empty=empty, type=TSRANGE())
+
+    @classmethod
+    def new_tstzrange(
+        cls,
+        lower: Optional[datetime] = None,
+        upper: Optional[datetime] = None,
+        *,
+        bounds: _BoundsType = "[)",
+        empty: bool = False,
+    ) -> Range[datetime]:
+        """Construct a :class:`.Range` with a :class:`.TSTZRANGE` type."""
+
+        return cls(lower, upper, bounds=bounds, empty=empty, type=TSTZRANGE())
 
     def __bool__(self) -> bool:
         return not self.empty
@@ -124,7 +207,7 @@ class Range(Generic[_T]):
 
     @property
     def __sa_type_engine__(self) -> AbstractSingleRange[_T]:
-        return AbstractSingleRange()
+        return self.type if self.type is not None else AbstractSingleRange()
 
     def _contains_value(self, value: _T) -> bool:
         """Return True if this range contains the given value."""
@@ -853,6 +936,9 @@ class AbstractSingleRange(AbstractRange[Range[_T]]):
     __abstract__ = True
 
     def _resolve_for_literal(self, value: Range[Any]) -> Any:
+        if value.type is not None:
+            return value.type
+
         spec = value.lower if value.lower is not None else value.upper
 
         if isinstance(spec, int):
