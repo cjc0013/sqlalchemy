@@ -1,0 +1,9 @@
+.. change::
+    :tags: bug, asyncio
+    :tickets: 12710
+
+    Fixed a connection leak which could occur when an asyncio task was
+    cancelled while :meth:`_asyncio.AsyncConnection.start` was waiting for a
+    newly created connection.  Connection creation is now shielded from
+    cancellation and a connection that finishes after cancellation is closed
+    before the cancellation is propagated.

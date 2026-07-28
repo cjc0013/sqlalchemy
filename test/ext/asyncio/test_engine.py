@@ -983,6 +983,40 @@ class AsyncCreatePoolTest(fixtures.TestBase):
         )
 
 
+class AsyncConnectionCancellationTest(fixtures.TestBase):
+    @async_test
+    async def test_cancel_during_start_closes_connection(self):
+        connect_started = asyncio.Event()
+        allow_connect = asyncio.Event()
+        sync_connection = mock.Mock()
+        sync_engine = mock.Mock()
+        sync_engine.connect.return_value = sync_connection
+        connect = sync_engine.connect
+
+        async def run_in_greenlet(fn, *arg, **kw):
+            if fn is connect:
+                connect_started.set()
+                await allow_connect.wait()
+            return fn(*arg, **kw)
+
+        async_engine = mock.Mock(sync_engine=sync_engine)
+        connection = AsyncConnection(async_engine)
+
+        with patch.object(_async_engine, "greenlet_spawn", run_in_greenlet):
+            start = asyncio.create_task(connection.start())
+            await connect_started.wait()
+            start.cancel()
+            await asyncio.sleep(0)
+
+            is_false(start.done())
+            allow_connect.set()
+            with expect_raises(asyncio.CancelledError):
+                await start
+
+        sync_connection.close.assert_called_once_with()
+        is_none(connection.sync_connection)
+
+
 class AsyncEventTest(EngineFixture):
     """The engine events all run in their normal synchronous context.
 

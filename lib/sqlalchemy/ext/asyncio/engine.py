@@ -277,9 +277,27 @@ class AsyncConnection(  # type: ignore[misc]
         """
         if self.sync_connection:
             raise exc.InvalidRequestError("connection is already started")
-        self.sync_connection = self._assign_proxied(
-            await greenlet_spawn(self.sync_engine.connect)
+
+        connect_task = asyncio.create_task(
+            greenlet_spawn(self.sync_engine.connect)
         )
+        try:
+            sync_connection = await asyncio.shield(connect_task)
+        except asyncio.CancelledError:
+            try:
+                sync_connection = await asyncio.shield(connect_task)
+            except BaseException:
+                # consume the connection task's result so that an exception
+                # raised concurrently with cancellation is not left pending
+                pass
+            else:
+                close_task = asyncio.create_task(
+                    greenlet_spawn(sync_connection.close)
+                )
+                await asyncio.shield(close_task)
+            raise
+
+        self.sync_connection = self._assign_proxied(sync_connection)
         return self
 
     @property
