@@ -1,0 +1,8 @@
+.. change::
+    :tags: feature, orm
+    :tickets: 9548
+
+    Added explicit recursion controls for wildcard relationship loader
+    options.  The ``"**"`` form applies a loader strategy recursively, while
+    ``"*|"`` limits it to relationships on the current entity.  The existing
+    ``"*"`` form retains its historical behavior for backwards compatibility.

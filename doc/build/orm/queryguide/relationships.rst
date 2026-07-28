@@ -1040,6 +1040,14 @@ of whether it appears before or after the :func:`.lazyload` option,
 if multiple options that each included ``"*"`` were passed, the last one
 will take effect.
 
+The ``"*"`` wildcard retains its historical recursion behavior, which can
+vary with the loader strategy.  To select the behavior explicitly, use
+``"**"`` to apply the strategy recursively to relationships reached by the
+load, or ``"*|"`` to stop after relationships on the current entity::
+
+    stmt = select(MyClass).options(selectinload("**"))
+    stmt = select(MyClass).options(selectinload("*|"))
+
 .. _orm_queryguide_relationship_per_entity_wildcard:
 
 Per-Entity Wildcard Loading Strategies

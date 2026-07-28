@@ -17,6 +17,7 @@ from typing import cast
 from typing import Dict
 from typing import Iterator
 from typing import List
+from typing import Literal
 from typing import Optional
 from typing import overload
 from typing import Sequence
@@ -85,6 +86,8 @@ def _unreduce_path(path: _SerializedPath) -> PathRegistry:
 
 
 _WILDCARD_TOKEN: _LiteralStar = "*"
+_RECURSIVE_WILDCARD_TOKEN: Literal["**"] = "**"
+_NON_RECURSIVE_WILDCARD_TOKEN: Literal["*|"] = "*|"
 _DEFAULT_TOKEN = "_sa_default"
 
 

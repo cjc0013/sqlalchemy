@@ -36,6 +36,8 @@ from .base import InspectionAttr
 from .interfaces import LoaderOption
 from .path_registry import _AbstractEntityRegistry
 from .path_registry import _DEFAULT_TOKEN
+from .path_registry import _NON_RECURSIVE_WILDCARD_TOKEN
+from .path_registry import _RECURSIVE_WILDCARD_TOKEN
 from .path_registry import _StrPathToken
 from .path_registry import _TokenRegistry
 from .path_registry import _WILDCARD_TOKEN
@@ -1339,13 +1341,14 @@ class Load(_AbstractLoad):
 
 
 class _WildcardLoad(_AbstractLoad):
-    """represent a standalone '*' load operation"""
+    """represent a standalone '*' or '**' load operation"""
 
-    __slots__ = ("strategy", "path", "local_opts")
+    __slots__ = ("strategy", "path", "local_opts", "recursive")
 
     _traverse_internals = [
         ("strategy", visitors.ExtendedInternalTraversal.dp_plain_obj),
         ("path", visitors.ExtendedInternalTraversal.dp_plain_obj),
+        ("recursive", visitors.ExtendedInternalTraversal.dp_plain_obj),
         (
             "local_opts",
             visitors.ExtendedInternalTraversal.dp_string_multi_dict,
@@ -1356,12 +1359,17 @@ class _WildcardLoad(_AbstractLoad):
     strategy: Optional[Tuple[Any, ...]]
     local_opts: _OptsType
     path: Union[Tuple[()], Tuple[str]]
-    propagate_to_loaders = False
+    recursive: Optional[bool]
 
-    def __init__(self) -> None:
+    def __init__(self, recursive: Optional[bool]) -> None:
         self.path = ()
         self.strategy = None
         self.local_opts = util.EMPTY_DICT
+        self.recursive = recursive
+
+    @property
+    def propagate_to_loaders(self):
+        return self.recursive
 
     def _clone_for_bind_strategy(
         self,
@@ -1431,6 +1439,9 @@ class _WildcardLoad(_AbstractLoad):
 
         entities = [ent.entity_zero for ent in mapper_entities]
         current_path = compile_state.current_path
+
+        if current_path and self.recursive is False:
+            return
 
         start_path: _PathRepresentation = self.path
 
@@ -2350,7 +2361,11 @@ def _generate_from_keys(
                     )
                     attr = attr[1:]
 
-                if attr == _WILDCARD_TOKEN:
+                if attr in (
+                    _WILDCARD_TOKEN,
+                    _RECURSIVE_WILDCARD_TOKEN,
+                    _NON_RECURSIVE_WILDCARD_TOKEN,
+                ):
                     if is_default:
                         raise sa_exc.ArgumentError(
                             "Wildcard token cannot be followed by "
@@ -2358,9 +2373,25 @@ def _generate_from_keys(
                         )
 
                     if lead_element is None:
-                        lead_element = _WildcardLoad()
+                        lead_element = _WildcardLoad(
+                            recursive=(
+                                True
+                                if attr == _RECURSIVE_WILDCARD_TOKEN
+                                else False
+                                if attr == _NON_RECURSIVE_WILDCARD_TOKEN
+                                else None
+                            )
+                        )
 
-                    lead_element = meth(lead_element, _DEFAULT_TOKEN, **kw)
+                    lead_element = meth(
+                        lead_element,
+                        (
+                            _WILDCARD_TOKEN
+                            if attr == _NON_RECURSIVE_WILDCARD_TOKEN
+                            else _DEFAULT_TOKEN
+                        ),
+                        **kw,
+                    )
 
                 else:
                     raise sa_exc.ArgumentError(
@@ -2584,7 +2615,7 @@ def undefer(key: _AttrType) -> _AbstractLoad:
 
 @loader_unbound_fn
 def undefer_group(name: str) -> _AbstractLoad:
-    element = _WildcardLoad()
+    element = _WildcardLoad(recursive=None)
     return element.undefer_group(name)
 
 

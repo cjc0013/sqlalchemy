@@ -391,6 +391,91 @@ class DefaultStrategyOptionsTest(DefaultStrategyOptionsTestFixtures):
         # verify everything loaded, with no additional sql needed
         self._assert_fully_loaded(users)
 
+    def test_joined_explicit_recursive_wildcard(self):
+        sess = self._upgrade_fixture()
+        users = []
+
+        def go():
+            users[:] = (
+                sess.query(self.classes.User)
+                .options(joinedload("**"))
+                .order_by(self.classes.User.id)
+                .all()
+            )
+
+        self.assert_sql_count(testing.db, go, 1)
+        self._assert_fully_loaded(users)
+
+    def test_joined_explicit_nonrecursive_wildcard(self):
+        sess = self._upgrade_fixture()
+        users = []
+
+        def go():
+            users[:] = (
+                sess.query(self.classes.User)
+                .options(joinedload("*|"))
+                .order_by(self.classes.User.id)
+                .all()
+            )
+
+        self.assert_sql_count(testing.db, go, 1)
+
+        def first_level():
+            for user in users:
+                user.addresses
+                user.orders
+
+        self.assert_sql_count(testing.db, first_level, 0)
+
+        def second_level():
+            users[0].orders[0].items
+
+        self.assert_sql_count(testing.db, second_level, 1)
+
+    def test_joined_wildcard_recursion_modes(self):
+        assert joinedload("*").recursive is None
+        assert joinedload("**").recursive is True
+        assert joinedload("*|").recursive is False
+
+    def test_selectin_explicit_recursion_modes(self):
+        sess = self._upgrade_fixture()
+        users = []
+
+        def nonrecursive():
+            users[:] = (
+                sess.query(self.classes.User)
+                .options(sa.orm.selectinload("*|"))
+                .order_by(self.classes.User.id)
+                .all()
+            )
+
+        self.assert_sql_count(testing.db, nonrecursive, 3)
+
+        def first_level():
+            for user in users:
+                user.addresses
+                user.orders
+
+        self.assert_sql_count(testing.db, first_level, 0)
+
+        def second_level():
+            users[0].orders[0].items
+
+        self.assert_sql_count(testing.db, second_level, 1)
+
+        sess.expunge_all()
+
+        def recursive():
+            users[:] = (
+                sess.query(self.classes.User)
+                .options(sa.orm.selectinload("**"))
+                .order_by(self.classes.User.id)
+                .all()
+            )
+
+        self.assert_sql_count(testing.db, recursive, 5)
+        self._assert_fully_loaded(users)
+
     def test_joined_path_wildcards(self):
         sess = self._upgrade_fixture()
         users = []
