@@ -6270,6 +6270,25 @@ class NamingConventionTest(fixtures.TestBase, AssertsCompiledSQL):
         a1.append_constraint(fk)
         eq_(fk.name, "fk_address_user_id_user_id")
 
+    def test_fk_referred_column_self_referential(self):
+        """test #5350"""
+
+        metadata = MetaData(
+            naming_convention={
+                "fk": "fk__%(referred_table_name)s__"
+                "%(referred_column_0_name)s"
+            }
+        )
+        parent = Table(
+            "parent",
+            metadata,
+            Column("id", Integer, primary_key=True),
+            Column("parent_id", Integer, ForeignKey("parent.id")),
+        )
+
+        fk = next(iter(parent.foreign_key_constraints))
+        eq_(fk.name, "fk__parent__id")
+
     @testing.combinations(True, False, argnames="col_has_type")
     def test_fk_ref_local_referent_has_no_type(self, col_has_type):
         """test #7958"""
