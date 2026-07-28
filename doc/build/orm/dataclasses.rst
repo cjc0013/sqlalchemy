@@ -134,6 +134,8 @@ have better compatibility with some versions of the mypy type checker::
 .. versionadded:: 2.0.44 Added :func:`_orm.mapped_as_dataclass` after observing
    mypy compatibility issues with the method form of the same feature
 
+.. _orm_declarative_native_dataclasses_class_configuration:
+
 Class level feature configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -526,6 +528,31 @@ itself, this would break compatibility with dataclasses, as the presence
 of :paramref:`_orm.relationship.default_factory` or
 :paramref:`_orm.relationship.default` is what determines if the parameter is
 to be required or optional when rendered into the ``__init__()`` method.
+
+Dataclass behavior to keep in mind
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Declarative Dataclass Mapping follows Python dataclass behavior in addition to
+ORM mapping behavior.  In particular:
+
+* Python's dataclass field-ordering rules apply across an inheritance
+  hierarchy.  A required field cannot follow a field that has a default.
+  Declaring reusable mixin fields as keyword-only, using ``kw_only=True`` on
+  the mixin or individual fields, avoids positional field-order conflicts.
+* A mixin that contributes mapped dataclass fields must itself participate in
+  the Declarative Dataclass hierarchy, as described at
+  :ref:`orm_declarative_dc_mixins`.
+* ``default`` and ``default_factory`` determine whether a generated
+  ``__init__()`` parameter is optional.  This remains explicit for
+  relationships even when the collection class could otherwise be inferred.
+* ORM loading does not call the generated ``__init__()`` or
+  ``__post_init__()`` methods.  State established only by those methods,
+  including non-mapped dataclass fields, is therefore construction-time state;
+  use ORM load events when equivalent transient state is required for objects
+  loaded from the database.
+
+The supported and unsupported class-level dataclass features are listed at
+:ref:`orm_declarative_native_dataclasses_class_configuration`.
 
 .. _orm_declarative_native_dataclasses_non_mapped_fields:
 
