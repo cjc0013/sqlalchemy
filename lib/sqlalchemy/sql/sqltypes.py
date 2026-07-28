@@ -1443,6 +1443,18 @@ class Enum(String, SchemaType, Emulated, TypeEngine[Union[str, enum.Enum]]):
     values to be persisted.   For a simple enumeration that uses string values,
     a callable such as  ``lambda x: [e.value for e in x]`` is sufficient.
 
+    .. note::
+
+       A plain Python value passed directly to an INSERT or UPDATE values
+       clause is coerced using the destination column's type.  A SQL
+       expression passed as the value, such as a :func:`_sql.case`
+       expression, is typed independently; Python enum values nested inside
+       that expression do not automatically inherit the destination
+       :class:`.Enum` type.  Use :func:`_sql.literal` with an explicit
+       :class:`.Enum` instance for such values.  On backends that require an
+       explicit SQL-level type for a named enum inside expressions, use
+       :func:`_sql.cast` to render that type in the SQL expression.
+
     .. seealso::
 
         :ref:`orm_declarative_mapped_column_enums` - background on using
