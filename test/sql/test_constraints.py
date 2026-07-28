@@ -923,6 +923,19 @@ class ConstraintCompilationTest(fixtures.TestBase, AssertsCompiledSQL):
 
             x.to_metadata(MetaData())
 
+    def test_expression_index_all_columns(self):
+        """test #9233"""
+        table = Table(
+            "x",
+            MetaData(),
+            Column("x", Integer),
+            Column("y", Integer),
+        )
+        index = Index("xy", func.div(table.c.x, table.c.y))
+
+        eq_(list(index.columns), [table.c.x])
+        eq_(index.all_columns, (table.c.x, table.c.y))
+
     def test_index_against_text_separate(self):
         metadata = MetaData()
         idx = Index("y", text("some_function(q)"))

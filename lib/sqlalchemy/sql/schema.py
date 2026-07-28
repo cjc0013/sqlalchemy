@@ -5722,6 +5722,32 @@ class Index(
         if table is not None:
             self._set_parent(table)
 
+    @property
+    def all_columns(self) -> Tuple[ColumnElement[Any], ...]:
+        """Return all column expressions referenced by this index.
+
+        Unlike :attr:`.Index.columns`, which retains one representative
+        column for each indexed expression when available, this collection
+        traverses functional expressions and includes every referenced
+        column in first-seen order.
+
+        .. versionadded:: 2.1
+        """
+        result: List[ColumnElement[Any]] = []
+        seen: Set[int] = set()
+
+        def add_column(column: ColumnElement[Any]) -> None:
+            identity = id(column)
+            if identity not in seen:
+                seen.add(identity)
+                result.append(column)
+
+        for expression in self.expressions:
+            if isinstance(expression, ClauseElement):
+                visitors.traverse(expression, {}, {"column": add_column})
+
+        return tuple(result)
+
     def _set_parent(self, parent: SchemaEventTarget, **kw: Any) -> None:
         table = parent
         assert isinstance(table, Table)

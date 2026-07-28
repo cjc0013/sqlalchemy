@@ -1,0 +1,8 @@
+.. change::
+    :tags: usecase, schema
+    :tickets: 9233
+
+    Added :attr:`_schema.Index.all_columns`, which returns every column
+    referenced by functional index expressions.  The existing
+    :attr:`_schema.Index.columns` collection retains its positional behavior
+    for compatibility.
