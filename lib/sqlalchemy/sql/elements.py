@@ -2045,6 +2045,7 @@ class BindParameter(roles.InElementRole, KeyedColumnElement[_T]):
         ("callable", InternalTraversal.dp_plain_dict),
         ("value", InternalTraversal.dp_plain_obj),
         ("literal_execute", InternalTraversal.dp_boolean),
+        ("expanding", InternalTraversal.dp_boolean),
     ]
 
     key: str
@@ -2136,11 +2137,7 @@ class BindParameter(roles.InElementRole, KeyedColumnElement[_T]):
             if expanding:
                 if value:
                     check_value = next(
-                        (
-                            element
-                            for element in value
-                            if element is not None
-                        ),
+                        (element for element in value if element is not None),
                         None,
                     )
                 else:

@@ -1611,7 +1611,14 @@ class HasCacheKeySubclass(fixtures.TestBase):
             {"right", "operator", "type_", "negate", "modifiers", "left"},
         ),
         "BindParameter": (
-            {"literal_execute", "type", "callable", "value", "key"},
+            {
+                "literal_execute",
+                "expanding",
+                "type",
+                "callable",
+                "value",
+                "key",
+            },
             {"required", "isoutparam", "literal_execute", "type_", "callable_"}
             | {"unique", "expanding", "quote", "value", "key"},
         ),
