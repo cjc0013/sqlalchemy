@@ -3190,6 +3190,18 @@ class NegationTest(fixtures.TestBase, testing.AssertsCompiledSQL):
             dialect=default.DefaultDialect(supports_native_boolean=False),
         )
 
+    def test_row_value_is_null_uses_external_negation(self):
+        self.assert_compile(
+            ~tuple_(null(), false()).is_(None),
+            "NOT ((NULL, 0) IS NULL)",
+        )
+
+        row = table("some_table", column("x")).table_valued()
+        self.assert_compile(~row.is_(None), "NOT (some_table IS NULL)")
+
+    def test_scalar_is_null_keeps_inline_negation(self):
+        self.assert_compile(~column("x").is_(None), "x IS NOT NULL")
+
     def test_implicitly_boolean(self):
         # test for expressions that the database always considers as boolean
         # even if there is no boolean datatype.

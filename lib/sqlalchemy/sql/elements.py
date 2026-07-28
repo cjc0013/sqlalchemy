@@ -4314,16 +4314,19 @@ class BinaryExpression(OperatorExpression[_T]):
 
     def _negate(self):
         if self.negate is not None:
-            return BinaryExpression(
-                self.left,
-                self.right._negate_in_binary(self.negate, self.operator),
-                self.negate,
-                negate=self.operator,
-                type_=self.type,
-                modifiers=self.modifiers,
+            external_negation_operators = getattr(
+                self.left.type, "_external_negation_operators", ()
             )
-        else:
-            return self.self_group()._negate()
+            if self.operator not in external_negation_operators:
+                return BinaryExpression(
+                    self.left,
+                    self.right._negate_in_binary(self.negate, self.operator),
+                    self.negate,
+                    negate=self.operator,
+                    type_=self.type,
+                    modifiers=self.modifiers,
+                )
+        return self.self_group()._negate()
 
 
 class Slice(ColumnElement[Any]):

@@ -3459,6 +3459,7 @@ class TupleType(TypeEngine[TupleAny]):
     """represent the composite type of a Tuple."""
 
     _is_tuple_type = True
+    _external_negation_operators = frozenset((operators.is_, operators.is_not))
 
     operator_classes = OperatorClass.TUPLE
 
@@ -3784,8 +3785,9 @@ class TableValueType(HasCacheKey, TypeEngine[Any]):
     """Refers to a table value type."""
 
     _is_table_value = True
+    _external_negation_operators = frozenset((operators.is_, operators.is_not))
 
-    operator_classes = OperatorClass.BASE
+    operator_classes = OperatorClass.BASE | OperatorClass.COMPARISON
 
     _traverse_internals = [
         ("_elements", InternalTraversal.dp_clauseelement_list),

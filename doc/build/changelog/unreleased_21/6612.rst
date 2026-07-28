@@ -1,0 +1,8 @@
+.. change::
+    :tags: bug, sql
+    :tickets: 6612
+
+    Fixed negation of ``IS NULL`` expressions for tuple and table-valued
+    expressions.  These row-valued expressions now render as
+    ``NOT (<row> IS NULL)`` instead of ``<row> IS NOT NULL``, preserving the
+    distinct PostgreSQL null semantics for partially-null rows.
