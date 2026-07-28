@@ -1,0 +1,12 @@
+.. change::
+    :tags: bug, mysql
+
+    Fixed bug in the MySQL dialect where the values of a :class:`.mysql.ENUM`
+    or :class:`.mysql.SET` type were rendered into ``CREATE TABLE`` DDL with
+    single quotes doubled but backslashes left unescaped. Under MySQL's default
+    ``sql_mode`` a backslash acts as an escape character, so a value containing
+    a backslash was emitted incorrectly and a value ending in a backslash would
+    escape the closing quote and break out of the string literal. Backslashes
+    are now escaped as well when the server does not have ``NO_BACKSLASH_ESCAPES``
+    enabled, matching the handling already used for ordinary string literals.
+    Pull request courtesy dxbjavid.
