@@ -3,23 +3,23 @@
   "artifacts": {
     "README.md": {
       "bytes": 2188,
-      "sha256": "e61fb003b05435686492b8340060b4903edd2ad522cc34ee313185542511f6c9"
+      "sha256": "764cf19b58734857ffefad88097c8c1b73b52412c92587564f1fa081e8307980"
     },
     "ci_attribution.jsonl": {
-      "bytes": 3960,
-      "sha256": "8b35589893bb2b2ebebbbe40e24141852606b14a1c5643230898f05b38bbad7a"
+      "bytes": 4130,
+      "sha256": "57500853daa62652c5b179cd3e48501994ba302fbd163f7bd1bdaca0916ae5d3"
     },
     "commit_series.tsv": {
-      "bytes": 23107,
-      "sha256": "eccb142dca84a2083eb9610ec053f36fccef5c65995f2ebe82bd8b675c280ebb"
+      "bytes": 23476,
+      "sha256": "08b1c9b0d722c547821e4dce49c0f72acbb4daad259a1928a897ce11924c51b2"
     },
     "issue_coverage.jsonl": {
       "bytes": 46470,
       "sha256": "a8de043e531b64391a7518e7bb1ae5e6994cc43497f021ece46898538df6dd10"
     },
     "pr_coverage.jsonl": {
-      "bytes": 8297,
-      "sha256": "b4a3daf5c0a3c72e7b23b0653bdda21fffd0495d1f4a669e929137407b3b572f"
+      "bytes": 8616,
+      "sha256": "e3a957e07a8f3c48319e13113fb3763199cebbeb4388a8ebf218c6ea9746a9db"
     },
     "residual_work_units.jsonl": {
       "bytes": 30425,
@@ -27,29 +27,30 @@
     },
     "validation_summary.json": {
       "bytes": 819,
-      "sha256": "7fd4ac4583ad7540d273221ae0e7fe67d74ff4c4afc1bc7fd3c45f3221ae494c"
+      "sha256": "bebefe40abaa8b4263897c8dac0550a3f553a5dea9d7b7cf62add37500c11476"
     }
   },
   "base_sha": "aa1a5575358d3aa14953b04dced02f4763fed2e7",
   "canary_branch": "ouroboros/canary-no-notify-9425-20260728",
   "catalog_branch": "ouroboros/catalog-20260728",
-  "commit_count": 143,
+  "commit_count": 145,
+  "prior_deep_ledger_summary_sha256": "a4865061d2b3b4e258f206c5e2d651111eadf3dde379d013b87fd2474d695ac1",
   "public_actions": {
     "creates_upstream_comment": false,
     "creates_upstream_issue": false,
     "creates_upstream_pull_request": false,
     "mentions_maintainers": false
   },
-  "publication_head_sha": "0e6736134724c2f8d975f2a51493624f934f1f92",
+  "publication_head_sha": "817011f2531cbe6d939e68859b5a01a2846d3088",
   "published_row_counts": {
-    "ci_attribution.jsonl": 26,
+    "ci_attribution.jsonl": 27,
     "issue_coverage.jsonl": 182,
-    "pr_coverage.jsonl": 26,
+    "pr_coverage.jsonl": 27,
     "residual_work_units.jsonl": 101
   },
   "repository": "cjc0013/sqlalchemy",
-  "source_integration_head_sha": "bc409096e77f338c05a9a1cef13f8ee99edd1887",
-  "source_ledger_summary_sha256": "a4865061d2b3b4e258f206c5e2d651111eadf3dde379d013b87fd2474d695ac1",
+  "source_integration_head_sha": "ac91268e679adb2c5e99ebd66e2462bbbb5ccf61",
+  "source_ledger_summary_sha256": "2d976334a61ea46db5fbe799dc3dee8d3b5cbc667f06dc457fbf70e16bf1d9bd",
   "upstream_repository": "sqlalchemy/sqlalchemy",
   "version": "sqlalchemy_publication_catalog_v1"
 }

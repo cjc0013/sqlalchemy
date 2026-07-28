@@ -3,10 +3,10 @@
   "non_typing": {
     "errors": 0,
     "failures": 0,
-    "passed": 25796,
-    "sha256": "4ea4bb1af1bdfbeda4fb94c08baaf2656d5a0c4156a9915c2769ac338e6c53e2",
+    "passed": 25800,
+    "sha256": "45ab7555faa52435238d73929fd6d1206c4f7fc4369f36e0722eaefc1e53bec2",
     "skipped": 1502,
-    "tests": 27298
+    "tests": 27302
   },
   "typing": {
     "errors": 0,
