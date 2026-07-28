@@ -2,8 +2,8 @@
   "all_branch": "ouroboros/all-20260728",
   "artifacts": {
     "README.md": {
-      "bytes": 2095,
-      "sha256": "2d95c3951830d460223f46d9ac08989ea58a9179303d531b8b294f300f122c9b"
+      "bytes": 2188,
+      "sha256": "e61fb003b05435686492b8340060b4903edd2ad522cc34ee313185542511f6c9"
     },
     "ci_attribution.jsonl": {
       "bytes": 3960,
@@ -11,7 +11,7 @@
     },
     "commit_series.tsv": {
       "bytes": 23107,
-      "sha256": "7eaf7bb38fb824265e83d574b4318ca44692b043b9a1addb2bb4359f6d6dddff"
+      "sha256": "eccb142dca84a2083eb9610ec053f36fccef5c65995f2ebe82bd8b675c280ebb"
     },
     "issue_coverage.jsonl": {
       "bytes": 46470,
@@ -34,13 +34,13 @@
   "canary_branch": "ouroboros/canary-no-notify-9425-20260728",
   "catalog_branch": "ouroboros/catalog-20260728",
   "commit_count": 143,
-  "head_sha": "bc409096e77f338c05a9a1cef13f8ee99edd1887",
   "public_actions": {
     "creates_upstream_comment": false,
     "creates_upstream_issue": false,
     "creates_upstream_pull_request": false,
     "mentions_maintainers": false
   },
+  "publication_head_sha": "0e6736134724c2f8d975f2a51493624f934f1f92",
   "published_row_counts": {
     "ci_attribution.jsonl": 26,
     "issue_coverage.jsonl": 182,
@@ -48,6 +48,7 @@
     "residual_work_units.jsonl": 101
   },
   "repository": "cjc0013/sqlalchemy",
+  "source_integration_head_sha": "bc409096e77f338c05a9a1cef13f8ee99edd1887",
   "source_ledger_summary_sha256": "a4865061d2b3b4e258f206c5e2d651111eadf3dde379d013b87fd2474d695ac1",
   "upstream_repository": "sqlalchemy/sqlalchemy",
   "version": "sqlalchemy_publication_catalog_v1"

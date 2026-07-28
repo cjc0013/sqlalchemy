@@ -8,7 +8,8 @@ This fork publishes a reviewable option set. It does not claim upstream acceptan
 - Catalog branch: `ouroboros/catalog-20260728`
 - Notification canary: `ouroboros/canary-no-notify-9425-20260728`
 - Frozen upstream base: `aa1a5575358d3aa14953b04dced02f4763fed2e7`
-- Integrated head: `bc409096e77f338c05a9a1cef13f8ee99edd1887`
+- Validated integration head: `bc409096e77f338c05a9a1cef13f8ee99edd1887`
+- Notification-safe publication head: `0e6736134724c2f8d975f2a51493624f934f1f92`
 - [Review the complete code diff](https://github.com/cjc0013/sqlalchemy/compare/aa1a5575358d3aa14953b04dced02f4763fed2e7...ouroboros/all-20260728)
 
 ## Coverage
