@@ -71,10 +71,10 @@ class DialectTest(fixtures.TestBase):
         to do dataclasses backwards compat operations"""
 
         r1 = Range(None, 5)
-        eq_(dataclasses.astuple(r1), (None, 5, "[)", False))
+        eq_(dataclasses.astuple(r1), (None, 5, "[)", False, None))
 
         r1 = Range(10, 5, bounds="()")
-        eq_(dataclasses.astuple(r1), (10, 5, "()", False))
+        eq_(dataclasses.astuple(r1), (10, 5, "()", False, None))
 
         with expect_raises(TypeError):
             Range(10, 5, "()")  # type: ignore
@@ -84,7 +84,7 @@ class DialectTest(fixtures.TestBase):
 
     def test_range_frozen(self):
         r1 = Range(None, 5)
-        eq_(dataclasses.astuple(r1), (None, 5, "[)", False))
+        eq_(dataclasses.astuple(r1), (None, 5, "[)", False, None))
 
         with expect_raises(dataclasses.FrozenInstanceError):
             r1.lower = 8  # type: ignore
