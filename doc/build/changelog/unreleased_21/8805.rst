@@ -1,0 +1,8 @@
+.. change::
+    :tags: usecase, tests, documentation
+    :tickets: 8805
+
+    Documented how third-party dialects without ``CHECK`` constraint support
+    can run the dialect compliance suite: inline check constraints should
+    compile as no-ops, while reflection remains disabled and standalone add
+    operations may still be rejected explicitly.

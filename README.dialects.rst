@@ -150,6 +150,22 @@ Key aspects of this file layout include:
   requirements rules, which attempt to have reasonable defaults. The
   tests will report on those requirements found as they are run.
 
+  The compliance suite also assumes that common schema constructs may be
+  present in ``MetaData`` even when a backend does not implement them.
+  A dialect for a backend with no ``CHECK`` constraint support should
+  therefore compile an inline ``CheckConstraint`` as a no-op rather
+  than raise while rendering the surrounding table::
+
+      def visit_check_constraint(self, constraint, **kw):
+          return None
+
+  The dialect's ``check_constraint_reflection`` requirement should still be
+  closed.  If standalone ``ALTER TABLE ... ADD CONSTRAINT`` operations must
+  be rejected, the dialect can override ``visit_add_constraint()`` to raise
+  for ``CheckConstraint`` while delegating other constraint types to
+  the superclass.  This keeps portable metadata usable without claiming a
+  database capability that is not present.
+
   The requirements system can also be used when running SQLAlchemy's
   primary test suite against the external dialect.  In this use case,
   a ``--dburi`` as well as a ``--requirements`` flag are passed to SQLAlchemy's
