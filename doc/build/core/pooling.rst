@@ -746,13 +746,13 @@ like in the following example::
 API Documentation - Available Pool Implementations
 --------------------------------------------------
 
-.. autoclass:: sqlalchemy.pool.Pool
+.. autoclass:: sqlalchemy.Pool
     :members:
 
-.. autoclass:: sqlalchemy.pool.QueuePool
+.. autoclass:: sqlalchemy.QueuePool
     :members:
 
-.. autoclass:: sqlalchemy.pool.AsyncAdaptedQueuePool
+.. autoclass:: sqlalchemy.AsyncAdaptedQueuePool
     :members:
 
 .. autoclass:: SingletonThreadPool

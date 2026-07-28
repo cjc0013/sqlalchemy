@@ -19,20 +19,20 @@ and :class:`_schema.MetaData` objects.
     SQLAlchemy's database metadata concept in the :ref:`unified_tutorial`
 
 A collection of metadata entities is stored in an object aptly named
-:class:`~sqlalchemy.schema.MetaData`::
+:class:`~sqlalchemy.MetaData`::
 
     from sqlalchemy import MetaData
 
     metadata_obj = MetaData()
 
-:class:`~sqlalchemy.schema.MetaData` is a container object that keeps together
+:class:`~sqlalchemy.MetaData` is a container object that keeps together
 many different features of a database (or multiple databases) being described.
 
-To represent a table, use the :class:`~sqlalchemy.schema.Table` class. Its two
+To represent a table, use the :class:`~sqlalchemy.Table` class. Its two
 primary arguments are the table name, then the
-:class:`~sqlalchemy.schema.MetaData` object which it will be associated with.
+:class:`~sqlalchemy.MetaData` object which it will be associated with.
 The remaining positional arguments are mostly
-:class:`~sqlalchemy.schema.Column` objects describing each column::
+:class:`~sqlalchemy.Column` objects describing each column::
 
     from sqlalchemy import Table, Column, Integer, String
 
@@ -51,8 +51,8 @@ may be assigned the ``primary_key=True`` flag which denotes a multi-column
 primary key, known as a *composite* primary key.
 
 Note also that each column describes its datatype using objects corresponding
-to genericized types, such as :class:`~sqlalchemy.types.Integer` and
-:class:`~sqlalchemy.types.String`. SQLAlchemy features dozens of types of
+to genericized types, such as :class:`~sqlalchemy.Integer` and
+:class:`~sqlalchemy.String`. SQLAlchemy features dozens of types of
 varying levels of specificity as well as the ability to create custom types.
 Documentation on the type system can be found at :ref:`types_toplevel`.
 
@@ -61,10 +61,10 @@ Documentation on the type system can be found at :ref:`types_toplevel`.
 Accessing Tables and Columns
 ----------------------------
 
-The :class:`~sqlalchemy.schema.MetaData` object contains all of the schema
+The :class:`~sqlalchemy.MetaData` object contains all of the schema
 constructs we've associated with it. It supports a few methods of accessing
 these table objects, such as the ``sorted_tables`` accessor which returns a
-list of each :class:`~sqlalchemy.schema.Table` object in order of foreign key
+list of each :class:`~sqlalchemy.Table` object in order of foreign key
 dependency (that is, each table is preceded by all tables which it
 references)::
 
@@ -75,12 +75,12 @@ references)::
     invoice
     invoice_item
 
-In most cases, individual :class:`~sqlalchemy.schema.Table` objects have been
+In most cases, individual :class:`~sqlalchemy.Table` objects have been
 explicitly declared, and these objects are typically accessed directly as
 module-level variables in an application. Once a
-:class:`~sqlalchemy.schema.Table` has been defined, it has a full set of
+:class:`~sqlalchemy.Table` has been defined, it has a full set of
 accessors which allow inspection of its properties. Given the following
-:class:`~sqlalchemy.schema.Table` definition::
+:class:`~sqlalchemy.Table` definition::
 
     employees = Table(
         "employees",
@@ -90,7 +90,7 @@ accessors which allow inspection of its properties. Given the following
         Column("employee_dept", Integer, ForeignKey("departments.department_id")),
     )
 
-Note the :class:`~sqlalchemy.schema.ForeignKey` object used in this table -
+Note the :class:`~sqlalchemy.ForeignKey` object used in this table -
 this construct defines a reference to a remote table, and is fully described
 in :ref:`metadata_foreignkeys`. Methods of accessing information about this
 table include::
@@ -158,7 +158,7 @@ table include::
 Creating and Dropping Database Tables
 -------------------------------------
 
-Once you've defined some :class:`~sqlalchemy.schema.Table` objects, assuming
+Once you've defined some :class:`~sqlalchemy.Table` objects, assuming
 you're working with a brand new database one thing you might want to do is
 issue CREATE statements for those tables and their related constructs (as an
 aside, it's also quite possible that you *don't* want to do this, if you
@@ -168,8 +168,8 @@ skip this section - SQLAlchemy has no requirement that it be used to create
 your tables).
 
 The usual way to issue CREATE is to use
-:func:`~sqlalchemy.schema.MetaData.create_all` on the
-:class:`~sqlalchemy.schema.MetaData` object. This method will issue queries
+:func:`~sqlalchemy.MetaData.create_all` on the
+:class:`~sqlalchemy.MetaData` object. This method will issue queries
 that first check for the existence of each individual table, and if not found
 will issue the CREATE statements:
 
@@ -213,19 +213,19 @@ will issue the CREATE statements:
             pref_value VARCHAR(100)
     )
 
-:func:`~sqlalchemy.schema.MetaData.create_all` creates foreign key constraints
+:func:`~sqlalchemy.MetaData.create_all` creates foreign key constraints
 between tables usually inline with the table definition itself, and for this
 reason it also generates the tables in order of their dependency. There are
 options to change this behavior such that ``ALTER TABLE`` is used instead.
 
 Dropping all tables is similarly achieved using the
-:func:`~sqlalchemy.schema.MetaData.drop_all` method. This method does the
-exact opposite of :func:`~sqlalchemy.schema.MetaData.create_all` - the
+:func:`~sqlalchemy.MetaData.drop_all` method. This method does the
+exact opposite of :func:`~sqlalchemy.MetaData.create_all` - the
 presence of each table is checked first, and tables are dropped in reverse
 order of dependency.
 
 Creating and dropping individual tables can be done via the ``create()`` and
-``drop()`` methods of :class:`~sqlalchemy.schema.Table`. These methods by
+``drop()`` methods of :class:`~sqlalchemy.Table`. These methods by
 default issue the CREATE or DROP regardless of the table being present:
 
 .. sourcecode:: python+sql
@@ -863,9 +863,9 @@ of :meth:`.Table.create`, which does not use a "checkfirst" query by default::
 Backend-Specific Options for :class:`.Table`
 --------------------------------------------
 
-:class:`~sqlalchemy.schema.Table` supports database-specific options. For
+:class:`~sqlalchemy.Table` supports database-specific options. For
 example, MySQL has different table backend types, including "MyISAM" and
-"InnoDB". This can be expressed with :class:`~sqlalchemy.schema.Table` using
+"InnoDB". This can be expressed with :class:`~sqlalchemy.Table` using
 ``mysql_engine``::
 
     addresses = Table(

@@ -76,10 +76,10 @@ Class documentation for the constructors listed at
 
    .. automethod:: Update.apply_syntax_extension_point
 
-.. autoclass:: sqlalchemy.sql.expression.UpdateBase
+.. autoclass:: sqlalchemy.UpdateBase
    :members:
 
-.. autoclass:: sqlalchemy.sql.expression.ValuesBase
+.. autoclass:: sqlalchemy.ValuesBase
    :members:
 
 

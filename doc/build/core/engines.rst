@@ -280,11 +280,11 @@ Engine Creation API
 
 .. autofunction:: sqlalchemy.create_mock_engine
 
-.. autofunction:: sqlalchemy.engine.make_url
+.. autofunction:: sqlalchemy.make_url
 
 .. autofunction:: sqlalchemy.create_pool_from_url
 
-.. autoclass:: sqlalchemy.engine.URL
+.. autoclass:: sqlalchemy.URL
     :members:
 
 Pooling
@@ -588,8 +588,8 @@ getting duplicate log lines.
 Setting the Logging Name
 -------------------------
 
-The logger name for :class:`~sqlalchemy.engine.Engine` or
-:class:`~sqlalchemy.pool.Pool` is set to be the module-qualified class name of the
+The logger name for :class:`~sqlalchemy.Engine` or
+:class:`~sqlalchemy.Pool` is set to be the module-qualified class name of the
 object.  This name can be further qualified with an additional name
 using the
 :paramref:`_sa.create_engine.logging_name` and

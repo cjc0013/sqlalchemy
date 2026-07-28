@@ -100,8 +100,8 @@ built-in capabilities of the database should normally be used, which may
 include sequence objects or other autoincrementing capabilities. For primary
 key columns, SQLAlchemy will in most cases use these capabilities
 automatically. See the API documentation for
-:class:`~sqlalchemy.schema.Column` including the :paramref:`_schema.Column.autoincrement` flag, as
-well as the section on :class:`~sqlalchemy.schema.Sequence` later in this
+:class:`~sqlalchemy.Column` including the :paramref:`_schema.Column.autoincrement` flag, as
+well as the section on :class:`~sqlalchemy.Sequence` later in this
 chapter for background on standard primary key generation techniques.
 
 To illustrate onupdate, we assign the Python ``datetime`` function ``now`` to
@@ -234,14 +234,14 @@ inline.
 
 When the statement is executed with a single set of parameters (that is, it is
 not an "executemany" style execution), the returned
-:class:`~sqlalchemy.engine.CursorResult` will contain a collection accessible
+:class:`~sqlalchemy.CursorResult` will contain a collection accessible
 via :meth:`_engine.CursorResult.postfetch_cols` which contains a list of all
-:class:`~sqlalchemy.schema.Column` objects which had an inline-executed
+:class:`~sqlalchemy.Column` objects which had an inline-executed
 default. Similarly, all parameters which were bound to the statement, including
 all Python and SQL expressions which were pre-executed, are present in the
 :meth:`_engine.CursorResult.last_inserted_params` or
 :meth:`_engine.CursorResult.last_updated_params` collections on
-:class:`~sqlalchemy.engine.CursorResult`. The
+:class:`~sqlalchemy.CursorResult`. The
 :attr:`_engine.CursorResult.inserted_primary_key` collection contains a list of primary
 key values for the row inserted (a list so that single-column and
 composite-column primary keys are represented in the same format).
@@ -338,11 +338,11 @@ Defining Sequences
 ------------------
 
 SQLAlchemy represents database sequences using the
-:class:`~sqlalchemy.schema.Sequence` object, which is considered to be a
+:class:`~sqlalchemy.Sequence` object, which is considered to be a
 special case of "column default". It only has an effect on databases which have
 explicit support for sequences, which among SQLAlchemy's included dialects
 includes PostgreSQL, Oracle Database, MS SQL Server, and MariaDB.  The
-:class:`~sqlalchemy.schema.Sequence` object is otherwise ignored.
+:class:`~sqlalchemy.Sequence` object is otherwise ignored.
 
 .. tip::
 
@@ -351,7 +351,7 @@ includes PostgreSQL, Oracle Database, MS SQL Server, and MariaDB.  The
     values. See the section :ref:`identity_ddl` for background on this
     construct.
 
-The :class:`~sqlalchemy.schema.Sequence` may be placed on any column as a
+The :class:`~sqlalchemy.Sequence` may be placed on any column as a
 "default" generator to be used during INSERT operations, and can also be
 configured to fire off during UPDATE operations if desired. It is most
 commonly used in conjunction with a single integer primary key column::
@@ -415,7 +415,7 @@ newly generated primary key identifiers, including but not limited to those
 generated using :class:`.Sequence`, are available from the :class:`.CursorResult`
 construct using the :attr:`.CursorResult.inserted_primary_key` attribute.
 
-When the :class:`~sqlalchemy.schema.Sequence` is associated with a
+When the :class:`~sqlalchemy.Sequence` is associated with a
 :class:`_schema.Column` as its **Python-side** default generator, the
 :class:`.Sequence` will also be subject to "CREATE SEQUENCE" and "DROP
 SEQUENCE" DDL when similar DDL is emitted for the owning :class:`_schema.Table`,

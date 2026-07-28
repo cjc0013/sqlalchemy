@@ -1010,7 +1010,7 @@
         :tickets: 2764
         :versions: 0.9.0b1
 
-        Added :class:`sqlalchemy.types.BIGINT` to the list of type names that can be
+        Added :class:`sqlalchemy.BIGINT` to the list of type names that can be
         reflected by the SQLite dialect; courtesy Russell Stuart.
 
     .. change::
@@ -2177,7 +2177,7 @@
         :tags: sql, bug
         :tickets: 2618
 
-      The :class:`~sqlalchemy.types.DECIMAL` type now honors the "precision" and
+      The :class:`~sqlalchemy.DECIMAL` type now honors the "precision" and
       "scale" arguments when rendering DDL.
 
     .. change::
@@ -2293,7 +2293,7 @@
     .. change::
         :tags: engine
 
-      The "reflect=True" argument to :class:`~sqlalchemy.schema.MetaData` is deprecated.
+      The "reflect=True" argument to :class:`~sqlalchemy.MetaData` is deprecated.
       Please use the :meth:`_schema.MetaData.reflect` method.
 
     .. change::

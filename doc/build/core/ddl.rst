@@ -6,12 +6,12 @@ Customizing DDL
 ===============
 
 In the preceding sections we've discussed a variety of schema constructs
-including :class:`~sqlalchemy.schema.Table`,
-:class:`~sqlalchemy.schema.ForeignKeyConstraint`,
-:class:`~sqlalchemy.schema.CheckConstraint`, and
-:class:`~sqlalchemy.schema.Sequence`. Throughout, we've relied upon the
-``create()`` and :func:`~sqlalchemy.schema.MetaData.create_all` methods of
-:class:`~sqlalchemy.schema.Table` and :class:`~sqlalchemy.schema.MetaData` in
+including :class:`~sqlalchemy.Table`,
+:class:`~sqlalchemy.ForeignKeyConstraint`,
+:class:`~sqlalchemy.CheckConstraint`, and
+:class:`~sqlalchemy.Sequence`. Throughout, we've relied upon the
+``create()`` and :func:`~sqlalchemy.MetaData.create_all` methods of
+:class:`~sqlalchemy.Table` and :class:`~sqlalchemy.MetaData` in
 order to issue data definition language (DDL) for all constructs. When issued,
 a pre-determined order of operations is invoked, and DDL to create each table
 is created unconditionally including all constraints and other objects
@@ -24,7 +24,7 @@ Custom DDL
 ----------
 
 Custom DDL phrases are most easily achieved using the
-:class:`~sqlalchemy.schema.DDL` construct. This construct works like all the
+:class:`~sqlalchemy.DDL` construct. This construct works like all the
 other DDL elements except it accepts a string which is the text to be emitted:
 
 .. sourcecode:: python+sql
@@ -163,7 +163,7 @@ one can use the :class:`.CreateTable` construct:
         col6 INTEGER
     ){stop}
 
-Above, the :class:`~sqlalchemy.schema.CreateTable` construct works like any
+Above, the :class:`~sqlalchemy.CreateTable` construct works like any
 other expression construct (such as ``select()``, ``table.insert()``, etc.).
 All of SQLAlchemy's DDL oriented constructs are subclasses of
 the :class:`.ExecutableDDLElement` base class; this is the base of all the

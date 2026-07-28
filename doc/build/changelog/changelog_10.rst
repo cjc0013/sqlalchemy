@@ -803,7 +803,7 @@
 
         Added support for parameter-ordered SET clauses in an UPDATE
         statement.  This feature is available by passing the
-        :paramref:`~.sqlalchemy.sql.expression.update.preserve_parameter_order`
+        :paramref:`~.sqlalchemy.update.preserve_parameter_order`
         flag either to the core :class:`_expression.Update` construct or alternatively
         adding it to the :paramref:`.Query.update.update_args` dictionary at
         the ORM-level, also passing the parameters themselves as a list of 2-tuples.

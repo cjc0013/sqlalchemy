@@ -1,0 +1,9 @@
+.. change::
+    :tags: documentation
+    :tickets: 8894
+
+    Updated Core documentation object references and autodoc aliases to use
+    public top-level imports such as :class:`.Column`, :class:`.Table`,
+    :class:`.Engine`, and :class:`.Connection` when those objects are exported
+    directly from ``sqlalchemy``.  Internal-only symbols retain their actual
+    module paths.

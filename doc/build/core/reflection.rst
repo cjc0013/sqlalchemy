@@ -7,10 +7,10 @@
 Reflecting Database Objects
 ===========================
 
-A :class:`~sqlalchemy.schema.Table` object can be instructed to load
+A :class:`~sqlalchemy.Table` object can be instructed to load
 information about itself from the corresponding database schema object already
 existing within the database. This process is called *reflection*. In the
-most simple case you need only specify the table name, a :class:`~sqlalchemy.schema.MetaData`
+most simple case you need only specify the table name, a :class:`~sqlalchemy.MetaData`
 object, and the ``autoload_with`` argument::
 
     >>> messages = Table("messages", metadata_obj, autoload_with=engine)
@@ -19,13 +19,13 @@ object, and the ``autoload_with`` argument::
 
 The above operation will use the given engine to query the database for
 information about the ``messages`` table, and will then generate
-:class:`~sqlalchemy.schema.Column`, :class:`~sqlalchemy.schema.ForeignKey`,
+:class:`~sqlalchemy.Column`, :class:`~sqlalchemy.ForeignKey`,
 and other objects corresponding to this information as though the
-:class:`~sqlalchemy.schema.Table` object were hand-constructed in Python.
+:class:`~sqlalchemy.Table` object were hand-constructed in Python.
 
 When tables are reflected, if a given table references another one via foreign
-key, a second :class:`~sqlalchemy.schema.Table` object is created within the
-:class:`~sqlalchemy.schema.MetaData` object representing the connection.
+key, a second :class:`~sqlalchemy.Table` object is created within the
+:class:`~sqlalchemy.MetaData` object representing the connection.
 Below, assume the table ``shopping_cart_items`` references a table named
 ``shopping_carts``. Reflecting the ``shopping_cart_items`` table has the
 effect such that the ``shopping_carts`` table will also be loaded::
@@ -34,12 +34,12 @@ effect such that the ``shopping_carts`` table will also be loaded::
     >>> "shopping_carts" in metadata_obj.tables
     True
 
-The :class:`~sqlalchemy.schema.MetaData` has an interesting "singleton-like"
+The :class:`~sqlalchemy.MetaData` has an interesting "singleton-like"
 behavior such that if you requested both tables individually,
-:class:`~sqlalchemy.schema.MetaData` will ensure that exactly one
-:class:`~sqlalchemy.schema.Table` object is created for each distinct table
-name. The :class:`~sqlalchemy.schema.Table` constructor actually returns to
-you the already-existing :class:`~sqlalchemy.schema.Table` object if one
+:class:`~sqlalchemy.MetaData` will ensure that exactly one
+:class:`~sqlalchemy.Table` object is created for each distinct table
+name. The :class:`~sqlalchemy.Table` constructor actually returns to
+you the already-existing :class:`~sqlalchemy.Table` object if one
 already exists with the given name. Such as below, we can access the already
 generated ``shopping_carts`` table just by naming it::
 
@@ -49,7 +49,7 @@ Of course, it's a good idea to use ``autoload_with=engine`` with the above table
 regardless. This is so that the table's attributes will be loaded if they have
 not been already. The autoload operation only occurs for the table if it
 hasn't already been loaded; once loaded, new calls to
-:class:`~sqlalchemy.schema.Table` with the same name will not re-issue any
+:class:`~sqlalchemy.Table` with the same name will not re-issue any
 reflection queries.
 
 .. _reflection_overriding_columns:
@@ -86,8 +86,8 @@ of a table::
 
     my_view = Table("some_view", metadata, autoload_with=engine)
 
-Above, ``my_view`` is a :class:`~sqlalchemy.schema.Table` object with
-:class:`~sqlalchemy.schema.Column` objects representing the names and types of
+Above, ``my_view`` is a :class:`~sqlalchemy.Table` object with
+:class:`~sqlalchemy.Column` objects representing the names and types of
 each column within the view "some_view".
 
 Usually, it's desired to have at least a primary key constraint when
@@ -108,10 +108,10 @@ which are part of the primary key or have foreign key constraints::
 Reflecting All Tables at Once
 -----------------------------
 
-The :class:`~sqlalchemy.schema.MetaData` object can also get a listing of
+The :class:`~sqlalchemy.MetaData` object can also get a listing of
 tables and reflect the full set. This is achieved by using the
-:func:`~sqlalchemy.schema.MetaData.reflect` method. After calling it, all
-located tables are present within the :class:`~sqlalchemy.schema.MetaData`
+:func:`~sqlalchemy.MetaData.reflect` method. After calling it, all
+located tables are present within the :class:`~sqlalchemy.MetaData`
 object's dictionary of tables::
 
     metadata_obj = MetaData()

@@ -21,6 +21,8 @@ import sys
 sys.path.insert(0, os.path.abspath("../../lib"))
 sys.path.insert(0, os.path.abspath("../.."))  # examples
 
+import sqlalchemy as _sa
+
 # was never needed, does not work as of python 3.12 due to conflicts
 # sys.path.insert(0, os.path.abspath("."))
 
@@ -165,6 +167,24 @@ autodocmods_convert_modname = {
     "sqlalchemy.orm.interfaces": "sqlalchemy.orm",
     "sqlalchemy.orm.query": "sqlalchemy.orm",
     "sqlalchemy.orm.util": "sqlalchemy.orm",
+}
+
+# Classes exported from ``sqlalchemy`` should be documented using that public
+# import path.  Classes that are not exported continue to use the module-level
+# conversion above, so internal helpers remain importable by autodoc.
+_autodocmods_public_root_modules = {
+    "sqlalchemy.engine.base",
+    "sqlalchemy.engine.cursor",
+    "sqlalchemy.engine.result",
+    "sqlalchemy.engine.row",
+    "sqlalchemy.engine.url",
+    "sqlalchemy.sql.schema",
+}
+autodocmods_convert_modname_w_class = {
+    f"{value.__module__}.{name}": "sqlalchemy"
+    for name, value in vars(_sa).items()
+    if isinstance(value, type)
+    and value.__module__ in _autodocmods_public_root_modules
 }
 
 # on the referencing side, a newer zzzeeksphinx extension

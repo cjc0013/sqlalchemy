@@ -985,7 +985,7 @@ along the lines of
 ``Task <Task pending ...> got Future attached to a different loop``
 
 If the same engine must be shared between different loop, it should be configured
-to disable pooling using :class:`~sqlalchemy.pool.NullPool`, preventing the Engine
+to disable pooling using :class:`~sqlalchemy.NullPool`, preventing the Engine
 from using any connection more than once::
 
     from sqlalchemy.ext.asyncio import create_async_engine

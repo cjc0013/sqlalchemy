@@ -76,9 +76,9 @@ SQL expressions and strings can be executed via the
 :class:`~sqlalchemy.orm.session.Session` within its transactional context.
 This is most easily accomplished using the
 :meth:`~.Session.execute` method, which returns a
-:class:`~sqlalchemy.engine.CursorResult` in the same manner as an
-:class:`~sqlalchemy.engine.Engine` or
-:class:`~sqlalchemy.engine.Connection`::
+:class:`~sqlalchemy.CursorResult` in the same manner as an
+:class:`~sqlalchemy.Engine` or
+:class:`~sqlalchemy.Connection`::
 
     Session = sessionmaker(bind=engine)
     session = Session()
@@ -89,7 +89,7 @@ This is most easily accomplished using the
     # execute a SQL expression construct
     result = session.execute(select(mytable).where(mytable.c.id == 7))
 
-The current :class:`~sqlalchemy.engine.Connection` held by the
+The current :class:`~sqlalchemy.Connection` held by the
 :class:`~sqlalchemy.orm.session.Session` is accessible using the
 :meth:`~.Session.connection` method::
 

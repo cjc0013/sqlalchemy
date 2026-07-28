@@ -96,7 +96,7 @@ Using Transactions
 Commit As You Go
 ~~~~~~~~~~~~~~~~
 
-The :class:`~sqlalchemy.engine.Connection` object always emits SQL statements
+The :class:`~sqlalchemy.Connection` object always emits SQL statements
 within the context of a transaction block.   The first time the
 :meth:`_engine.Connection.execute` method is called to execute a SQL
 statement, this transaction is begun automatically, using a behavior known

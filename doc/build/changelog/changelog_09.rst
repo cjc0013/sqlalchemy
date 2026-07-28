@@ -3287,7 +3287,7 @@
         :tags: feature, sql
         :tickets: 1068
 
-        A :func:`~sqlalchemy.sql.expression.label` construct will now render as its name alone
+        A :func:`~sqlalchemy.label` construct will now render as its name alone
         in an ``ORDER BY`` clause, if that label is also referred to
         in the columns clause of the select, instead of rewriting the
         full expression.  This gives the database a better chance to

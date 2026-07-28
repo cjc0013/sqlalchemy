@@ -430,7 +430,7 @@ For example, to build a ``Geometry`` type which will apply the PostGIS function
 ``ST_GeomFromText`` to all outgoing values and the function ``ST_AsText`` to
 all incoming data, we can create our own subclass of :class:`.UserDefinedType`
 which provides these methods in conjunction with
-:data:`~.sqlalchemy.sql.expression.func`::
+:data:`~.sqlalchemy.func`::
 
     from sqlalchemy import func
     from sqlalchemy.types import UserDefinedType

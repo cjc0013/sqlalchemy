@@ -7,10 +7,10 @@ Some key internal constructs are listed here.
 
 .. currentmodule:: sqlalchemy
 
-.. autoclass:: sqlalchemy.engine.BindTyping
+.. autoclass:: sqlalchemy.BindTyping
     :members:
 
-.. autoclass:: sqlalchemy.engine.Compiled
+.. autoclass:: sqlalchemy.Compiled
     :members:
 
 .. autoclass:: sqlalchemy.engine.interfaces.DBAPIConnection
@@ -33,13 +33,13 @@ Some key internal constructs are listed here.
     :members:
     :inherited-members:
 
-.. autoclass:: sqlalchemy.engine.Dialect
+.. autoclass:: sqlalchemy.Dialect
     :members:
 
 .. autoclass:: sqlalchemy.engine.default.DefaultExecutionContext
     :members:
 
-.. autoclass:: sqlalchemy.engine.ExecutionContext
+.. autoclass:: sqlalchemy.ExecutionContext
     :members:
 
 .. autoclass:: sqlalchemy.sql.compiler.ExpandedState
@@ -66,6 +66,6 @@ Some key internal constructs are listed here.
     :members:
 
 
-.. autoclass:: sqlalchemy.engine.AdaptedConnection
+.. autoclass:: sqlalchemy.AdaptedConnection
     :members:
 
