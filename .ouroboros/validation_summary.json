@@ -1,0 +1,28 @@
+{
+  "integration_only_failure_count": 0,
+  "non_typing": {
+    "errors": 0,
+    "failures": 0,
+    "passed": 25796,
+    "sha256": "4ea4bb1af1bdfbeda4fb94c08baaf2656d5a0c4156a9915c2769ac338e6c53e2",
+    "skipped": 1502,
+    "tests": 27298
+  },
+  "typing": {
+    "errors": 0,
+    "failures": 1,
+    "passed": 77,
+    "sha256": "0c873501bd9405943e726694e054db045b818b1c9e42fe9b9f227c6bd20c3e17",
+    "skipped": 0,
+    "tests": 78
+  },
+  "typing_failure_boundary": "The single typing failure matches the stored upstream baseline on Python 3.11 because string.templatelib is unavailable.",
+  "typing_upstream_baseline": {
+    "errors": 0,
+    "failures": 1,
+    "passed": 0,
+    "sha256": "646febfd04c0ba2eec32b27d0ce3209590585ffd129de975cedc6d0a88d58dd9",
+    "skipped": 0,
+    "tests": 1
+  }
+}

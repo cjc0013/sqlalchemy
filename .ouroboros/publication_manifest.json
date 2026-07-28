@@ -1,0 +1,54 @@
+{
+  "all_branch": "ouroboros/all-20260728",
+  "artifacts": {
+    "README.md": {
+      "bytes": 2095,
+      "sha256": "2d95c3951830d460223f46d9ac08989ea58a9179303d531b8b294f300f122c9b"
+    },
+    "ci_attribution.jsonl": {
+      "bytes": 3960,
+      "sha256": "8b35589893bb2b2ebebbbe40e24141852606b14a1c5643230898f05b38bbad7a"
+    },
+    "commit_series.tsv": {
+      "bytes": 23107,
+      "sha256": "7eaf7bb38fb824265e83d574b4318ca44692b043b9a1addb2bb4359f6d6dddff"
+    },
+    "issue_coverage.jsonl": {
+      "bytes": 46470,
+      "sha256": "a8de043e531b64391a7518e7bb1ae5e6994cc43497f021ece46898538df6dd10"
+    },
+    "pr_coverage.jsonl": {
+      "bytes": 8297,
+      "sha256": "b4a3daf5c0a3c72e7b23b0653bdda21fffd0495d1f4a669e929137407b3b572f"
+    },
+    "residual_work_units.jsonl": {
+      "bytes": 30425,
+      "sha256": "a4e232bd98a0ff8355367b1c659e28469520b55c43bea5bd699b945e40f6ba8f"
+    },
+    "validation_summary.json": {
+      "bytes": 819,
+      "sha256": "7fd4ac4583ad7540d273221ae0e7fe67d74ff4c4afc1bc7fd3c45f3221ae494c"
+    }
+  },
+  "base_sha": "aa1a5575358d3aa14953b04dced02f4763fed2e7",
+  "canary_branch": "ouroboros/canary-no-notify-9425-20260728",
+  "catalog_branch": "ouroboros/catalog-20260728",
+  "commit_count": 143,
+  "head_sha": "bc409096e77f338c05a9a1cef13f8ee99edd1887",
+  "public_actions": {
+    "creates_upstream_comment": false,
+    "creates_upstream_issue": false,
+    "creates_upstream_pull_request": false,
+    "mentions_maintainers": false
+  },
+  "published_row_counts": {
+    "ci_attribution.jsonl": 26,
+    "issue_coverage.jsonl": 182,
+    "pr_coverage.jsonl": 26,
+    "residual_work_units.jsonl": 101
+  },
+  "repository": "cjc0013/sqlalchemy",
+  "source_ledger_summary_sha256": "a4865061d2b3b4e258f206c5e2d651111eadf3dde379d013b87fd2474d695ac1",
+  "upstream_repository": "sqlalchemy/sqlalchemy",
+  "version": "sqlalchemy_publication_catalog_v1"
+}
