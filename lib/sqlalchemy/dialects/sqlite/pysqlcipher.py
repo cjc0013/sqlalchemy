@@ -125,6 +125,9 @@ class SQLiteDialect_pysqlcipher(SQLiteDialect_pysqlite):
     def get_pool_class(cls, url):
         return pool.SingletonThreadPool
 
+    def _has_deterministic_kwarg(self) -> bool:
+        return False
+
     def on_connect_url(self, url):
         super_on_connect = super().on_connect_url(url)
 

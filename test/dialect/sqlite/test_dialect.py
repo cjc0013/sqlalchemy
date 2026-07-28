@@ -23,6 +23,7 @@ from sqlalchemy import text
 from sqlalchemy import types as sqltypes
 from sqlalchemy import UniqueConstraint
 from sqlalchemy.dialects.sqlite import base as sqlite
+from sqlalchemy.dialects.sqlite import pysqlcipher as pysqlcipher_dialect
 from sqlalchemy.dialects.sqlite import pysqlite as pysqlite_dialect
 from sqlalchemy.engine.url import make_url
 from sqlalchemy.schema import CreateTable
@@ -194,6 +195,26 @@ class DialectTest(
                     version_info=(2, 6, 0), sqlite_version_info=(3, 2, 8)
                 )
             )
+
+    @combinations(
+        (pysqlite_dialect.SQLiteDialect_pysqlite, True),
+        (pysqlcipher_dialect.SQLiteDialect_pysqlcipher, False),
+        argnames="dialect_cls,deterministic",
+    )
+    def test_create_function_deterministic_kwarg(
+        self, dialect_cls, deterministic
+    ):
+        """test #10544"""
+        dialect = dialect_cls(
+            dbapi=mock.Mock(sqlite_version_info=(3, 40, 0))
+        )
+        connection = mock.Mock()
+
+        dialect.on_connect()(connection)
+
+        eq_(connection.create_function.call_count, 2)
+        for call in connection.create_function.call_args_list:
+            eq_(call.kwargs, {"deterministic": True} if deterministic else {})
 
     @testing.only_on("sqlite+pysqlcipher")
     def test_pysqlcipher_connects(self):

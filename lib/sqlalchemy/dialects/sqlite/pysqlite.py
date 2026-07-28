@@ -600,17 +600,20 @@ class SQLiteDialect_pysqlite(SQLiteDialect):
     def detect_autocommit_setting(self, dbapi_conn: DBAPIConnection) -> bool:
         return dbapi_conn.isolation_level is None
 
+    def _has_deterministic_kwarg(self) -> bool:
+        # sqlite must be greater than 3.8.3 for deterministic=True
+        # https://docs.python.org/3/library/sqlite3.html#sqlite3.Connection.create_function
+        # the check is more conservative since there were still issues
+        # with following 3.8 sqlite versions
+        return self._get_server_version_info(None) >= (3, 9)
+
     def on_connect(self) -> Callable[[DBAPIConnection], None]:
         def regexp(a: str, b: Optional[str]) -> Optional[bool]:
             if b is None:
                 return None
             return re.search(a, b) is not None
 
-        if self._get_server_version_info(None) >= (3, 9):
-            # sqlite must be greater than 3.8.3 for deterministic=True
-            # https://docs.python.org/3/library/sqlite3.html#sqlite3.Connection.create_function
-            # the check is more conservative since there were still issues
-            # with following 3.8 sqlite versions
+        if self._has_deterministic_kwarg():
             create_func_kw = {"deterministic": True}
         else:
             create_func_kw = {}

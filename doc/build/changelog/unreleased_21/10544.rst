@@ -1,0 +1,8 @@
+.. change::
+    :tags: bug, sqlite
+    :tickets: 10544
+
+    Fixed the ``pysqlcipher`` dialect to omit the ``deterministic`` keyword
+    when registering SQLite functions.  Unlike Python's built-in ``sqlite3``
+    driver, supported ``pysqlcipher`` drivers expose the three-argument
+    ``create_function()`` form and reject that keyword.
