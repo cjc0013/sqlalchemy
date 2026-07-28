@@ -2008,7 +2008,11 @@ def synonym(
 
     :param descriptor: a Python :term:`descriptor` that will be used
       as a getter (and potentially a setter) when this attribute is
-      accessed at the instance level.
+      accessed at the instance level.  For an imperative mapping, if this
+      parameter is omitted and the mapped class already has a descriptor at
+      the synonym attribute name, that existing descriptor is retained
+      automatically.  Pass ``descriptor`` explicitly when the mapping
+      declaration itself would replace the class-bound descriptor.
 
     :param map_column: **For classical mappings and mappings against
       an existing Table object only**.  if ``True``, the :func:`.synonym`
