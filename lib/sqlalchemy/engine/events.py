@@ -717,6 +717,14 @@ class DialectEvents(event.Events[Dialect]):
         event must expect new calling patterns to be present in minor
         releases.
 
+        A single high-level operation may invoke the event more than once
+        when an exception occurs in a nested operation.  For example, result
+        row fetching performed while a DML statement is being processed may
+        invoke the event before the enclosing statement execution also
+        handles the exception.  Event handlers should therefore tolerate
+        re-entrant calls and must not assume they are invoked exactly once per
+        statement execution.
+
         To support the wide variety of members that correspond to an exception,
         as well as to allow extensibility of the event without backwards
         incompatibility, the sole argument received is an instance of

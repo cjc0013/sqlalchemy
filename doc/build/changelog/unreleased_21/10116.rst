@@ -1,0 +1,8 @@
+.. change::
+    :tags: bug, documentation, engine
+    :tickets: 10116
+
+    Documented that :meth:`.DialectEvents.handle_error` can be invoked more
+    than once for a high-level operation when nested result processing and the
+    enclosing statement execution both handle the same failure.  Event
+    handlers should tolerate re-entrant calls.
