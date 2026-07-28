@@ -719,6 +719,38 @@ and :class:`_engine.Row` objects::
         # (variable) users_legacy: List[User]
         users_legacy = sess.query(User).all()
 
+Additional typing annotations for Declarative directives
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Methods that produce mapped attributes use the usual
+:class:`_orm.Mapped` return annotation with :class:`_orm.declared_attr`.
+Methods that instead produce Declarative configuration directives, such as
+``__tablename__``, ``__mapper_args__``, and ``__table_args__``, use
+:attr:`_orm.declared_attr.directive`.  The ``@classmethod`` decorator is
+optional at runtime, but allows typing tools to recognize ``cls`` as the
+mapped class::
+
+    from sqlalchemy import CheckConstraint
+    from sqlalchemy import Index
+    from sqlalchemy.orm import declared_attr
+    from sqlalchemy.schema import SchemaItem
+
+
+    class HasTableArgs:
+        @declared_attr.directive
+        @classmethod
+        def __table_args__(cls) -> tuple[SchemaItem, ...]:
+            return (
+                Index(f"ix_{cls.__name__.lower()}_status", "status"),
+                CheckConstraint("status >= 0"),
+            )
+
+For a ``__table_args__`` value that includes a trailing table-options
+dictionary, the return annotation may include ``dict[str, Any]`` as
+appropriate.  Using :class:`_schema.SchemaItem` avoids a long union of
+individual schema constructs such as :class:`_schema.Index` and
+:class:`_schema.CheckConstraint`.
+
 .. seealso::
 
     :ref:`orm_declarative_table` - Updated Declarative documentation for
