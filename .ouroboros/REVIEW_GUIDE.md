@@ -6,6 +6,8 @@ Nothing in this catalog needs an upstream pull request, issue, comment, or menti
 git fetch https://github.com/cjc0013/sqlalchemy.git refs/heads/ouroboros/all-20260728:refs/remotes/ouroboros/options
 ```
 
+Start with `MAINTAINER_REVIEW_INDEX.md`. It separates coherent technical-review units, units that still need a design or branch decision, and evidence-only outcomes. Each entry links to a Gerrit-shaped packet under `review_packets/`.
+
 ## Pull-request options
 
 `pr_pick_commands.tsv` contains one row for each of the 27 integrated pull-request options.
@@ -14,7 +16,7 @@ git fetch https://github.com/cjc0013/sqlalchemy.git refs/heads/ouroboros/all-202
 - `inspect_command` shows the net file-level change before applying it.
 - `exact_net_command` is available when a reviewer prefers the exact integrated delta.
 - Single commits and ordinary commit series preserve original commit authors. Rows containing internal merges use the exact integration delta or a squash workflow.
-- Patch-equivalent rows consume a validated repair objective rather than asserting that the current source head was merged. A grouped repair may include related objectives and is labeled explicitly.
+- Patch-equivalent rows consume a validated repair objective rather than asserting that the current source head was merged. Exact-file overlap alone is never treated as patch equivalence.
 
 Run commands from a clean review branch based on the maintainer's current target branch. A conflict means the option overlaps newer work and should be reviewed normally; it is not evidence that the option itself is wrong.
 
@@ -29,6 +31,12 @@ Run commands from a clean review branch based on the maintainer's current target
 - Rows where the frozen evidence does not justify an exact unit: 0
 
 Blank commands are deliberate. They prevent a branch-state validation result or already-present behavior from being presented as a patch.
+
+## Gerrit workflow boundary
+
+SQLAlchemy accepts GitHub pull requests as intake and uses Gerrit for accepted code changes. This catalog prepares local review units for that workflow without uploading them. It intentionally creates no Change-Ids and assigns no reviewers or topics. If a maintainer selects a packet, apply it to the chosen target branch, revise or split it as needed, rerun its tests, make the changelog decision explicit, and then use the project's normal Gerrit commands.
+
+Multi-commit packets preserve source order. A packet with exact-file overlaps lists the other affected review units so maintainers can choose a parent chain, a shared topic, a squash, or only one competing option deliberately.
 
 ## Whole option branch
 

@@ -29,16 +29,19 @@ This fork publishes a reviewable option set. It does not claim upstream acceptan
 
 ## Review order
 
-1. `REVIEW_GUIDE.md` - fetch, inspect, and consumption instructions.
-2. `pr_pick_commands.tsv` - one copy-paste command row per integrated pull request.
-3. `issue_pick_commands.tsv` - issue options separated into commits, PR units, already-present behavior, and validation-only closures.
-4. `commit_series.tsv` - exact commit and authorship order.
-5. `pr_coverage.jsonl` - imported pull-request coverage and objective review state.
-6. `issue_coverage.jsonl` - local issue closure coverage and remaining block reasons.
-7. `residual_work_units.jsonl` - unresolved issues collapsed into reviewable work units.
-8. `ci_attribution.jsonl` - failed-check attribution without assuming every CI failure belongs to a patch.
-9. `validation_summary.json` - test counts and SHA-256 evidence.
-10. `publication_manifest.json` - hashes for every catalog artifact.
+1. `MAINTAINER_REVIEW_INDEX.md` - three human review queues.
+2. `review_packets/` - one Gerrit-shaped review packet per integrated pull-request option.
+3. `REVIEW_GUIDE.md` - fetch, inspect, and consumption instructions.
+4. `review_packet_index.jsonl` - machine mirror of packet scope, order, overlap, and decisions.
+5. `pr_pick_commands.tsv` - one copy-paste command row per integrated pull request.
+6. `issue_pick_commands.tsv` - issue options separated into commits, PR units, already-present behavior, and validation-only closures.
+7. `commit_series.tsv` - exact commit and authorship order.
+8. `pr_coverage.jsonl` - imported pull-request coverage and objective review state.
+9. `issue_coverage.jsonl` - local issue closure coverage and remaining block reasons.
+10. `residual_work_units.jsonl` - unresolved issues collapsed into reviewable work units.
+11. `ci_attribution.jsonl` - failed-check attribution without assuming every CI failure belongs to a patch.
+12. `validation_summary.json` - test counts and SHA-256 evidence.
+13. `publication_manifest.json` - hashes for every catalog artifact.
 
 ## Catalog scope
 

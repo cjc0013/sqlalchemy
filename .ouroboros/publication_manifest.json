@@ -1,13 +1,17 @@
 {
   "all_branch": "ouroboros/all-20260728",
   "artifacts": {
+    "MAINTAINER_REVIEW_INDEX.md": {
+      "bytes": 6100,
+      "sha256": "aa4b74078ac40ebc55fc97173f0ad4449be790f7a386f010c4d65bcf120b8574"
+    },
     "README.md": {
-      "bytes": 2432,
-      "sha256": "d3b42c8134202cc393976484bf93af5a9ace79f1749ed7b59d127d2c9f7ff421"
+      "bytes": 2686,
+      "sha256": "b1535d69bfeb4829b2e77b7e69553317b592ce2741fce0a84c09b4c867982ced"
     },
     "REVIEW_GUIDE.md": {
-      "bytes": 1998,
-      "sha256": "7b1e94b9d87a5c95a40692fbb1707c56b90db2ca103247bb3653499ccd383cea"
+      "bytes": 2947,
+      "sha256": "f260abfff79b4949dd32a3181169db65d3209bd96cb334a543395bde25ade06e"
     },
     "ci_attribution.jsonl": {
       "bytes": 4130,
@@ -30,12 +34,124 @@
       "sha256": "e3a957e07a8f3c48319e13113fb3763199cebbeb4388a8ebf218c6ea9746a9db"
     },
     "pr_pick_commands.tsv": {
-      "bytes": 13374,
-      "sha256": "48259bf657ccc38d1b80215a847a73d40f0d5742dd2d181f7612777d880902ea"
+      "bytes": 13315,
+      "sha256": "f4ac1d0cf91553c43dadcc1c7f7e4baa0de5aba96c9e65b046991e28eb0434ca"
     },
     "residual_work_units.jsonl": {
       "bytes": 30425,
       "sha256": "a4e232bd98a0ff8355367b1c659e28469520b55c43bea5bd699b945e40f6ba8f"
+    },
+    "review_packet_index.jsonl": {
+      "bytes": 40140,
+      "sha256": "3984c46158e775f6096c28b0d276055d132d69f65ba32bdbdd4441b1be466175"
+    },
+    "review_packets/PR-11437.md": {
+      "bytes": 4175,
+      "sha256": "21ee84a5bfb641741ed3be126b8af2562e75a58dda7d2665449bad4dfd99f19d"
+    },
+    "review_packets/PR-12297.md": {
+      "bytes": 2803,
+      "sha256": "1c57daba3e349f0cdfa32600efa2cf83dc9cd4ca8decd546dbaeb38ba084c868"
+    },
+    "review_packets/PR-12731.md": {
+      "bytes": 2797,
+      "sha256": "6ec0db70514e775542aa445cb86853e145db7919d3d9682c6bd2376a299a0b75"
+    },
+    "review_packets/PR-13051.md": {
+      "bytes": 2933,
+      "sha256": "3468b72ed9e06f3d9020faa72f439123d73805548af5a7ec4b567b29613fa856"
+    },
+    "review_packets/PR-13288.md": {
+      "bytes": 2746,
+      "sha256": "7361b41899ea070e5674830b2c172ba1c81bc8dd5e0522b2b64d0d550aeb7a45"
+    },
+    "review_packets/PR-13289.md": {
+      "bytes": 3269,
+      "sha256": "f1325f8a2d6788e6a857333fd6dd332110e8b1555b9402712ed214e874105037"
+    },
+    "review_packets/PR-13303.md": {
+      "bytes": 3912,
+      "sha256": "ba74de9f44928a937f1a3f4568caf153cd91a3c586de02eaa1a3eed26b725bb3"
+    },
+    "review_packets/PR-13312.md": {
+      "bytes": 2700,
+      "sha256": "54b881c499726dba7fe81abe765ccefb2bec08da47fe047be12e0699eac825ea"
+    },
+    "review_packets/PR-13323.md": {
+      "bytes": 2811,
+      "sha256": "b3e0f1b5428af50924d5d767c0344c7ba9e4837fe4045ad2b5719d1e8556b0e0"
+    },
+    "review_packets/PR-13368.md": {
+      "bytes": 2934,
+      "sha256": "b6f8091928f1e58816bca28e679f240cb12ec21ad1fce362c74f0aadc33e8ce3"
+    },
+    "review_packets/PR-13399.md": {
+      "bytes": 3435,
+      "sha256": "a80834f9979093253ab101250638a55cd68a09d842126552ab4de895d1e47d2f"
+    },
+    "review_packets/PR-13404.md": {
+      "bytes": 2979,
+      "sha256": "6df1bbe137690f49c560a78739b124e91b07bd80fbed37896efbe344b723a890"
+    },
+    "review_packets/PR-13405.md": {
+      "bytes": 3589,
+      "sha256": "4a6ef85395cc7a085bd1e4ba1c334f50ba9ead0994606cacdc2d979f3111fd89"
+    },
+    "review_packets/PR-13415.md": {
+      "bytes": 3942,
+      "sha256": "5361c2f5f5a60d9b7fa3bd7f21e15dbe2af4e301f98140214278f340ff7c89a7"
+    },
+    "review_packets/PR-13416.md": {
+      "bytes": 3279,
+      "sha256": "a4a84b7becd3b89b5e2affc49cf0ff989f72d48f2766d110d9b7979ab61c927c"
+    },
+    "review_packets/PR-13435.md": {
+      "bytes": 3398,
+      "sha256": "4f382e7ecb9c7051543d6944ba01d1f28559a1d73e3a2f1b920eb251e46f9200"
+    },
+    "review_packets/PR-13436.md": {
+      "bytes": 3383,
+      "sha256": "7a9a183024d863b9ce7cd5c8ffe70088c51900901b9ad5c94af2e68396602264"
+    },
+    "review_packets/PR-13438.md": {
+      "bytes": 3231,
+      "sha256": "cef9137eef134e1acf1beff1260dd997fb7f66310f77b5d536a35d2c0b9db91b"
+    },
+    "review_packets/PR-13442.md": {
+      "bytes": 2668,
+      "sha256": "4ce447c9652e4c0eb1c8e2cf9354663e75665a3247101f8ee524927f1a0f5cbd"
+    },
+    "review_packets/PR-13452.md": {
+      "bytes": 3200,
+      "sha256": "504dea6aab9da0a1bc0d99de191131d9e9775cd83bd9059a0151e1b69e258295"
+    },
+    "review_packets/PR-13453.md": {
+      "bytes": 2849,
+      "sha256": "481dd0fa2262d927d1cd96a9ebaac017910a92e6a64b1cf43931c3e7c37f8a9f"
+    },
+    "review_packets/PR-13454.md": {
+      "bytes": 2740,
+      "sha256": "09415d82e18223a41ab807aaba86f32861d6d72226924ce7d2f8380373a6c443"
+    },
+    "review_packets/PR-13455.md": {
+      "bytes": 3959,
+      "sha256": "402e3c02b1178a4fa59eac0e00d865489692e0961b4005da4ac6056a439bc8c4"
+    },
+    "review_packets/PR-13456.md": {
+      "bytes": 2763,
+      "sha256": "3c331ab1f4aab7959d26e236caadb2dc2e2c7182159a78f24809c118c3792621"
+    },
+    "review_packets/PR-13457.md": {
+      "bytes": 2918,
+      "sha256": "c6d5654b582052aa6e9455beade9204044d920288470d98f0208721038443359"
+    },
+    "review_packets/PR-13459.md": {
+      "bytes": 2742,
+      "sha256": "0a058054da094e9ad6d0580b20956dc39ae91c3f19b36589ced01d451b7538ab"
+    },
+    "review_packets/PR-13461.md": {
+      "bytes": 2941,
+      "sha256": "1756307dc94be18498c037f320f779028cf8e0d0c9286e421cd7b8ab2dbf15d4"
     },
     "validation_summary.json": {
       "bytes": 819,
@@ -60,11 +176,12 @@
     "issue_pick_commands.tsv": 80,
     "pr_coverage.jsonl": 27,
     "pr_pick_commands.tsv": 27,
-    "residual_work_units.jsonl": 101
+    "residual_work_units.jsonl": 101,
+    "review_packet_index.jsonl": 27
   },
   "repository": "cjc0013/sqlalchemy",
   "source_integration_head_sha": "ac91268e679adb2c5e99ebd66e2462bbbb5ccf61",
   "source_ledger_summary_sha256": "2d976334a61ea46db5fbe799dc3dee8d3b5cbc667f06dc457fbf70e16bf1d9bd",
   "upstream_repository": "sqlalchemy/sqlalchemy",
-  "version": "sqlalchemy_publication_catalog_v2"
+  "version": "sqlalchemy_publication_catalog_v3"
 }
