@@ -1,0 +1,8 @@
+.. change::
+    :tags: bug, orm, dataclasses
+    :tickets: 9493
+
+    Fixed native mapped dataclass subclasses to use the standard dataclass
+    defaults for decorator arguments instead of inheriting arguments such as
+    ``kw_only=True`` from a mapped dataclass base.  Subclasses may continue to
+    opt into those arguments explicitly.

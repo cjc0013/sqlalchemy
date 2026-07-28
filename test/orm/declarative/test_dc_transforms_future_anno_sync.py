@@ -2061,6 +2061,30 @@ class DataclassesForNonMappedClassesTest(fixtures.TestBase):
 
 
 class DataclassArgsTest(fixtures.TestBase):
+    def test_dataclass_arguments_not_inherited(self):
+        """test #9493"""
+
+        class Base(MappedAsDataclass, DeclarativeBase, kw_only=True):
+            pass
+
+        class A(Base):
+            __tablename__ = "a"
+
+            id: Mapped[int] = mapped_column(primary_key=True)
+
+        class B(Base, kw_only=True):
+            __tablename__ = "b"
+
+            id: Mapped[int] = mapped_column(primary_key=True)
+
+        a_spec = pyinspect.getfullargspec(A.__init__)
+        eq_(a_spec.args, ["self", "id"])
+        eq_(a_spec.kwonlyargs, [])
+
+        b_spec = pyinspect.getfullargspec(B.__init__)
+        eq_(b_spec.args, ["self"])
+        eq_(b_spec.kwonlyargs, ["id"])
+
     dc_arg_names = (
         "init",
         "repr",
@@ -2366,7 +2390,11 @@ class DataclassArgsTest(fixtures.TestBase):
 
             x: Mapped[Optional[int]] = mapped_expr_constructor
 
-        self._assert_cls(A, dc_argument_fixture[1])
+        effective = dc_argument_fixture[1]
+        if dc_argument_fixture[0].get("kw_only"):
+            effective = {**effective, "kw_only": False}
+
+        self._assert_cls(A, effective)
 
     def test_dc_arguments_perclass(
         self,

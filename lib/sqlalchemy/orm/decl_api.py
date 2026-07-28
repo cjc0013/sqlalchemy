@@ -604,6 +604,9 @@ def _generate_dc_transforms(
     if hasattr(cls_, "_sa_apply_dc_transforms"):
         current = cls_._sa_apply_dc_transforms  # type: ignore[attr-defined]
 
+        if "_sa_apply_dc_transforms" not in cls_.__dict__:
+            current = {**current, "kw_only": _NoArg.NO_ARG}
+
         _DeclarativeMapperConfig._assert_dc_arguments(current)
 
         cls_._sa_apply_dc_transforms = {  # type: ignore[attr-defined]  # noqa: E501
