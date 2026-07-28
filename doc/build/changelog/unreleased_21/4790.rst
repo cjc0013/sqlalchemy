@@ -1,0 +1,8 @@
+.. change::
+    :tags: bug, schema
+    :tickets: 4790
+
+    Improved naming-convention errors for an unnamed constraint used with the
+    ``%(constraint_name)s`` token.  The message now identifies the constraint
+    type and associated table and directly indicates that ``name=`` must be
+    set, without attempting to compile the constraint expression.

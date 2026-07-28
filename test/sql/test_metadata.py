@@ -6180,7 +6180,8 @@ class NamingConventionTest(fixtures.TestBase, AssertsCompiledSQL):
         assert_raises_message(
             exc.InvalidRequestError,
             r"Naming convention including %\(constraint_name\)s token "
-            "requires that constraint is explicitly named.",
+            "requires that constraint is explicitly named. Please set name= "
+            "on the CheckConstraint associated with table 'user'.",
             CheckConstraint,
             u1.c.data == "x",
         )
@@ -6194,7 +6195,8 @@ class NamingConventionTest(fixtures.TestBase, AssertsCompiledSQL):
         assert_raises_message(
             exc.InvalidRequestError,
             r"Naming convention including %\(constraint_name\)s token "
-            "requires that constraint is explicitly named.",
+            "requires that constraint is explicitly named. Please set name= "
+            "on the CheckConstraint associated with table 'user'.",
             schema.AddConstraint(ck).compile,
         )
 
@@ -6469,7 +6471,8 @@ class NamingConventionTest(fixtures.TestBase, AssertsCompiledSQL):
         assert_raises_message(
             exc.InvalidRequestError,
             r"Naming convention including \%\(constraint_name\)s token "
-            r"requires that constraint is explicitly named.",
+            r"requires that constraint is explicitly named. Please set "
+            r"name= on the CheckConstraint associated with table 'user'.",
             schema.CreateTable(u1).compile,
             dialect=default.DefaultDialect(),
         )

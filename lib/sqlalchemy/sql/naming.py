@@ -60,7 +60,9 @@ class ConventionDict:
             raise exc.InvalidRequestError(
                 "Naming convention including "
                 "%(constraint_name)s token requires that "
-                "constraint is explicitly named."
+                "constraint is explicitly named. Please set name= on the "
+                f"{self.const.__class__.__name__} associated with table "
+                f"{self.table.description!r}."
             )
         if not isinstance(self._const_name, conv):
             self.const.name = None
