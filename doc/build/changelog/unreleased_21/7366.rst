@@ -1,0 +1,8 @@
+.. change::
+    :tags: engine, reflection, bug
+    :tickets: 7366
+
+    Reflection with ``extend_existing=True`` now preserves an existing index,
+    foreign key, unique constraint, or check constraint when a reflected item
+    of the same kind has the same non-NULL name.  Unnamed schema items retain
+    their previous behavior because they cannot be identified by name.

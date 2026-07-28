@@ -1773,6 +1773,13 @@ class Inspector(inspection.Inspectable["Inspector"]):
         fkeys = _reflect_info.foreign_keys.get(table_key, [])
         for fkey_d in fkeys:
             conname = fkey_d["name"]
+            if conname is not None and any(
+                isinstance(constraint, sa_schema.ForeignKeyConstraint)
+                and constraint.name == conname
+                for constraint in table.constraints
+            ):
+                continue
+
             # look for columns by orig name in cols_by_orig_name,
             # but support columns that are in-Python only as fallback
             constrained_columns = [
@@ -1868,6 +1875,11 @@ class Inspector(inspection.Inspectable["Inspector"]):
         indexes = _reflect_info.indexes.get(table_key, [])
         for index_d in indexes:
             name = index_d["name"]
+            if name is not None and any(
+                index.name == name for index in table.indexes
+            ):
+                continue
+
             columns = index_d["column_names"]
             expressions = index_d.get("expressions")
             column_sorting = index_d.get("column_sorting", {})
@@ -1934,6 +1946,13 @@ class Inspector(inspection.Inspectable["Inspector"]):
         # Unique Constraints
         for const_d in constraints:
             conname = const_d["name"]
+            if conname is not None and any(
+                isinstance(constraint, sa_schema.UniqueConstraint)
+                and constraint.name == conname
+                for constraint in table.constraints
+            ):
+                continue
+
             columns = const_d["column_names"]
             comment = const_d.get("comment")
             duplicates = const_d.get("duplicates_index")
@@ -1980,6 +1999,14 @@ class Inspector(inspection.Inspectable["Inspector"]):
     ) -> None:
         constraints = _reflect_info.check_constraints.get(table_key, [])
         for const_d in constraints:
+            conname = const_d.get("name")
+            if conname is not None and any(
+                isinstance(constraint, sa_schema.CheckConstraint)
+                and constraint.name == conname
+                for constraint in table.constraints
+            ):
+                continue
+
             table.append_constraint(sa_schema.CheckConstraint(**const_d))
 
     def _reflect_table_comment(

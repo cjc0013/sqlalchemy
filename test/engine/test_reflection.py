@@ -492,6 +492,77 @@ class ReflectionTest(fixtures.TestBase, ComparesTables):
                 1,
             )
 
+    @testing.only_on("sqlite")
+    def test_extend_existing_dedupes_named_schema_items(
+        self, connection, metadata
+    ):
+        parent = Table(
+            "parent", metadata, Column("id", Integer, primary_key=True)
+        )
+        table = Table(
+            "named_items",
+            metadata,
+            Column("id", Integer, primary_key=True),
+            Column("parent_id", Integer),
+            Column("value", Integer),
+            sa.ForeignKeyConstraint(
+                ["parent_id"], [parent.c.id], name="fk_named_items_parent"
+            ),
+            UniqueConstraint("value", name="uq_named_items_value"),
+            sa.CheckConstraint("value > 0", name="ck_named_items_value"),
+        )
+        Index("ix_named_items_value", table.c.value)
+        metadata.create_all(connection)
+
+        reflected = MetaData()
+        reflected_parent = Table(
+            "parent", reflected, Column("id", Integer, primary_key=True)
+        )
+        reflected_table = Table(
+            "named_items",
+            reflected,
+            Column("id", Integer, primary_key=True),
+            Column("parent_id", Integer),
+            Column("value", Integer),
+            sa.ForeignKeyConstraint(
+                ["parent_id"],
+                [reflected_parent.c.id],
+                name="fk_named_items_parent",
+            ),
+            UniqueConstraint("value", name="uq_named_items_value"),
+            sa.CheckConstraint("value > 0", name="ck_named_items_value"),
+        )
+        Index("ix_named_items_value", reflected_table.c.value)
+
+        Table(
+            "named_items",
+            reflected,
+            autoload_with=connection,
+            extend_existing=True,
+            autoload_replace=False,
+        )
+
+        eq_(
+            sum(
+                index.name == "ix_named_items_value"
+                for index in reflected_table.indexes
+            ),
+            1,
+        )
+        for constraint_type, name in (
+            (sa.ForeignKeyConstraint, "fk_named_items_parent"),
+            (UniqueConstraint, "uq_named_items_value"),
+            (sa.CheckConstraint, "ck_named_items_value"),
+        ):
+            eq_(
+                sum(
+                    isinstance(constraint, constraint_type)
+                    and constraint.name == name
+                    for constraint in reflected_table.constraints
+                ),
+                1,
+            )
+
     def test_include_columns_indexes(self, connection, metadata):
         m = metadata
 
