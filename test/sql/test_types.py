@@ -4101,6 +4101,19 @@ class ExpressionTest(
         expr = bindparam("bar") + bindparam("foo")
         eq_(expr.type, types.NULLTYPE)
 
+    @testing.combinations(
+        ((None, 5), Integer),
+        ((None, datetime.datetime(2020, 1, 1)), DateTime),
+        ((None, None), types.NullType),
+        ((), types.NullType),
+        argnames="values, expected_type",
+    )
+    def test_expanding_parameter_type_from_sequence(
+        self, values, expected_type
+    ):
+        parameter = bindparam("values", value=values, expanding=True)
+        assert isinstance(parameter.type, expected_type)
+
     def test_distinct(self, connection):
         test_table = self.tables.test
         s = select(test_table.c.avalue).distinct()

@@ -1,0 +1,8 @@
+.. change::
+    :tags: bug, sql
+    :tickets: 6874
+
+    Corrected type inference for an expanding :func:`_sql.bindparam` whose
+    sequence starts with ``None``.  Inference now uses the first non-``None``
+    value, while an empty or all-``None`` sequence continues to use
+    :class:`_types.NullType`.
