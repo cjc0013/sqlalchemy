@@ -1,0 +1,8 @@
+.. change::
+    :tags: bug, orm, typing
+    :tickets: 9369
+
+    Fixed inheritance of legacy annotated :class:`_schema.Column` objects
+    from a class passed to :func:`_orm.declarative_base` when that class sets
+    ``__allow_unmapped__ = True``.  The setting is now honored while the
+    inherited columns are copied onto mapped subclasses.

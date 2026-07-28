@@ -511,6 +511,21 @@ class MappedColumnTest(fixtures.TestBase, testing.AssertsCompiledSQL):
 
             status: int
 
+    def test_allow_unmapped_on_declarative_base_cls(self):
+        """test #9369"""
+
+        class LegacyBase:
+            __allow_unmapped__ = True
+
+            id: int = Column(Integer, primary_key=True)
+
+        Base = declarative_base(cls=LegacyBase)
+
+        class MyClass(Base):
+            __tablename__ = "mytable"
+
+        assert "id" in inspect(MyClass).attrs
+
     @testing.variation("annotation", ["none", "any", "datatype"])
     @testing.variation("explicit_name", [True, False])
     @testing.variation("attribute", ["column", "deferred"])
@@ -4636,7 +4651,6 @@ class WriteOnlyRelationshipTest(fixtures.TestBase):
             bs: WriteOnlyMapped[B] = relationship()
 
         self._assertions(A, B, "write_only")
-
 
 class GenericMappingQueryTest(AssertsCompiledSQL, fixtures.TestBase):
     """test the Generic support added as part of #8665"""
