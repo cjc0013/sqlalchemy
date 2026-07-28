@@ -1024,6 +1024,18 @@ more specific type constructions, as in the following example::
         num_value: Mapped[num_12_4]
         short_num_value: Mapped[num_6_2]
 
+.. note::
+
+   Declarative resolves strings inside annotations as Python forward
+   references.  When the metadata carried by ``Annotated`` is an arbitrary
+   string rather than a type expression, wrap it in :class:`typing.Literal`
+   so that it remains string metadata::
+
+       from typing import Annotated
+       from typing import Literal
+
+       long_string = Annotated[str, Literal["long string"]]
+
 a CREATE TABLE for the above mapping will illustrate the different variants
 of ``VARCHAR`` and ``NUMERIC`` we've configured, and looks like:
 
