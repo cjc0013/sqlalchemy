@@ -5926,6 +5926,22 @@ class ParentTest(QueryTest, AssertsCompiledSQL):
         ):
             with_parent(u1, User.name)
 
+    def test_incompatible_instance(self):
+        User, Order = self.classes("User", "Order")
+
+        with expect_raises_message(
+            sa_exc.ArgumentError,
+            r"with_parent\(\) expects an instance of User or a subclass "
+            r"for relationship User.orders; got Order",
+        ):
+            with_parent(Order(id=1), User.orders)
+
+        with expect_raises_message(
+            sa_exc.ArgumentError,
+            r"with_parent\(\) expects a mapped instance; got object",
+        ):
+            with_parent(object(), User.orders)
+
     def test_select_from(self):
         User, Address = self.classes.User, self.classes.Address
 

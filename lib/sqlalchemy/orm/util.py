@@ -2080,6 +2080,21 @@ def with_parent(
     else:
         prop_t = prop
 
+    try:
+        instance_mapper = object_mapper(instance)
+    except orm_exc.UnmappedInstanceError as err:
+        raise sa_exc.ArgumentError(
+            "with_parent() expects a mapped instance; "
+            f"got {type(instance).__name__}"
+        ) from err
+
+    if not instance_mapper.isa(prop_t.parent):
+        raise sa_exc.ArgumentError(
+            "with_parent() expects an instance of "
+            f"{prop_t.parent.class_.__name__} or a subclass for relationship "
+            f"{prop_t}; got {instance_mapper.class_.__name__}"
+        )
+
     return prop_t._with_parent(instance, from_entity=from_entity)
 
 

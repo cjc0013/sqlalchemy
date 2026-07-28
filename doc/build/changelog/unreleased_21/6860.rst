@@ -1,0 +1,8 @@
+.. change::
+    :tags: bug, orm
+    :tickets: 6860
+
+    Improved :func:`_orm.with_parent` validation so that an unmapped instance,
+    or an instance incompatible with the class that owns the relationship,
+    raises a descriptive :class:`_exc.ArgumentError` immediately instead of
+    producing incorrect criteria or a later attribute lookup failure.
