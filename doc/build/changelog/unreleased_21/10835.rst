@@ -1,0 +1,8 @@
+.. change::
+    :tags: bug, orm
+    :tickets: 10835
+
+    Added ORM collection instrumentation support for
+    :class:`_collections.OrderedSet`, including its compiled extension form.
+    Relationships may now use ``OrderedSet`` as their ``collection_class``
+    without attempting to modify the immutable extension type in place.

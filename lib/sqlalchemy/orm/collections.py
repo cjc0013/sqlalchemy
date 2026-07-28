@@ -1577,6 +1577,10 @@ class InstrumentedSet(Set[_T]):
     """An instrumented version of the built-in set."""
 
 
+class InstrumentedOrderedSet(util.OrderedSet[_T]):
+    """An instrumented version of :class:`.OrderedSet`."""
+
+
 class InstrumentedDict(Dict[_KT, _VT]):
     """An instrumented version of the built-in dict."""
 
@@ -1587,6 +1591,7 @@ __canned_instrumentation = cast(
         {
             list: InstrumentedList,
             set: InstrumentedSet,
+            util.OrderedSet: InstrumentedOrderedSet,
             dict: InstrumentedDict,
         }
     ),

@@ -221,6 +221,12 @@ class OrderedDictTest(fixtures.TestBase):
 
 
 class OrderedSetTest(fixtures.TestBase):
+    def test_generic_alias(self):
+        alias = util.OrderedSet[int]
+
+        is_(alias.__origin__, util.OrderedSet)
+        eq_(alias.__args__, (int,))
+
     def test_mutators_against_iter(self):
         # testing a set modified against an iterator
         o = util.OrderedSet([3, 2, 4, 5])

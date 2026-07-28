@@ -22,6 +22,8 @@ from sqlalchemy.orm import attributes
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import instrumentation
 from sqlalchemy.orm import joinedload
+from sqlalchemy.orm import Mapped
+from sqlalchemy.orm import mapped_column
 from sqlalchemy.orm import relationship
 from sqlalchemy.orm import selectinload
 from sqlalchemy.orm import subqueryload
@@ -2793,6 +2795,31 @@ class CustomCollectionsTest(fixtures.MappedTest):
 
 
 class InstrumentationTest(fixtures.ORMTest):
+    def test_ordered_set_relationship(self):
+        """test #10835"""
+        Base = declarative_base()
+
+        class Parent(Base):
+            __tablename__ = "parent"
+
+            id: Mapped[int] = mapped_column(primary_key=True)
+            children: Mapped[util.OrderedSet[Child]] = relationship(
+                collection_class=util.OrderedSet
+            )
+
+        class Child(Base):
+            __tablename__ = "child"
+
+            id: Mapped[int] = mapped_column(primary_key=True)
+            parent_id: Mapped[int] = mapped_column(ForeignKey("parent.id"))
+
+        parent = Parent()
+        child = Child()
+        parent.children.add(child)
+
+        assert isinstance(parent.children, collections.InstrumentedOrderedSet)
+        eq_(list(parent.children), [child])
+
     def test_name_setup(self):
 
         class Base:
