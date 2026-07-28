@@ -1,7 +1,9 @@
 from decimal import Decimal
+import enum
 from typing import assert_type
 
 from sqlalchemy import Column
+from sqlalchemy import Enum
 from sqlalchemy import Float
 from sqlalchemy import JSON
 from sqlalchemy import Numeric
@@ -14,6 +16,15 @@ assert_type(Float(asdecimal=True), Float[Decimal])
 
 assert_type(Numeric(), Numeric[Decimal])
 assert_type(Numeric(asdecimal=False), Numeric[float])
+
+
+class MyEnum(enum.Enum):
+    one = "one"
+    two = "two"
+
+
+assert_type(Enum(MyEnum), Enum[MyEnum])
+assert_type(Enum("one", "two"), Enum[str])
 
 
 def test_json_value_type() -> None:

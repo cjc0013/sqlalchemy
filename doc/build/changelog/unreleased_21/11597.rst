@@ -1,0 +1,7 @@
+.. change::
+    :tags: bug, typing
+    :tickets: 11597
+
+    Made :class:`.Enum` generic in the Python value type it represents.  Type
+    checkers can now preserve a specific PEP-435 enum class through
+    ``Enum(MyEnum)`` instead of widening the type to ``str | enum.Enum``.

@@ -1381,9 +1381,14 @@ class SchemaType(SchemaEventTarget, TypeEngineMixin):
 
 
 _EnumTupleArg = Union[Sequence[enum.Enum], Sequence[str]]
+_EnumValue = TypeVar(
+    "_EnumValue",
+    bound=Union[str, enum.Enum],
+    default=Union[str, enum.Enum],
+)
 
 
-class Enum(String, SchemaType, Emulated, TypeEngine[Union[str, enum.Enum]]):
+class Enum(String, SchemaType, Emulated, TypeEngine[_EnumValue]):
     """Generic Enum Type.
 
     The :class:`.Enum` type provides a set of possible string values
@@ -1477,10 +1482,12 @@ class Enum(String, SchemaType, Emulated, TypeEngine[Union[str, enum.Enum]]):
     _object_lookup: Dict[Optional[str], Union[enum.Enum, str, None]]
 
     @overload
-    def __init__(self, enums: Type[enum.Enum], **kw: Any) -> None: ...
+    def __init__(
+        self: Enum[_EnumValue], enums: Type[_EnumValue], **kw: Any
+    ) -> None: ...
 
     @overload
-    def __init__(self, *enums: str, **kw: Any) -> None: ...
+    def __init__(self: Enum[str], *enums: str, **kw: Any) -> None: ...
 
     def __init__(self, *enums: Union[str, Type[enum.Enum]], **kw: Any) -> None:
         r"""Construct an enum.
@@ -1729,7 +1736,7 @@ class Enum(String, SchemaType, Emulated, TypeEngine[Union[str, enum.Enum]]):
             or other._type_affinity is String
         )
 
-    def _resolve_for_literal(self, value: Any) -> Enum:
+    def _resolve_for_literal(self, value: Any) -> Enum[Any]:
         tv = type(value)
         typ = self._resolve_for_python_type(tv, tv, tv)
         assert typ is not None
@@ -1740,7 +1747,7 @@ class Enum(String, SchemaType, Emulated, TypeEngine[Union[str, enum.Enum]]):
         python_type: Type[Any],
         matched_on: _MatchedOnType,
         matched_on_flattened: Type[Any],
-    ) -> Optional[Enum]:
+    ) -> Optional[Enum[Any]]:
         # "generic form" indicates we were placed in a type map
         # as ``sqlalchemy.Enum(enum.Enum)`` which indicates we need to
         # get enumerated values from the datatype
@@ -1799,7 +1806,7 @@ class Enum(String, SchemaType, Emulated, TypeEngine[Union[str, enum.Enum]]):
 
         kw["length"] = NO_ARG if self.length == 0 else self.length
         return cast(
-            Enum,
+            Enum[Any],
             self._generic_type_affinity(_enums=enum_args, **kw),  # type: ignore[call-arg]  # noqa: E501
         )
 
