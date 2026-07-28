@@ -1462,6 +1462,28 @@ class RowShapeElisionTest(fixtures.TestBase):
         make_row = s1._row_getter[0]
         eq_(make_row((7, "q")), "Q")
 
+    @testing.combinations(False, True, argnames="scalar")
+    def test_processor_failure_names_column(self, scalar):
+        def fail(value):
+            raise ValueError("malformed value")
+
+        metadata = result.SimpleResultMetaData(
+            ["a", "payload"], _processors=[None, fail]
+        )
+        res = result.IteratorResult(metadata, iter([(1, "bad")]))
+        if scalar:
+            res = res.scalars("payload")
+
+        with expect_raises(TypeError) as err:
+            res.all()
+
+        eq_(
+            str(err.error),
+            "Result processor for column 'payload' failed; "
+            "see above cause for details.",
+        )
+        eq_(str(err.error.__cause__), "malformed value")
+
     # --- scalars: behavior parity (pass before AND after) ---
 
     def test_scalars_values(self):

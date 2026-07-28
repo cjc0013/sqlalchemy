@@ -1,0 +1,8 @@
+.. change::
+    :tags: bug, engine
+    :tickets: 5123
+
+    Improved errors raised by result processors to identify the result column
+    whose processor failed while retaining the original exception as the
+    direct cause.  The additional diagnostic work occurs only on the
+    exceptional path and applies to both row and scalar result shapes.

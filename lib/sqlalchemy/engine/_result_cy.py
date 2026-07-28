@@ -99,6 +99,13 @@ class _NoRow(Enum):
 _NO_ROW = _NoRow._NO_ROW
 
 
+def _raise_for_result_processor(column_name: str, err: Exception):
+    raise TypeError(
+        f"Result processor for column {column_name!r} failed; "
+        "see above cause for details."
+    ) from err
+
+
 class BaseResultInternal(Generic[_R]):
     __slots__ = ()
 
@@ -237,11 +244,15 @@ class BaseResultInternal(Generic[_R]):
             assert translated is not None and len(translated) == 1
             scalar_index: cython.Py_ssize_t = translated[0]
             scalar_proc = processors[0] if proc_size != 0 else None
+            scalar_key = metadata._keys[0]
 
             if scalar_proc is not None:
 
                 def single_scalar(input_row: Sequence[Any], /) -> Any:
-                    return scalar_proc(input_row[scalar_index])
+                    try:
+                        return scalar_proc(input_row[scalar_index])
+                    except Exception as err:
+                        _raise_for_result_processor(scalar_key, err)
 
             else:
 
@@ -257,7 +268,10 @@ class BaseResultInternal(Generic[_R]):
                     for i in range(size):
                         value: object = rows[i][scalar_index]
                         if scalar_proc is not None:
-                            value = scalar_proc(value)
+                            try:
+                                value = scalar_proc(value)
+                            except Exception as err:
+                                _raise_for_result_processor(scalar_key, err)
                         Py_INCREF(value)
                         PyList_SET_ITEM(result, i, value)
                     return result
@@ -266,7 +280,13 @@ class BaseResultInternal(Generic[_R]):
                 if scalar_proc is not None:
 
                     def many_scalars(rows: Sequence[Any], /) -> list[Any]:
-                        return [scalar_proc(row[scalar_index]) for row in rows]
+                        result = []
+                        for row in rows:
+                            try:
+                                result.append(scalar_proc(row[scalar_index]))
+                            except Exception as err:
+                                _raise_for_result_processor(scalar_key, err)
+                        return result
 
                 else:
 
@@ -331,7 +351,11 @@ class BaseResultInternal(Generic[_R]):
                     first_row = False
                     assert len(input_row) == proc_size
                 input_row = _apply_processors(
-                    processors, proc_size, proc_valid, input_row
+                    processors,
+                    proc_size,
+                    proc_valid,
+                    metadata._keys,
+                    input_row,
                 )
 
             row: Row = _Row(metadata, None, key_to_index, input_row)
@@ -367,7 +391,11 @@ class BaseResultInternal(Generic[_R]):
                     input_row = tuple_filters(input_row)
                 if proc_size != 0:
                     input_row = _apply_processors(
-                        processors, proc_size, proc_valid, input_row
+                        processors,
+                        proc_size,
+                        proc_valid,
+                        metadata._keys,
+                        input_row,
                     )
                 elif type(input_row) is not tuple:
                     input_row = tuple(input_row)
@@ -760,6 +788,7 @@ if cython.compiled:
         proc: tuple,
         proc_size: cython.Py_ssize_t,
         proc_valid: object,  # used only by python impl
+        keys: Sequence,
         data: Sequence,
     ) -> tuple[Any, ...]:
         res: tuple = PyTuple_New(proc_size)
@@ -767,7 +796,10 @@ if cython.compiled:
         for i in range(proc_size):
             p = proc[i]
             if p is not None:
-                value = p(data[i])
+                try:
+                    value = p(data[i])
+                except Exception as err:
+                    _raise_for_result_processor(keys[i], err)
             else:
                 value = data[i]
             Py_INCREF(value)
@@ -780,11 +812,15 @@ else:
         proc: _ProcessorsType,
         proc_size: int,  # used only by cython impl
         proc_valid: tuple[int, ...],
+        keys: Sequence[str],
         data: Sequence[Any],
     ) -> tuple[Any, ...]:
         res = list(data)
         for i in proc_valid:
-            res[i] = proc[i](res[i])
+            try:
+                res[i] = proc[i](res[i])
+            except Exception as err:
+                _raise_for_result_processor(keys[i], err)
         return tuple(res)
 
 
