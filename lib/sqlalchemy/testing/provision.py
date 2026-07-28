@@ -569,6 +569,17 @@ def allow_stale_updates(fn, *arg, **kw):
 
 
 @register.init
+def truncate_table(cfg, connection, table):
+    """Remove all rows from a table during test-suite cleanup.
+
+    Dialects that don't support an unconditional DELETE may override this
+    hook in their provisioning module.
+
+    """
+    connection.execute(table.delete())
+
+
+@register.init
 def delete_from_all_tables(connection, cfg, metadata):
     """an absolutely foolproof delete from all tables routine.
 
@@ -596,9 +607,9 @@ def delete_from_all_tables(connection, cfg, metadata):
     ):
         if savepoints:
             with connection.begin_nested():
-                connection.execute(table.delete())
+                truncate_table(cfg, connection, table)
         else:
-            connection.execute(table.delete())
+            truncate_table(cfg, connection, table)
 
 
 @register.init
