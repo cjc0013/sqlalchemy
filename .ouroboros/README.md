@@ -1,5 +1,7 @@
 # SQLAlchemy option integration - 2026-07-28
-**ON GOING WORK IN PROGRESS IF YOU ARE LOOKING AT THIS NOW IT IS NOT YET FINISHED PLEASE WAIT UNTIL ITS FINISHED TO JUDGE THANK YOU SHOULD BE FINISHED SOMETIME TODAY 
+
+**ONGOING WORK IN PROGRESS. IF YOU ARE LOOKING AT THIS NOW, IT IS NOT YET FINISHED. PLEASE WAIT UNTIL IT IS FINISHED TO JUDGE. THANK YOU. IT SHOULD BE FINISHED SOMETIME TODAY.**
+
 This fork publishes a reviewable option set. It does not claim upstream acceptance and it does not create or link upstream pull requests, issues, comments, or reviewer mentions.
 
 ## Start here
@@ -19,6 +21,9 @@ This fork publishes a reviewable option set. It does not claim upstream acceptan
 - Residual issues: 102
 - Collapsed residual work units: 101
 - Current upstream pull requests integrated locally: 27
+- Pull-request packets with direct apply commands: 26
+- Issue outcomes with direct apply commands: 56
+- PR packets with passing focused validation: 22
 - Commits after the frozen base: 145
 
 ## Validation
@@ -29,19 +34,21 @@ This fork publishes a reviewable option set. It does not claim upstream acceptan
 
 ## Review order
 
-1. `MAINTAINER_REVIEW_INDEX.md` - three human review queues.
-2. `review_packets/` - one Gerrit-shaped review packet per integrated pull-request option.
-3. `REVIEW_GUIDE.md` - fetch, inspect, and consumption instructions.
-4. `review_packet_index.jsonl` - machine mirror of packet scope, order, overlap, and decisions.
-5. `pr_pick_commands.tsv` - one copy-paste command row per integrated pull request.
-6. `issue_pick_commands.tsv` - issue options separated into commits, PR units, already-present behavior, and validation-only closures.
-7. `commit_series.tsv` - exact commit and authorship order.
-8. `pr_coverage.jsonl` - imported pull-request coverage and objective review state.
-9. `issue_coverage.jsonl` - local issue closure coverage and remaining block reasons.
-10. `residual_work_units.jsonl` - unresolved issues collapsed into reviewable work units.
-11. `ci_attribution.jsonl` - failed-check attribution without assuming every CI failure belongs to a patch.
-12. `validation_summary.json` - test counts and SHA-256 evidence.
-13. `publication_manifest.json` - hashes for every catalog artifact.
+1. `MAINTAINER_REVIEW_INDEX.md` - complete accounting followed by three PR review queues.
+2. `ISSUE_REVIEW_INDEX.md` - every issue outcome and direct issue command.
+3. `review_packets/` - one concise Gerrit-shaped review packet per integrated pull-request option.
+4. `REVIEW_GUIDE.md` - fetch, inspect, and consumption instructions.
+5. `review_packet_index.jsonl` - machine mirror of packet scope, order, overlap, validation, and decisions.
+6. `focused_validation.jsonl` - packet-specific commands, counts, and receipt hashes.
+7. `pr_pick_commands.tsv` - one copy-paste command row per integrated pull request.
+8. `issue_pick_commands.tsv` - issue options separated into commits, PR units, already-present behavior, and validation-only closures.
+9. `commit_series.tsv` - exact commit and authorship order.
+10. `pr_coverage.jsonl` - imported pull-request coverage and objective review state.
+11. `issue_coverage.jsonl` - local issue closure coverage and remaining block reasons.
+12. `residual_work_units.jsonl` - unresolved issues collapsed into reviewable work units.
+13. `ci_attribution.jsonl` - failed-check attribution without assuming every CI failure belongs to a patch.
+14. `validation_summary.json` - combined-suite test counts and SHA-256 evidence.
+15. `publication_manifest.json` - hashes for every catalog artifact.
 
 ## Catalog scope
 

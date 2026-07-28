@@ -6,7 +6,7 @@ Nothing in this catalog needs an upstream pull request, issue, comment, or menti
 git fetch https://github.com/cjc0013/sqlalchemy.git refs/heads/ouroboros/all-20260728:refs/remotes/ouroboros/options
 ```
 
-Start with `MAINTAINER_REVIEW_INDEX.md`. It separates coherent technical-review units, units that still need a design or branch decision, and evidence-only outcomes. Each entry links to a Gerrit-shaped packet under `review_packets/`.
+Start with `MAINTAINER_REVIEW_INDEX.md`. It accounts for every PR and issue outcome, then separates coherent technical-review units, units that still need a design or branch decision, and evidence-only outcomes. `ISSUE_REVIEW_INDEX.md` lists every issue result and every direct issue command.
 
 ## Pull-request options
 
@@ -14,9 +14,11 @@ Start with `MAINTAINER_REVIEW_INDEX.md`. It separates coherent technical-review 
 
 - `recommended_command` is the simplest safe consumption command for that row.
 - `inspect_command` shows the net file-level change before applying it.
-- `exact_net_command` is available when a reviewer prefers the exact integrated delta.
-- Single commits and ordinary commit series preserve original commit authors. Rows containing internal merges use the exact integration delta or a squash workflow.
+- `integrated_reproduction_command` is secondary and reproduces the combined integration-branch delta when it differs from the original commit path.
+- Original commits are the primary path whenever they apply cleanly from the frozen base. Merge-delta commands remain primary only where the original internal-merge series does not apply independently.
 - Patch-equivalent rows consume a validated repair objective rather than asserting that the current source head was merged. Exact-file overlap alone is never treated as patch equivalence.
+
+Each packet reports fresh focused validation when a runnable changed pytest target exists. A packet says `passed` only when its command has a receipt tied to the publication tree. Docs, examples, workflow-only, or otherwise non-runnable packets say `not applicable` rather than borrowing the combined-suite result.
 
 Run commands from a clean review branch based on the maintainer's current target branch. A conflict means the option overlaps newer work and should be reviewed normally; it is not evidence that the option itself is wrong.
 
