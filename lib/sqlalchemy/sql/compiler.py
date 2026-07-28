@@ -2826,6 +2826,27 @@ class SQLCompiler(Compiled):
             "asfrom_froms": set(),
             "selectable": taf,
         }
+
+        if compound_index == 0:
+            entry["select_0"] = taf
+        elif compound_index:
+            select_0 = entry["select_0"]
+            numcols = len(select_0._all_selected_columns)
+
+            if len(taf.column_args) != numcols:
+                raise exc.CompileError(
+                    "All selectables passed to "
+                    "CompoundSelect must have identical numbers of "
+                    "columns; select #%d has %d columns, select "
+                    "#%d has %d"
+                    % (
+                        1,
+                        numcols,
+                        compound_index + 1,
+                        len(taf.column_args),
+                    )
+                )
+
         self.stack.append(new_entry)
 
         if taf._independent_ctes:

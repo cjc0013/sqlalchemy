@@ -1,0 +1,8 @@
+.. change::
+    :tags: sql, bug
+    :tickets: 9425
+
+    Added compound-select column-count validation when one or more branches
+    are textual selects.  Textual branches now raise the same
+    :class:`.CompileError` as regular selects when their number of declared
+    columns differs.

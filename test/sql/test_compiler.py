@@ -2774,6 +2774,47 @@ class SelectTest(fixtures.TestBase, AssertsCompiledSQL):
             dialect="default_enhanced",
         )
 
+    @testing.combinations(
+        (
+            select(table1.c.myid, table1.c.name),
+            text("select 1").columns(column("a")),
+            2,
+            1,
+        ),
+        (
+            text("select 1, 2").columns(column("a"), column("b")),
+            select(table1.c.myid),
+            2,
+            1,
+        ),
+        (
+            text("select 1, 2").columns(column("a"), column("b")),
+            text("select 1, 2, 3").columns(
+                column("a"), column("b"), column("c")
+            ),
+            2,
+            3,
+        ),
+    )
+    def test_compound_textual_select_column_count(
+        self, first, second, first_count, second_count
+    ):
+        assert_raises_message(
+            exc.CompileError,
+            "All selectables passed to CompoundSelect "
+            "must have identical numbers of columns; "
+            f"select #1 has {first_count} columns, "
+            f"select #2 has {second_count}",
+            union_all(first, second).compile,
+        )
+
+    def test_compound_textual_select_matching_count(self):
+        union_all(
+            text("select 1, 2").columns(column("a"), column("b")),
+            select(table1.c.myid, table1.c.name),
+            text("select 3, 4").columns(column("a"), column("b")),
+        ).compile()
+
     def test_compound_grouping(self):
         s = select(column("foo"), column("bar")).select_from(text("bat"))
 
