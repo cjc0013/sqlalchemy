@@ -1,0 +1,9 @@
+.. change::
+    :tags: bug, sql
+    :tickets: 7517
+
+    Added the :paramref:`_sql.bindparam.expanding` flag to the bound
+    parameter cache key so an explicitly expanding parameter cannot reuse an
+    incompatible compiled statement from an otherwise identical scalar
+    parameter.  Also clarified when the flag is automatic and when it is
+    useful to pass explicitly.

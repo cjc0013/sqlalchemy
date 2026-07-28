@@ -2277,6 +2277,7 @@ class BindParameter(roles.InElementRole, KeyedColumnElement[_T]):
                 else self.key
             ),
             self.literal_execute,
+            self.expanding,
         )
 
     def _convert_to_unique(self):

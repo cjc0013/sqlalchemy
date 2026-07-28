@@ -774,6 +774,14 @@ def bindparam(
       This is to allow statement caching to be used in conjunction with
       an IN clause.
 
+      The :meth:`.ColumnOperators.in_` operator sets this flag automatically
+      when it coerces a sequence into a bound parameter.  Passing
+      ``expanding=True`` explicitly is mainly useful for a named
+      :func:`.bindparam` that will receive its sequence at execution time.
+      Because this flag changes the compiled SQL shape, otherwise identical
+      bound parameters with different ``expanding`` settings have distinct
+      statement cache keys.
+
       .. seealso::
 
         :meth:`.ColumnOperators.in_`

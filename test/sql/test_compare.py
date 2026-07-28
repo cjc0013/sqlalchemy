@@ -378,6 +378,7 @@ class CoreFixtures:
         lambda: (
             bindparam("x"),
             bindparam("x", literal_execute=True),
+            bindparam("x", expanding=True),
             bindparam("y"),
             bindparam("x", type_=Integer),
             bindparam("x", type_=String),
