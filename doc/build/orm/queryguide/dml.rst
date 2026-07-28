@@ -985,6 +985,17 @@ field of multiple rows
     [...] ('Name starts with S', 'squidward', 'sandy')
     {stop}<...>
 
+The keyword form of :meth:`_dml.Update.values` is convenient when keys are
+literal mapped attribute names.  A dictionary may instead use ORM mapped
+attributes directly as keys, which is useful when attributes are selected
+dynamically or checked by a typing tool::
+
+    >>> stmt = (
+    ...     update(User)
+    ...     .where(User.name == "sandy")
+    ...     .values({User.fullname: "Sandy Cheeks"})
+    ... )
+
 
 For a DELETE, an example of deleting rows based on criteria::
 

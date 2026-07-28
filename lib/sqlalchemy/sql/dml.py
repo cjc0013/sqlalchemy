@@ -1101,6 +1101,11 @@ class ValuesBase(UpdateBase):
 
             users.update().values({"name": "some new name"})
 
+         When passing a dictionary, the keys may also be
+         :class:`_schema.Column` objects or other mapped column expressions::
+
+            users.update().values({users.c.name: "some new name"})
+
          Also for either form but more typically for the
          :class:`_expression.Insert` construct, a tuple that contains an
          entry for every column in the table is also accepted::
