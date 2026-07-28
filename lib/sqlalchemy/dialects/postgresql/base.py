@@ -1206,6 +1206,44 @@ of :class:`.PGInspector`, which offers additional methods::
 
     print(insp.get_enums())
 
+Reflecting PostgreSQL Foreign Tables
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+PostgreSQL foreign tables are exposed by
+:meth:`.PGInspector.get_foreign_table_names`.  They are not included in the
+ordinary table-name enumeration used by :meth:`.MetaData.reflect`, but may be
+reflected explicitly into the same :class:`.MetaData` collection::
+
+    from sqlalchemy import inspect
+    from sqlalchemy import MetaData
+    from sqlalchemy import Table
+
+    metadata = MetaData()
+
+    with engine.connect() as conn:
+        inspector = inspect(conn)
+        for table_name in inspector.get_foreign_table_names(
+            schema="remote_data"
+        ):
+            Table(
+                table_name,
+                metadata,
+                schema="remote_data",
+                autoload_with=conn,
+            )
+
+This reflects the columns PostgreSQL reports for each foreign table.  Other
+objects such as constraints, indexes, or comments may not be available from
+the foreign-data wrapper and therefore may not be present on the reflected
+:class:`.Table`.
+
+.. versionadded:: 2.1 Added a documented recipe for reflecting PostgreSQL
+   foreign tables.
+
+.. seealso::
+
+    :meth:`.PGInspector.get_foreign_table_names`
+
 .. autoclass:: PGInspector
     :members:
 

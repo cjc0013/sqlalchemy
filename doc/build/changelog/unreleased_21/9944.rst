@@ -1,0 +1,9 @@
+.. change::
+    :tags: documentation, postgresql
+    :tickets: 9944
+
+    Added a PostgreSQL-specific recipe using
+    :meth:`.PGInspector.get_foreign_table_names` and explicit
+    :class:`.Table` reflection, allowing foreign tables to be loaded into a
+    :class:`.MetaData` collection without broadening the generic
+    :meth:`.MetaData.reflect` table-enumeration contract.
