@@ -29,14 +29,17 @@ This fork publishes a reviewable option set. It does not claim upstream acceptan
 
 ## Review order
 
-1. `commit_series.tsv` - exact commit and authorship order.
-2. `pr_coverage.jsonl` - imported pull-request coverage and objective review state.
-3. `issue_coverage.jsonl` - local issue closure coverage and remaining block reasons.
-4. `residual_work_units.jsonl` - unresolved issues collapsed into reviewable work units.
-5. `ci_attribution.jsonl` - failed-check attribution without assuming every CI failure belongs to a patch.
-6. `validation_summary.json` - test counts and SHA-256 evidence.
-7. `publication_manifest.json` - hashes for every catalog artifact.
+1. `REVIEW_GUIDE.md` - fetch, inspect, and consumption instructions.
+2. `pr_pick_commands.tsv` - one copy-paste command row per integrated pull request.
+3. `issue_pick_commands.tsv` - issue options separated into commits, PR units, already-present behavior, and validation-only closures.
+4. `commit_series.tsv` - exact commit and authorship order.
+5. `pr_coverage.jsonl` - imported pull-request coverage and objective review state.
+6. `issue_coverage.jsonl` - local issue closure coverage and remaining block reasons.
+7. `residual_work_units.jsonl` - unresolved issues collapsed into reviewable work units.
+8. `ci_attribution.jsonl` - failed-check attribution without assuming every CI failure belongs to a patch.
+9. `validation_summary.json` - test counts and SHA-256 evidence.
+10. `publication_manifest.json` - hashes for every catalog artifact.
 
-## Publication boundary
+## Catalog scope
 
-Private maintainer-behavior priors, internal review forecasts, workstation paths, and control-plane receipts are intentionally not published. They were decision aids, not patch evidence. Upstream issue and pull-request numbers in the ledgers are identifiers only and use no closing keywords or backlink-producing references.
+This catalog is limited to technical patch provenance, issue and pull-request coverage, CI attribution, validation evidence, and local consumption instructions. Upstream issue and pull-request numbers are identifiers only and use no closing keywords or backlink-producing references.

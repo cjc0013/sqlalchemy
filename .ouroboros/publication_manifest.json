@@ -2,8 +2,12 @@
   "all_branch": "ouroboros/all-20260728",
   "artifacts": {
     "README.md": {
-      "bytes": 2188,
-      "sha256": "764cf19b58734857ffefad88097c8c1b73b52412c92587564f1fa081e8307980"
+      "bytes": 2432,
+      "sha256": "d3b42c8134202cc393976484bf93af5a9ace79f1749ed7b59d127d2c9f7ff421"
+    },
+    "REVIEW_GUIDE.md": {
+      "bytes": 1998,
+      "sha256": "7b1e94b9d87a5c95a40692fbb1707c56b90db2ca103247bb3653499ccd383cea"
     },
     "ci_attribution.jsonl": {
       "bytes": 4130,
@@ -17,9 +21,17 @@
       "bytes": 46470,
       "sha256": "a8de043e531b64391a7518e7bb1ae5e6994cc43497f021ece46898538df6dd10"
     },
+    "issue_pick_commands.tsv": {
+      "bytes": 17950,
+      "sha256": "386e6584048b396d658f741a99ea6a57c630b382a09eb1bd92babb85d73ebf64"
+    },
     "pr_coverage.jsonl": {
       "bytes": 8616,
       "sha256": "e3a957e07a8f3c48319e13113fb3763199cebbeb4388a8ebf218c6ea9746a9db"
+    },
+    "pr_pick_commands.tsv": {
+      "bytes": 13374,
+      "sha256": "48259bf657ccc38d1b80215a847a73d40f0d5742dd2d181f7612777d880902ea"
     },
     "residual_work_units.jsonl": {
       "bytes": 30425,
@@ -33,8 +45,8 @@
   "base_sha": "aa1a5575358d3aa14953b04dced02f4763fed2e7",
   "canary_branch": "ouroboros/canary-no-notify-9425-20260728",
   "catalog_branch": "ouroboros/catalog-20260728",
+  "ci_attribution_reference_summary_sha256": "a4865061d2b3b4e258f206c5e2d651111eadf3dde379d013b87fd2474d695ac1",
   "commit_count": 145,
-  "prior_deep_ledger_summary_sha256": "a4865061d2b3b4e258f206c5e2d651111eadf3dde379d013b87fd2474d695ac1",
   "public_actions": {
     "creates_upstream_comment": false,
     "creates_upstream_issue": false,
@@ -45,12 +57,14 @@
   "published_row_counts": {
     "ci_attribution.jsonl": 27,
     "issue_coverage.jsonl": 182,
+    "issue_pick_commands.tsv": 80,
     "pr_coverage.jsonl": 27,
+    "pr_pick_commands.tsv": 27,
     "residual_work_units.jsonl": 101
   },
   "repository": "cjc0013/sqlalchemy",
   "source_integration_head_sha": "ac91268e679adb2c5e99ebd66e2462bbbb5ccf61",
   "source_ledger_summary_sha256": "2d976334a61ea46db5fbe799dc3dee8d3b5cbc667f06dc457fbf70e16bf1d9bd",
   "upstream_repository": "sqlalchemy/sqlalchemy",
-  "version": "sqlalchemy_publication_catalog_v1"
+  "version": "sqlalchemy_publication_catalog_v2"
 }
