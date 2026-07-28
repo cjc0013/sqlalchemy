@@ -2711,12 +2711,21 @@ class EnumTest(AssertsCompiledSQL, fixtures.TablesTest):
             ).scalar(),
             "four",
         )
-        assert_raises_message(
-            LookupError,
+        with expect_raises(TypeError) as err:
+            connection.scalar(
+                select(self.tables.non_native_enum_table.c.someotherenum)
+            )
+
+        eq_(
+            str(err.error),
+            "Result processor for column 'someotherenum' failed; "
+            "see above cause for details.",
+        )
+        is_(type(err.error.__cause__), LookupError)
+        eq_(
+            str(err.error.__cause__),
             "'four' is not among the defined enum values. "
             "Enum name: None. Possible values: one, two, three",
-            connection.scalar,
-            select(self.tables.non_native_enum_table.c.someotherenum),
         )
 
     def test_non_native_round_trip(self, connection):

@@ -15,11 +15,11 @@ from sqlalchemy import text
 from sqlalchemy import types as sqltypes
 from sqlalchemy.dialects.sqlite import base as sqlite
 from sqlalchemy.testing import assert_raises
-from sqlalchemy.testing import assert_raises_message
 from sqlalchemy.testing import AssertsCompiledSQL
 from sqlalchemy.testing import AssertsExecutionResults
 from sqlalchemy.testing import engines
 from sqlalchemy.testing import eq_
+from sqlalchemy.testing import expect_raises
 from sqlalchemy.testing import fixtures
 from sqlalchemy.testing import is_
 from sqlalchemy.testing import mock
@@ -83,13 +83,18 @@ class TestTypes(fixtures.TestBase, AssertsExecutionResults):
             (DateTime, "datetime"),
             (Date, "date"),
         ]:
-            assert_raises_message(
-                ValueError,
-                "Invalid isoformat string:",
-                lambda: connection.execute(
+            with expect_raises(TypeError) as err:
+                connection.execute(
                     text("select 'ASDF' as value").columns(value=typ)
-                ).scalar(),
+                ).scalar()
+
+            eq_(
+                str(err.error),
+                "Result processor for column 'value' failed; "
+                "see above cause for details.",
             )
+            is_(type(err.error.__cause__), ValueError)
+            assert "Invalid isoformat string:" in str(err.error.__cause__)
 
     @testing.provide_metadata
     def test_native_datetime(self):
