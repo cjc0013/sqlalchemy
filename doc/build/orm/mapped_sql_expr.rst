@@ -205,6 +205,34 @@ to add an additional property after the fact::
         select(func.count(Address.id)).where(Address.user_id == User.id).scalar_subquery()
     )
 
+For a mapping that is checked by a typing tool, the attribute can be declared
+only during type checking so that Declarative does not interpret the annotation
+as an implicit mapped column::
+
+    from typing import TYPE_CHECKING
+
+    from sqlalchemy.orm import Mapped
+
+
+    class User(Base):
+        __tablename__ = "user"
+
+        # ... additional mapping directives
+
+        if TYPE_CHECKING:
+            address_count: Mapped[int]
+
+
+    # after Address has been declared
+    User.address_count = column_property(
+        select(func.count(Address.id)).where(Address.user_id == User.id).scalar_subquery()
+    )
+
+For a :class:`_orm.MappedAsDataclass` mapping, the type-checking-only
+declaration may use ``column_property(None, init=False)`` on the right side so
+that typing tools also omit the deferred attribute from the generated
+constructor.
+
 When using mapping styles that don't use Declarative base classes
 such as the :meth:`_orm.registry.mapped` decorator, the :meth:`_orm.Mapper.add_property`
 method may be invoked explicitly on the underlying :class:`_orm.Mapper` object,
