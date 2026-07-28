@@ -1624,6 +1624,23 @@ class MapperTest(_fixtures.FixtureTest, AssertsCompiledSQL):
             primary_key=[users.c.id],
         )
 
+    def test_mapping_to_join_sibling_aliases_raises(self):
+        """Test sibling proxies are not treated as one lineage. #10960"""
+
+        users, User = self.tables.users, self.classes.User
+        user_a = users.alias("user_a")
+        user_b = users.alias("user_b")
+        users_join = user_a.join(user_b, user_a.c.id == user_b.c.id)
+
+        assert_raises_message(
+            sa.exc.InvalidRequestError,
+            "Implicitly combining column user_a.id with column user_b.id",
+            self.mapper_registry.map_imperatively,
+            User,
+            users_join,
+            primary_key=[user_a.c.id],
+        )
+
     def test_mapping_to_join_explicit_prop(self):
         """Mapping to a join"""
 

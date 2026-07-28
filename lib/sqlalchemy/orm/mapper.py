@@ -2296,12 +2296,16 @@ class Mapper(
             incoming_column = incoming_prop.columns[0]
             equated_pair_key = (incoming_column, existing_prop.columns[0])
 
+        columns_share_lineage_branch = existing_column.proxy_set.issubset(
+            incoming_column.proxy_set
+        ) or incoming_column.proxy_set.issubset(existing_column.proxy_set)
+
         if (
             (
                 not self._inherits_equated_pairs
                 or (equated_pair_key not in self._inherits_equated_pairs)
             )
-            and not existing_column.shares_lineage(incoming_column)
+            and not columns_share_lineage_branch
             and existing_column is not self.version_id_col
             and incoming_column is not self.version_id_col
         ):

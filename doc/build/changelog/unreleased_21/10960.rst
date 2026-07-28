@@ -1,0 +1,9 @@
+.. change::
+    :tags: bug, orm
+    :tickets: 10960
+
+    Fixed mapper configuration for joins containing sibling aliases of the
+    same table.  Columns from separate aliases are no longer considered the
+    same lineage branch merely because they share a common ancestor, so an
+    ambiguous implicit column combination now raises the usual informative
+    mapping error instead of silently loading values from the last alias.
