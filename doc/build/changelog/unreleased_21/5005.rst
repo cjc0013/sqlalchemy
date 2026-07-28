@@ -1,0 +1,8 @@
+.. change::
+    :tags: bug, orm
+    :tickets: 5005
+
+    Changed ORM persistence rowcount checks to treat negative or ``None``
+    DBAPI rowcounts as indeterminate rather than as stale-row mismatches.
+    Indeterminate counts now dominate totals and emit a warning for update,
+    post-update, delete, and many-to-many synchronization operations.

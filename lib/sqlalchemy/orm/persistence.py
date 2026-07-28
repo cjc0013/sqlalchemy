@@ -36,6 +36,27 @@ from ..sql import operators
 from ..sql.elements import BooleanClauseList
 
 
+def _is_indeterminate_rowcount(rowcount):
+    return rowcount is None or rowcount < 0
+
+
+def _add_rowcount(current, increment):
+    if current is None or increment is None:
+        return None
+    elif current < 0 or increment < 0:
+        return -1
+    else:
+        return current + increment
+
+
+def _warn_for_indeterminate_rowcount(dialect, operation, table, rowcount):
+    util.warn(
+        "Dialect %s returned an indeterminate rowcount (%r) for %s "
+        "statement on table '%s'; ORM state consistency cannot be verified."
+        % (dialect.dialect_description, rowcount, operation, table)
+    )
+
+
 def _save_obj(base_mapper, states, uowtransaction, single=False):
     """Issue ``INSERT`` and/or ``UPDATE`` statements for a list
     of objects.
@@ -871,7 +892,7 @@ def _emit_update_statements(
                         True,
                         c.returned_defaults,
                     )
-                rows += c.rowcount
+                rows = _add_rowcount(rows, c.rowcount)
                 check_rowcount = enable_check_rowcount and assert_singlerow
         else:
             if not allow_executemany:
@@ -904,7 +925,7 @@ def _emit_update_statements(
                             True,
                             c.returned_defaults,
                         )
-                    rows += c.rowcount
+                    rows = _add_rowcount(rows, c.rowcount)
             else:
                 multiparams = [rec[2] for rec in records]
 
@@ -917,7 +938,7 @@ def _emit_update_statements(
                     statement, multiparams, execution_options=execution_options
                 )
 
-                rows += c.rowcount
+                rows = _add_rowcount(rows, c.rowcount)
 
                 for (
                     state,
@@ -948,7 +969,11 @@ def _emit_update_statements(
                         )
 
         if check_rowcount:
-            if rows != len(records):
+            if _is_indeterminate_rowcount(rows):
+                _warn_for_indeterminate_rowcount(
+                    connection.dialect, "UPDATE", table.description, rows
+                )
+            elif rows != len(records):
                 raise orm_exc.StaleDataError(
                     "UPDATE statement on table '%s' expected to "
                     "update %d row(s); %d were matched."
@@ -1370,7 +1395,7 @@ def _emit_post_update_statements(
                     c,
                     c.context.compiled_parameters[0],
                 )
-                rows += c.rowcount
+                rows = _add_rowcount(rows, c.rowcount)
         else:
             multiparams = [
                 params
@@ -1385,7 +1410,7 @@ def _emit_post_update_statements(
                 statement, multiparams, execution_options=execution_options
             )
 
-            rows += c.rowcount
+            rows = _add_rowcount(rows, c.rowcount)
             for i, (
                 state,
                 state_dict,
@@ -1404,7 +1429,11 @@ def _emit_post_update_statements(
                 )
 
         if check_rowcount:
-            if rows != len(records):
+            if _is_indeterminate_rowcount(rows):
+                _warn_for_indeterminate_rowcount(
+                    connection.dialect, "UPDATE", table.description, rows
+                )
+            elif rows != len(records):
                 raise orm_exc.StaleDataError(
                     "UPDATE statement on table '%s' expected to "
                     "update %d row(s); %d were matched."
@@ -1469,7 +1498,7 @@ def _emit_delete_statements(
                     c = connection.execute(
                         statement, params, execution_options=execution_options
                     )
-                    rows_matched += c.rowcount
+                    rows_matched = _add_rowcount(rows_matched, c.rowcount)
             else:
                 util.warn(
                     "Dialect %s does not support deleted rowcount "
@@ -1489,9 +1518,18 @@ def _emit_delete_statements(
 
             rows_matched = c.rowcount
 
-        if (
+        if base_mapper.confirm_deleted_rows and _is_indeterminate_rowcount(
+            rows_matched
+        ):
+            if connection.dialect.supports_sane_rowcount:
+                _warn_for_indeterminate_rowcount(
+                    connection.dialect,
+                    "DELETE",
+                    table.description,
+                    rows_matched,
+                )
+        elif (
             base_mapper.confirm_deleted_rows
-            and rows_matched > -1
             and expected != rows_matched
             and (
                 connection.dialect.supports_sane_multi_rowcount

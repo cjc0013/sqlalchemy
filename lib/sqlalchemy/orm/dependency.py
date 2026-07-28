@@ -19,6 +19,8 @@ from . import util as mapperutil
 from .interfaces import MANYTOMANY
 from .interfaces import MANYTOONE
 from .interfaces import ONETOMANY
+from .persistence import _is_indeterminate_rowcount
+from .persistence import _warn_for_indeterminate_rowcount
 from .. import exc as sa_exc
 from .. import sql
 from .. import util
@@ -1218,18 +1220,25 @@ class _ManyToManyDP(_DependencyProcessor):
             )
             result = connection.execute(statement, secondary_delete)
 
-            if (
-                result.supports_sane_multi_rowcount()
-            ) and result.rowcount != len(secondary_delete):
-                raise exc.StaleDataError(
-                    "DELETE statement on table '%s' expected to delete "
-                    "%d row(s); Only %d were matched."
-                    % (
+            if result.supports_sane_multi_rowcount():
+                rowcount = result.rowcount
+                if _is_indeterminate_rowcount(rowcount):
+                    _warn_for_indeterminate_rowcount(
+                        connection.dialect,
+                        "DELETE",
                         self.secondary.description,
-                        len(secondary_delete),
-                        result.rowcount,
+                        rowcount,
                     )
-                )
+                elif rowcount != len(secondary_delete):
+                    raise exc.StaleDataError(
+                        "DELETE statement on table '%s' expected to delete "
+                        "%d row(s); Only %d were matched."
+                        % (
+                            self.secondary.description,
+                            len(secondary_delete),
+                            rowcount,
+                        )
+                    )
 
         if secondary_update:
             associationrow = secondary_update[0]
@@ -1244,18 +1253,25 @@ class _ManyToManyDP(_DependencyProcessor):
             )
             result = connection.execute(statement, secondary_update)
 
-            if (
-                result.supports_sane_multi_rowcount()
-            ) and result.rowcount != len(secondary_update):
-                raise exc.StaleDataError(
-                    "UPDATE statement on table '%s' expected to update "
-                    "%d row(s); Only %d were matched."
-                    % (
+            if result.supports_sane_multi_rowcount():
+                rowcount = result.rowcount
+                if _is_indeterminate_rowcount(rowcount):
+                    _warn_for_indeterminate_rowcount(
+                        connection.dialect,
+                        "UPDATE",
                         self.secondary.description,
-                        len(secondary_update),
-                        result.rowcount,
+                        rowcount,
                     )
-                )
+                elif rowcount != len(secondary_update):
+                    raise exc.StaleDataError(
+                        "UPDATE statement on table '%s' expected to update "
+                        "%d row(s); Only %d were matched."
+                        % (
+                            self.secondary.description,
+                            len(secondary_update),
+                            rowcount,
+                        )
+                    )
 
         if secondary_insert:
             statement = self.secondary.insert()

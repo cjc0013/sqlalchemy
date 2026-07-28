@@ -1775,6 +1775,17 @@ class BasicStaleChecksTest(fixtures.MappedTest):
             Column("id", Integer, ForeignKey("parent.id"), primary_key=True),
             Column("data", Integer),
         )
+        Table(
+            "related",
+            metadata,
+            Column("id", Integer, primary_key=True),
+        )
+        Table(
+            "association",
+            metadata,
+            Column("parent_id", ForeignKey("parent.id"), primary_key=True),
+            Column("related_id", ForeignKey("related.id"), primary_key=True),
+        )
 
     def _fixture(self, confirm_deleted_rows=True):
         parent, child = self.tables.parent, self.tables.child
@@ -1800,6 +1811,102 @@ class BasicStaleChecksTest(fixtures.MappedTest):
         )
         self.mapper_registry.map_imperatively(Child, child)
         return Parent, Child
+
+    def _m2m_fixture(self):
+        parent = self.tables.parent
+        related = self.tables.related
+        association = self.tables.association
+
+        class Parent(BasicEntity):
+            pass
+
+        class Related(BasicEntity):
+            pass
+
+        self.mapper_registry.map_imperatively(
+            Parent,
+            parent,
+            properties={
+                "related": relationship(Related, secondary=association)
+            },
+        )
+        self.mapper_registry.map_imperatively(Related, related)
+        return Parent, Related
+
+    @testing.combinations(-1, None, argnames="rowcount_value")
+    def test_update_indeterminate_rowcount_warns(self, rowcount_value):
+        @util.memoized_property
+        def rowcount(self):
+            return rowcount_value
+
+        Parent, Child = self._fixture()
+        sess = fixture_session()
+        p1 = Parent(id=1, data=2)
+        sess.add(p1)
+        sess.flush()
+
+        p1.data = 3
+        with patch("sqlalchemy.engine.cursor.CursorResult.rowcount", rowcount):
+            assert_warns_message(
+                exc.SAWarning,
+                r"Dialect .* returned an indeterminate rowcount .* for "
+                r"UPDATE statement on table 'parent'; ORM state "
+                r"consistency cannot be verified.",
+                sess.flush,
+            )
+
+        eq_(sess.scalar(select(self.tables.parent.c.data)), 3)
+
+    @testing.combinations(-1, None, argnames="rowcount_value")
+    def test_delete_indeterminate_rowcount_warns(self, rowcount_value):
+        @util.memoized_property
+        def rowcount(self):
+            return rowcount_value
+
+        Parent, Child = self._fixture()
+        sess = fixture_session()
+        p1 = Parent(id=1, data=2)
+        sess.add(p1)
+        sess.flush()
+        sess.delete(p1)
+
+        with patch("sqlalchemy.engine.cursor.CursorResult.rowcount", rowcount):
+            assert_warns_message(
+                exc.SAWarning,
+                r"Dialect .* returned an indeterminate rowcount .* for "
+                r"DELETE statement on table 'parent'; ORM state "
+                r"consistency cannot be verified.",
+                sess.flush,
+            )
+
+    @testing.combinations(-1, None, argnames="rowcount_value")
+    def test_m2m_indeterminate_rowcount_warns(self, rowcount_value):
+        @util.memoized_property
+        def rowcount(self):
+            return rowcount_value
+
+        Parent, Related = self._m2m_fixture()
+        sess = fixture_session()
+        p1 = Parent(id=1, related=[Related(id=1)])
+        sess.add(p1)
+        sess.flush()
+        p1.related.clear()
+
+        with patch("sqlalchemy.engine.cursor.CursorResult.rowcount", rowcount):
+            assert_warns_message(
+                exc.SAWarning,
+                r"Dialect .* returned an indeterminate rowcount .* for "
+                r"DELETE statement on table 'association'; ORM state "
+                r"consistency cannot be verified.",
+                sess.flush,
+            )
+
+        eq_(
+            sess.scalar(
+                select(func.count()).select_from(self.tables.association)
+            ),
+            0,
+        )
 
     @testing.requires.sane_rowcount
     def test_update_single_missing(self):
