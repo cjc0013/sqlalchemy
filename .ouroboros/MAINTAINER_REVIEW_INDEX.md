@@ -6,22 +6,22 @@ The TSV and JSONL files remain the machine source of truth. These pages are a re
 
 ## Complete accounting
 
-- Pull-request objectives represented: 27
-- Pull-request packets with direct apply commands: 26
-- Issue outcomes represented: 80
-- Issue rows with direct apply commands: 56 (55 unique commands)
+- Pull-request objectives represented: 24
+- Pull-request packets with direct apply commands: 23
+- Issue outcomes represented: 79
+- Issue rows with direct apply commands: 55 (54 unique commands)
 - Standalone issue commit options: 40
-- Pull-request-backed issue options: 16
+- Pull-request-backed issue options: 15
 - Already-present issue outcomes: 3
 - Validation-only issue outcomes: 21
-- PR packets with passing focused validation: 22
-- PR packets with no applicable focused pytest target: 5
+- PR packets with passing focused validation: 21
+- PR packets with no applicable focused pytest target: 3
 
 Issue rows and PR packets overlap: one PR can close an issue, and one commit can cover multiple issues. The counts above describe coverage and consumption paths, not an additive count of independent patches.
 
 See `ISSUE_REVIEW_INDEX.md` for every issue outcome, including all direct commands and every evidence-only result.
 
-## Ready for technical review (17)
+## Ready for technical review (13)
 
 - [PR 13312](review_packets/PR-13312.md) — test: add coverage for delete with nested alias exists (SQL compiler / DELETE compilation; one test commit; focused validation: passed)
 - [PR 13323](review_packets/PR-13323.md) — Apply tuple bind expressions to expanding IN values (SQL expression language; one source commit; focused validation: passed)
@@ -32,16 +32,12 @@ See `ISSUE_REVIEW_INDEX.md` for every issue outcome, including all direct comman
 - [PR 13416](review_packets/PR-13416.md) — Perf/eager collection bulk extend (ORM; 6 source commits; focused validation: passed)
 - [PR 13435](review_packets/PR-13435.md) — Add log_note execution option (ORM, SQL expression language, asyncio extension, engine, typing; one source commit; focused validation: passed)
 - [PR 13436](review_packets/PR-13436.md) — docs: document @classmethod usage with declared_attr for typing (ORM, typing; 4 source commits; focused validation: passed)
-- [PR 13438](review_packets/PR-13438.md) — Homogenize declared_attr parameter name (ORM, typing; one source commit; focused validation: passed)
 - [PR 13442](review_packets/PR-13442.md) — Add disconnect error handling for mssqlpython dialect (mssql dialect; 2 source commits; focused validation: passed)
 - [PR 13452](review_packets/PR-13452.md) — mssql: exclude LOB types from length assignment in column reflection (mssql dialect; 3 source commits; focused validation: passed)
 - [PR 13453](review_packets/PR-13453.md) — docs: add async-specific note to expire/expire_all proxied docstrings (asyncio extension; one source commit; focused validation: not applicable)
-- [PR 13454](review_packets/PR-13454.md) — test(mysql): cover ordered from-select upserts (mysql dialect; one test commit; focused validation: passed)
-- [PR 13456](review_packets/PR-13456.md) — docs: document sequence arguments to any_ and all_ (SQL expression language; one source commit; focused validation: not applicable)
-- [PR 13457](review_packets/PR-13457.md) — Add support for multiple on-conflict clauses in inserts on SQLite (sqlite dialect; one source commit; focused validation: passed)
-- [PR 13459](review_packets/PR-13459.md) — Bump pypa/cibuildwheel from 4.1.0 to 4.1.1 (build and CI; one source commit; focused validation: not applicable)
+- [PR 13457](review_packets/PR-13457.md) — Add support for multiple on-conflict clauses in inserts on SQLite (SQLite dialect / INSERT ON CONFLICT; 2 source commits; focused validation: passed)
 
-## Needs design or branch decision (9)
+## Needs design or branch decision (10)
 
 - [PR 11437](review_packets/PR-11437.md) — initial commit to update the SQLAlchemy examples (examples; validated patch-equivalent repair; focused validation: not applicable)
 - [PR 12297](review_packets/PR-12297.md) — refactor(MSExecutionContext): improve identity insert handling and va… (mssql dialect; validated patch-equivalent repair; focused validation: passed)
@@ -52,6 +48,7 @@ See `ISSUE_REVIEW_INDEX.md` for every issue outcome, including all direct comman
 - [PR 13399](review_packets/PR-13399.md) — UniqueConstraint and Index withheld from table via attach_to_table flag, and appended to table via append_constraint (SQL expression language; 5 source commits; focused validation: passed)
 - [PR 13455](review_packets/PR-13455.md) — Add postgresql_unnamed Index option to support nameless CREATE INDEX on PostgreSQL (SQL expression language, postgresql dialect; 7 source commits; focused validation: passed)
 - [PR 13461](review_packets/PR-13461.md) — escape backslashes in mysql enum/set value rendering (mysql dialect; one source commit; focused validation: passed)
+- [PR 13465](review_packets/PR-13465.md) — Add deprecation warnings for SQLite mode= pool-selection heuristics (SQL expression typing / any_() and all_(), SQLite dialect / pool selection; 2 source commits; focused validation: passed)
 
 ## Evidence only or already resolved (1)
 

@@ -15,13 +15,10 @@
 {"classification": "no_failed_remote_check", "confidence": "high", "failed_check_names": [], "local_objective_integrated": true, "number": 13416}
 {"classification": "no_failed_remote_check", "confidence": "high", "failed_check_names": [], "local_objective_integrated": true, "number": 13435}
 {"classification": "no_failed_remote_check", "confidence": "high", "failed_check_names": [], "local_objective_integrated": true, "number": 13436}
-{"classification": "no_failed_remote_check", "confidence": "high", "failed_check_names": [], "local_objective_integrated": true, "number": 13438}
 {"classification": "no_failed_remote_check", "confidence": "high", "failed_check_names": [], "local_objective_integrated": true, "number": 13442}
-{"classification": "shared_remote_check_failure_across_unrelated_prs", "confidence": "medium", "failed_check_names": ["pep484-3.14"], "local_objective_integrated": true, "number": 13452}
+{"classification": "unattributed_remote_failure", "confidence": "low", "failed_check_names": ["pep484-3.14", "ci_verification"], "local_objective_integrated": true, "number": 13452}
 {"classification": "no_failed_remote_check", "confidence": "high", "failed_check_names": [], "local_objective_integrated": true, "number": 13453}
-{"classification": "shared_remote_check_failure_across_unrelated_prs", "confidence": "medium", "failed_check_names": ["pep484-3.14"], "local_objective_integrated": true, "number": 13454}
 {"classification": "no_failed_remote_check", "confidence": "high", "failed_check_names": [], "local_objective_integrated": true, "number": 13455}
-{"classification": "no_failed_remote_check", "confidence": "high", "failed_check_names": [], "local_objective_integrated": true, "number": 13456}
 {"classification": "no_failed_remote_check", "confidence": "high", "failed_check_names": [], "local_objective_integrated": true, "number": 13457}
-{"classification": "shared_remote_check_failure_across_unrelated_prs", "confidence": "medium", "failed_check_names": ["pep484-3.14"], "local_objective_integrated": true, "number": 13459}
-{"classification": "unattributed_remote_failure", "confidence": "low", "failed_check_names": ["statusCheckRollup"], "local_objective_integrated": true, "number": 13461}
+{"classification": "shared_remote_check_failure_across_unrelated_prs", "confidence": "medium", "failed_check_names": ["pep484-3.14"], "local_objective_integrated": true, "number": 13461}
+{"classification": "no_failed_remote_check", "confidence": "high", "failed_check_names": [], "local_objective_integrated": true, "number": 13465}

@@ -10,21 +10,21 @@ This fork publishes a reviewable option set. It does not claim upstream acceptan
 - Catalog branch: `ouroboros/catalog-20260728`
 - Notification canary: `ouroboros/canary-no-notify-9425-20260728`
 - Frozen upstream base: `aa1a5575358d3aa14953b04dced02f4763fed2e7`
-- Validated integration head: `ac91268e679adb2c5e99ebd66e2462bbbb5ccf61`
-- Notification-safe publication head: `817011f2531cbe6d939e68859b5a01a2846d3088`
+- Validated integration head: `c64be3b26036fcd3798ced1279b30d8440e39a82`
+- Notification-safe publication head: `c64be3b26036fcd3798ced1279b30d8440e39a82`
 - [Review the complete code diff](https://github.com/cjc0013/sqlalchemy/compare/aa1a5575358d3aa14953b04dced02f4763fed2e7...ouroboros/all-20260728)
 
 ## Coverage
 
-- Current upstream issues represented: 182
-- Issues with local closure options: 80
-- Residual issues: 102
-- Collapsed residual work units: 101
-- Current upstream pull requests integrated locally: 27
-- Pull-request packets with direct apply commands: 26
-- Issue outcomes with direct apply commands: 56
-- PR packets with passing focused validation: 22
-- Commits after the frozen base: 145
+- Current upstream issues represented: 180
+- Issues with local closure options: 79
+- Residual issues: 101
+- Collapsed residual work units: 100
+- Current upstream pull requests integrated locally: 24
+- Pull-request packets with direct apply commands: 23
+- Issue outcomes with direct apply commands: 55
+- PR packets with passing focused validation: 21
+- Commits after the frozen base: 148
 
 ## Validation
 

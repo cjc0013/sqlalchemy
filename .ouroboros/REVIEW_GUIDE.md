@@ -10,7 +10,7 @@ Start with `MAINTAINER_REVIEW_INDEX.md`. It accounts for every PR and issue outc
 
 ## Pull-request options
 
-`pr_pick_commands.tsv` contains one row for each of the 27 integrated pull-request options.
+`pr_pick_commands.tsv` contains one row for each of the 24 integrated pull-request options.
 
 - `recommended_command` is the simplest safe consumption command for that row.
 - `inspect_command` shows the net file-level change before applying it.
@@ -24,10 +24,10 @@ Run commands from a clean review branch based on the maintainer's current target
 
 ## Issue options
 
-`issue_pick_commands.tsv` contains all 80 locally closed issue rows:
+`issue_pick_commands.tsv` contains all 79 locally closed issue rows:
 
 - Standalone commit options: 40
-- Pull-request-backed options: 16
+- Pull-request-backed options: 15
 - No pick needed because the behavior is already present: 3
 - Validation-only closures with no isolated patch claim: 21
 - Rows where the frozen evidence does not justify an exact unit: 0

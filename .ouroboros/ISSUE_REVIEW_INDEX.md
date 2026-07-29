@@ -1,6 +1,6 @@
 # Issue review index
 
-All 80 locally classified issue outcomes are listed here. Commands are copied from the machine-readable issue catalog.
+All 79 locally classified issue outcomes are listed here. Commands are copied from the machine-readable issue catalog.
 
 ## Standalone issue patch options (40)
 
@@ -406,7 +406,7 @@ git cherry-pick d4737a8f08be526d075b4694eb793807fd44b6af
 git cherry-pick 3f0fed9f6e49bdbb387566502cddcaf42dc12b56
 ```
 
-## Pull-request-backed issue options (16)
+## Pull-request-backed issue options (15)
 
 These issues consume the linked PR packet command.
 
@@ -438,16 +438,6 @@ git cherry-pick 3a2ad769e54486fce8ae0229904932a59422f5df
 
 ```bash
 git cherry-pick b9bcad398bcec0172d6a587f0c585498f14efd54 68897644127ab814809d73214c9501c6c644b669 31312d602da0d3a2b2e1a696805a9c6c8e3d0f99 fbed8e7ae20afc41f89f6f557d92120479a5c8e5
-```
-
-### Issue #10675 — syntax error with mysql bulk update via INSERT ... SELECT ... ON DUPLICATE KEY UPDATE
-
-- Review unit: PR-13454
-- Closure mode: `integrated_current_pr_objective`
-- Apply:
-
-```bash
-git cherry-pick c683e3990b8a39bb6636d3994138aef6c9aa0435
 ```
 
 ### Issue #11132 — MySQL DOUBLE accepts deprecated params that dont propagate from the base DOUBLE type, document this caveat
@@ -520,16 +510,6 @@ git cherry-pick 91feee81b9b077bf41f47b8f757120e293f767f6
 git cherry-pick b723c4396d31fa1daca7028125bd1a4a523ea1bc f6eb1429a6bc7b38d0928c1b4b79d0c34e3f8f18 90f8d18ce7af306d5ee23af4c0ac9c5bcc13975f
 ```
 
-### Issue #13357 — Type check error when passing lists to `any_`/`all_`
-
-- Review unit: PR-13456
-- Closure mode: `integrated_current_pr_objective`
-- Apply:
-
-```bash
-git cherry-pick f7ee08dff52e11ff116330ee30ac6c0fccd4e88d
-```
-
 ### Issue #13406 — use new _raw_all_tuples with subqueryloads
 
 - Review unit: PR-13404
@@ -548,6 +528,16 @@ git cherry-pick -m 1 e16498a837a796c9b63ea985ffa56a41307d8725
 
 ```bash
 git cherry-pick -m 1 18dcfb9a2a5f80fe0f640d7c71d19cf8e6020ce4
+```
+
+### Issue #13433 — Deprecate guess-the-pool in sqlite memory
+
+- Review unit: PR-13465
+- Closure mode: `integrated_current_pr_objective`
+- Apply:
+
+```bash
+git cherry-pick 0652cc62247eef64d95b1ded25cab707e382aa17 fc50a9837fd50334450ee6c9dd645db1b27b4dad
 ```
 
 ### Issue #13441 — mssql+mssqlpython does not recognize communication failures as disconnects
