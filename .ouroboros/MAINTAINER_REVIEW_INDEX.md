@@ -55,7 +55,7 @@ See `ISSUE_REVIEW_INDEX.md` for every issue outcome, including all direct comman
 
 ## Evidence only or already resolved (1)
 
-- [PR 12731](review_packets/PR-12731.md) — fix(typing): allow DeclarativeBase subclasses in with_for_update(of=...) (SQL expression language, typing; maintained superseding objective already present on the frozen base; focused validation: passed)
+- [PR 12731](review_packets/PR-12731.md) — fix(typing): allow DeclarativeBase subclasses in with_for_update(of=...) (SQL expression typing / with_for_update(); maintained superseding objective already present on the frozen base; focused validation: passed)
 
 ## Issue outcomes that intentionally have no patch packet
 

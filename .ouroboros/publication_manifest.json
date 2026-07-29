@@ -6,12 +6,12 @@
       "sha256": "0bbc153fe12bd66354d804bc4565275afc490d0e157710e127ec97a46c4080cb"
     },
     "MAINTAINER_REVIEW_INDEX.md": {
-      "bytes": 7361,
-      "sha256": "930e7e969cec325f0d26a5a3476514d963d8fa028a49ab6281432a67003df7b4"
+      "bytes": 7371,
+      "sha256": "640257a34e4d0c64f269058d5677bc2c44475e6e8aebcf8a7436fb5987d3b646"
     },
     "README.md": {
-      "bytes": 3245,
-      "sha256": "60701e71dbb7eccb8519e97d5bb0b0f7afb8ec1eb6f19e31a90dd38eda6cd306"
+      "bytes": 3250,
+      "sha256": "33ff28e3581d97120c780b77be74f713bb7da957400285caf6dcd3a4c796aace"
     },
     "REVIEW_GUIDE.md": {
       "bytes": 3424,
@@ -50,128 +50,131 @@
       "sha256": "a4e232bd98a0ff8355367b1c659e28469520b55c43bea5bd699b945e40f6ba8f"
     },
     "review_packet_index.jsonl": {
-      "bytes": 65043,
-      "sha256": "24466aad0d395a2cd7e36235e6f73c30e6698d758abcd89b5b5eaf2462ea0d7f"
+      "bytes": 84628,
+      "sha256": "dc5eb2bd6b537a50933df82d148d386fa77b796cecdb98e24f532a3845bdf82a"
     },
     "review_packets/PR-11437.md": {
-      "bytes": 4072,
-      "sha256": "665db3df962f2cb2b02411080cdb26ab793c4764ca0281133c737aa7bdc4a04d"
+      "bytes": 4736,
+      "sha256": "15f8f27f273149370adfd06984c35d2649114fc8714df0d72ccf59b65a704c43"
     },
     "review_packets/PR-12297.md": {
-      "bytes": 2494,
-      "sha256": "b5787a2761c49a0050ed902597c5011ab6e6745e33864b2f82cd2936c8e2b6f0"
+      "bytes": 2832,
+      "sha256": "994387c084ab0146f1ca9bc0ea787b0e3330487ad29b6fba8c72cfd06e23cbf2"
     },
     "review_packets/PR-12731.md": {
-      "bytes": 2608,
-      "sha256": "54f4099f69d0a56229c10c2c46b690bfd6540d1c8f11e91d788092512c852996"
+      "bytes": 2546,
+      "sha256": "ef25c112de205e0a64970ee5340ba6616c7800dfbfd33fc38346f64539484aa8"
     },
     "review_packets/PR-13051.md": {
-      "bytes": 2616,
-      "sha256": "c4be7ac05617a11951bd835ec93f57ce17441d17dd77f1ffc3b7cf25d15c19c8"
+      "bytes": 2577,
+      "sha256": "bb2e80076254c4054125c0b16161c046cb6090c8300f6180b48cc00912b5cab6"
     },
     "review_packets/PR-13288.md": {
-      "bytes": 2825,
-      "sha256": "0fcc7cb3605033c76fcd8d0513644704baed288b7fb835d4c5f457be6f56a224"
+      "bytes": 3367,
+      "sha256": "81ada9646a6955ab64b3df4844c25772b7c1837f13cdad1e4d3a24edd12cf20f"
     },
     "review_packets/PR-13289.md": {
-      "bytes": 3324,
-      "sha256": "d60272871196c787cace4895c00de14853ae259dcbfbcac85ffb9dc6b201773c"
+      "bytes": 3955,
+      "sha256": "d36b9ae77c6454dae198d301f5bd97034b52aab763aa9572261f2036543ffe91"
     },
     "review_packets/PR-13303.md": {
-      "bytes": 3864,
-      "sha256": "81f4ab6be88f267ac9283fc763410e016de26be467e6365a630d661bf450f636"
+      "bytes": 4451,
+      "sha256": "1dfc036458576405f8d22ef192258f273c1213b9ed538371028bba7836ccc6db"
     },
     "review_packets/PR-13312.md": {
       "bytes": 2658,
       "sha256": "12b0ceba8c5da59835f6f3379bd7eb729aa16ea715c843cfc6a002913f0ccee5"
     },
     "review_packets/PR-13323.md": {
-      "bytes": 2719,
-      "sha256": "921fe893c5a249cd74d023887e08c9c3c3f2fb33eb64c79c3bf0252e5e69436f"
+      "bytes": 2709,
+      "sha256": "deaacf8eb1bb82def0dfedb36f9048b8ab4983483e6615558d8d2b263dd06477"
     },
     "review_packets/PR-13368.md": {
-      "bytes": 2851,
-      "sha256": "4dfc1bbdec2caf335fc40a0b38b7fb0d4c0524abb55c891de03ed69dea933fcf"
+      "bytes": 3535,
+      "sha256": "aa636f79c2501a9652d30f463930a43e31ac06ee6e536af8b21e7b19a7129097"
     },
     "review_packets/PR-13399.md": {
-      "bytes": 3508,
-      "sha256": "4887aa2678db1b3a626d30be7a8d43d8e311dee27e4886c78e0ed50969d43af3"
+      "bytes": 3996,
+      "sha256": "1dc8e9c9452daffd72f0851148d78afc5a307d54ac089ff06233a8a4bda956bd"
     },
     "review_packets/PR-13404.md": {
-      "bytes": 2736,
-      "sha256": "d09d648e7a794d0da7f7c33da2eff15040cdeac5efea749d4a7a0090471f8142"
+      "bytes": 3403,
+      "sha256": "fd94a8cf4013319ba0c1111f563c0e6dc2e27a27b47e2598464c837ac55c8be1"
     },
     "review_packets/PR-13405.md": {
-      "bytes": 3161,
-      "sha256": "12db647aa88ec66564f4fad1ea6949f6ddca75aec73064e2be82b5e49eced49b"
+      "bytes": 3716,
+      "sha256": "db473f79527d92fd6464357ebb006a6ae646f9cee2e3ce3d3a2408033c8a1e66"
     },
     "review_packets/PR-13415.md": {
-      "bytes": 4048,
-      "sha256": "cf167125d73262be7f1011346b893a606924c20d27b0390eb90ed8417a6c13bf"
+      "bytes": 4706,
+      "sha256": "b0c52158b97eb74f3ea7135ba2c6f8770354e533e7d1f432e3efdc91741fc01a"
     },
     "review_packets/PR-13416.md": {
-      "bytes": 3861,
-      "sha256": "0eb995ade28bbc722df481bb1edf5aef778529214a9a369f4349006ca500d5f4"
+      "bytes": 4482,
+      "sha256": "f6ef51c088babf737e1a44ec7ad7f3074a9c0271e7f9f15398bb71cee32bc4e4"
     },
     "review_packets/PR-13435.md": {
-      "bytes": 3107,
-      "sha256": "648f2d88e73b33650d9b0480a5b8729968d4927e57c39b60d735bf6e97d75445"
+      "bytes": 3747,
+      "sha256": "a6bbafb479feeeb154c92287f758b9e3ce4ba07d985c8ce091d4325717c5ad02"
     },
     "review_packets/PR-13436.md": {
-      "bytes": 3421,
-      "sha256": "a21b5388d2d53761cd56f40573d921b059fdf8e728acfe2992520d3f93a80d3b"
+      "bytes": 3433,
+      "sha256": "19e2b0a0616a612dfdc5d17455bad21a246d6a7ad4b744fe9ec68fbb6f5b638d"
     },
     "review_packets/PR-13438.md": {
-      "bytes": 3105,
-      "sha256": "68e6e60969cf599c09a63301b506e725a96df1877c595ad1c5fa87d86bf2ff18"
+      "bytes": 3107,
+      "sha256": "de507d94100ffe826a33248af0caadcdad0b4368f475b8f43cae50351c7231bc"
     },
     "review_packets/PR-13442.md": {
-      "bytes": 2680,
-      "sha256": "7f5b700aaee9c692b84661a43f8895cdb0d199705e6dd5b7ab93526265bd48c4"
+      "bytes": 2717,
+      "sha256": "92d639470bfe20f5de9e9679fd802d3d5e438b325904211646aa07dfb69605b2"
     },
     "review_packets/PR-13452.md": {
-      "bytes": 3186,
-      "sha256": "d48e9e5057443d9c06522d5961b231042ca02ba8c7676acc2039403443a36b20"
+      "bytes": 3573,
+      "sha256": "ff1b9abef0096007c3121801f26ef60a8e28d9f10f89ac49b507e24b4c41d73f"
     },
     "review_packets/PR-13453.md": {
-      "bytes": 2877,
-      "sha256": "9819528f002f3f6bccd601bc819a7c191a9f2cc61cb6a8aafb7e7c51cffa8174"
+      "bytes": 3347,
+      "sha256": "d56430091df5460453b79ac34b79c0936928e0e73b0da033cabb88f3c2ea33d3"
     },
     "review_packets/PR-13454.md": {
-      "bytes": 2751,
-      "sha256": "2e4ed1a8bcb37ded76299233e7bf1990b960421178d680a92ac7bd5d6c10ed0d"
+      "bytes": 2771,
+      "sha256": "a6653f707738018136201dafc43364cfce844ee310a53ed350a32e69f4a893f9"
     },
     "review_packets/PR-13455.md": {
-      "bytes": 4131,
-      "sha256": "20cbdb75e9ad8460779bd4d7aae1800d9373f183a202258542ce50c4066283b0"
+      "bytes": 4799,
+      "sha256": "4b2f513e1e28fb66f0a6c5be9b05dcbf06fd3acb0b4910ac65c1b8233e0bb0d8"
     },
     "review_packets/PR-13456.md": {
-      "bytes": 2724,
-      "sha256": "b2a7dd904bba08e0a159b6c452d773c854f71767281c736736d3a6cea4b193bf"
+      "bytes": 2711,
+      "sha256": "8c43e030da605dd918862b1840a3c68064d8f69522eaaa22d9f9a56f13a9a2f8"
     },
     "review_packets/PR-13457.md": {
-      "bytes": 2840,
-      "sha256": "ab772b6928fba27dab647469bdaed4e62f672073c7e5f0e03007401ec6d2c5c0"
+      "bytes": 2780,
+      "sha256": "c788a029c80b4a93dd20913f44e5ef0ffb6bef68833c648aafecfa9eca04b30b"
     },
     "review_packets/PR-13459.md": {
-      "bytes": 2817,
-      "sha256": "102596d868f41f088a4fd06b5d1eec886fe24454883c8cad87a1d4da1452f184"
+      "bytes": 3393,
+      "sha256": "9b9bfea36b1f821d00be04d57b53cde9bbadc30a41d071c484aa8b7cf235b244"
     },
     "review_packets/PR-13461.md": {
-      "bytes": 2827,
-      "sha256": "14420fc9aa8b242eaf7dba6f9251fb3ef0e651e5820d52fcf59c88f15d6c4ec1"
+      "bytes": 3495,
+      "sha256": "7d7abc135623b6bb09d0084b3dbb4af54e16a780481bb4fb210a9e60a1ced1fe"
     },
     "validation_summary.json": {
       "bytes": 819,
       "sha256": "bebefe40abaa8b4263897c8dac0550a3f553a5dea9d7b7cf62add37500c11476"
     }
   },
+  "backlog_packet_sha256": "bb69974066cd5c2d2ff0257f33840f31690e2ba394fd8e0ca7218aae1e3b62c1",
   "base_sha": "aa1a5575358d3aa14953b04dced02f4763fed2e7",
   "canary_branch": "ouroboros/canary-no-notify-9425-20260728",
   "catalog_branch": "ouroboros/catalog-20260728",
   "ci_attribution_reference_summary_sha256": "a4865061d2b3b4e258f206c5e2d651111eadf3dde379d013b87fd2474d695ac1",
   "commit_count": 145,
   "focused_validation_index_sha256": "880774d6c9a197c0cccb68b157a950ed1f37aceb470fd5902dcf4551548830f1",
+  "option_closure_spec_sha256": "ece3eb57f429ad74c96f3968d17d7ca256483d0eadf033cbcd9d7986597c3ff0",
+  "prior_pr_dispositions_sha256": "a7b081a40cfc3e73b48c413267ce12c5a8455ca749b9468a31e12f7e246c58c0",
   "public_actions": {
     "creates_upstream_comment": false,
     "creates_upstream_issue": false,
@@ -189,9 +192,11 @@
     "residual_work_units.jsonl": 101,
     "review_packet_index.jsonl": 27
   },
+  "raw_pr_metadata_count": 27,
+  "raw_pr_metadata_sha256": "ce55a2efd4d4eca14cab9d2b237c32a7c23a6f0643bce6969a4b3b839a0ae67f",
   "repository": "cjc0013/sqlalchemy",
   "source_integration_head_sha": "ac91268e679adb2c5e99ebd66e2462bbbb5ccf61",
   "source_ledger_summary_sha256": "2d976334a61ea46db5fbe799dc3dee8d3b5cbc667f06dc457fbf70e16bf1d9bd",
   "upstream_repository": "sqlalchemy/sqlalchemy",
-  "version": "sqlalchemy_publication_catalog_v4"
+  "version": "sqlalchemy_publication_catalog_v5"
 }
