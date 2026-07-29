@@ -1,0 +1,14 @@
+.. change::
+    :tags: change, sqlite
+    :tickets: 13433
+
+    Added deprecation warnings for two SQLite ``:memory:`` URI patterns
+    where the ``mode`` query string parameter is used to influence pool
+    selection in a way that isn't fully sound: using ``mode`` without
+    also passing ``uri=true``, and using ``mode=memory`` without
+    ``cache=shared``. In both cases the automatic pool selection behavior
+    that keys off of ``mode`` is planned to be removed in a future
+    release; a plain ``:memory:`` database, or an explicit ``poolclass``,
+    should be used instead. This is the first phase of a deprecation
+    described in the issue; the pool-selection behavior itself is
+    unchanged in this release.

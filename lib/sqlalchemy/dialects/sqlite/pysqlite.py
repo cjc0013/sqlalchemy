@@ -573,7 +573,41 @@ class SQLiteDialect_pysqlite(SQLiteDialect):
             return False
 
     @classmethod
+    def _warn_mode_pool_selection_deprecations(cls, url: URL) -> None:
+        mode = url.query.get("mode", None)
+        if mode is None:
+            return
+        try:
+            is_uri = util.asbool(url.query.get("uri", False))
+        except ValueError:
+            is_uri = False
+        if not is_uri:
+            util.warn_deprecated(
+                "Using the 'mode' query string parameter to control "
+                "SQLite pool selection without also passing 'uri=true' "
+                "is deprecated; the 'mode' parameter is only meaningful "
+                "when SQLite URI mode is in use. This parameter will "
+                "stop being interpreted for pool selection in a future "
+                "release. Use a plain ':memory:' database instead if "
+                "that is the intent.",
+                "2.1",
+            )
+        elif mode == "memory" and "cache" not in url.query:
+            util.warn_deprecated(
+                "Using 'mode=memory' without 'cache=shared' in the "
+                "SQLite URI is deprecated for the purposes of automatic "
+                "pool selection; without 'cache=shared', the resulting "
+                "':memory:' database is not actually shared across "
+                "connections, making the automatic use of "
+                "SingletonThreadPool misleading. This parameter will "
+                "stop being interpreted for pool selection in a future "
+                "release.",
+                "2.1",
+            )
+
+    @classmethod
     def get_pool_class(cls, url: URL) -> type[pool.Pool]:
+        cls._warn_mode_pool_selection_deprecations(url)
         if cls._is_url_file_db(url):
             return pool.QueuePool
         else:

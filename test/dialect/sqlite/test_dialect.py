@@ -359,13 +359,61 @@ class DialectTest(
         e = create_engine("sqlite+pysqlite:///:memory:")
         assert e.pool.__class__ is pool.SingletonThreadPool
 
-        e = create_engine(
-            "sqlite+pysqlite:///file:foo.db?mode=memory&uri=true"
-        )
+        # no cache=shared present; see
+        # test_mode_query_param_deprecations for the warning this now emits
+        with testing.expect_deprecated(
+            "Using 'mode=memory' without 'cache=shared'"
+        ):
+            e = create_engine(
+                "sqlite+pysqlite:///file:foo.db?mode=memory&uri=true"
+            )
         assert e.pool.__class__ is pool.SingletonThreadPool
 
         e = create_engine("sqlite+pysqlite:///foo.db")
         # changed as of 2.0 #7490
+        assert e.pool.__class__ is pool.QueuePool
+
+    def test_mode_query_param_deprecations(self):
+        """test #13433"""
+
+        # mode= present without uri=true: deprecated. Pool selection is
+        # unchanged by this fix (still keyed off the raw 'mode' value,
+        # regardless of whether uri=true is present) -- only the warning
+        # is new here; #13433 targets a future release for the behavior
+        # change itself.
+        with testing.expect_deprecated(
+            "Using the 'mode' query string parameter to control SQLite "
+            "pool selection without also passing 'uri=true' is deprecated"
+        ):
+            e = create_engine("sqlite+pysqlite:///file:foo.db?mode=memory")
+        assert e.pool.__class__ is pool.SingletonThreadPool
+
+        # uri=true, mode=memory, no cache=shared: deprecated
+        with testing.expect_deprecated(
+            "Using 'mode=memory' without 'cache=shared'"
+        ):
+            e = create_engine(
+                "sqlite+pysqlite:///file:foo.db?mode=memory&uri=true"
+            )
+        assert e.pool.__class__ is pool.SingletonThreadPool
+
+        # uri=true, mode=memory, cache=shared: the officially supported
+        # form, no warning
+        e = create_engine(
+            "sqlite+pysqlite:///file:foo.db?"
+            "mode=memory&cache=shared&uri=true"
+        )
+        assert e.pool.__class__ is pool.SingletonThreadPool
+
+        # uri=true, mode=rwc (not memory): no warning, mode is meaningful
+        # here and isn't the memory/pool-sharing case
+        e = create_engine(
+            "sqlite+pysqlite:///file:foo.db?mode=rwc&uri=true"
+        )
+        assert e.pool.__class__ is pool.QueuePool
+
+        # plain file db, no mode/uri at all: no warning
+        e = create_engine("sqlite+pysqlite:///foo.db")
         assert e.pool.__class__ is pool.QueuePool
 
     @combinations(

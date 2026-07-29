@@ -318,6 +318,7 @@ class SQLiteDialect_aiosqlite(SQLiteDialect_pysqlite):
 
     @classmethod
     def get_pool_class(cls, url: URL) -> type[pool.Pool]:
+        cls._warn_mode_pool_selection_deprecations(url)
         if cls._is_url_file_db(url):
             return pool.AsyncAdaptedQueuePool
         else:
