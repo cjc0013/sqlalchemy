@@ -2,7 +2,7 @@
 
 All 79 locally classified issue outcomes are listed here. Commands are copied from the machine-readable issue catalog.
 
-## Standalone issue patch options (40)
+## Standalone issue patch options (36)
 
 Each row has an isolated commit command.
 
@@ -34,16 +34,6 @@ git cherry-pick 70e6b730b53852e27ec5699f6309eba92e820c8c
 
 ```bash
 git cherry-pick cb16d59854e4fa8bcbbeeed6f4938996c1763481
-```
-
-### Issue #5123 — apply informative re-raise if a result processor function fails
-
-- Review unit: none
-- Closure mode: `verified_local_option_closure`
-- Apply:
-
-```bash
-git cherry-pick 86bec267f7041e312c1a100b9296edbf30a8a63a
 ```
 
 ### Issue #5350 — `NoReferencedColumnError` when using `referred_column_0[[_]N]_name` in FK naming convention
@@ -134,16 +124,6 @@ git cherry-pick 2a8d83a114a17208b2430d3f3c4ce39f23338daa
 
 ```bash
 git cherry-pick 43136535d03a5f190275ea389cb8c5fe380df672
-```
-
-### Issue #7517 — Better document `expanding=True` on a bind parameter
-
-- Review unit: none
-- Closure mode: `verified_local_option_closure`
-- Apply:
-
-```bash
-git cherry-pick f0f5ef3fb50b1b24d9fee23635f4b3adf0726a91 77d27749ea50b5a5a86b10d01b2449765578eb0f
 ```
 
 ### Issue #8805 — Some tests for dialect ignores lack of support of CHECK CONSTRAINT
@@ -316,16 +296,6 @@ git cherry-pick c6366f7e453e992665a000fba3ab23e5136499e4
 git cherry-pick 0120e74078d09e0acc868507317045e5a6a51007
 ```
 
-### Issue #10835 — sqlalchemy.util.OrderedSet does not work with v2 in ORM mappings
-
-- Review unit: none
-- Closure mode: `verified_local_option_closure`
-- Apply:
-
-```bash
-git cherry-pick 368c7076a4005e0abbb2392c56e1a851f8b7f20f
-```
-
 ### Issue #10888 — OrderingList typing incorrect / incomplete and implementation doesn't accept non-int indices
 
 - Review unit: none
@@ -364,16 +334,6 @@ git cherry-pick bba9d0fc63e12fd0553d391fec4bd12ae3a74729
 
 ```bash
 git cherry-pick 0d62dfb5241d64999750e68d5896df60e47c490e
-```
-
-### Issue #11677 — SQLITE: SQLiteDialect.get_check_constraints incorrectly reflects multiline check constraints
-
-- Review unit: none
-- Closure mode: `verified_local_option_closure`
-- Apply:
-
-```bash
-git cherry-pick 600851433f2bb7c940d6ad62e14dc5803698ac7b
 ```
 
 ### Issue #12097 — can't adapt type for enum in case()
@@ -417,7 +377,7 @@ These issues consume the linked PR packet command.
 - Apply:
 
 ```bash
-git cherry-pick 66c529e6f5b007fc6c2577641e927d97709177f5 ed7176e271c48981c9f214f1afee91ac65e50df3 730dccdb2f90d0aa629b5c53ffe963a656b6abb8 dfb3f4ec31aadd08bf666898bc0286c4793d5f1e 508281ec8b3b1bba33f8cc1c4dc35b9ad512f445 ba50f18f9cb6e77989ec867ce4ec60a5d6e142d4 aeb0d4a01f6d602ed559c4a367e52a7288ff54d1
+git cherry-pick 4e812c2d8440a3946afb90c3c400ff42a7c499c1 fc0941b6887dd549290051450d337565b6744206 9485451520bd75520b82b14d56bac9b33a0dd909 2125396d2fbf150e18b0f05643279f9453ade8e4 95185cb882258bc3c623bfdaa5b9559be1198dc8 045c820e47975ca8e27e0c405978ae1504d13333 82e8ccda1fc4f055845070d8e776e6d702d9a410
 ```
 
 ### Issue #8992 — tuple expanding params do not render bind_expression() for elements
@@ -427,7 +387,7 @@ git cherry-pick 66c529e6f5b007fc6c2577641e927d97709177f5 ed7176e271c48981c9f214f
 - Apply:
 
 ```bash
-git cherry-pick 3a2ad769e54486fce8ae0229904932a59422f5df
+git cherry-pick 32ebdc7a508ea6c32d5152b32bf96451614ccf5d
 ```
 
 ### Issue #9213 — document `@classmethod` add for all `declared_attr` to work w/ typing
@@ -437,7 +397,7 @@ git cherry-pick 3a2ad769e54486fce8ae0229904932a59422f5df
 - Apply:
 
 ```bash
-git cherry-pick b9bcad398bcec0172d6a587f0c585498f14efd54 68897644127ab814809d73214c9501c6c644b669 31312d602da0d3a2b2e1a696805a9c6c8e3d0f99 fbed8e7ae20afc41f89f6f557d92120479a5c8e5
+git cherry-pick 7e8f5cb765c321e50d81f6ecb8b19b5f92546307 37160d9b0f8cedf00514266ce976895c0bf4a2a6 b5a6daa92105c6873b1df7199a18542fc8766568 9a6d0c40ce7c2b1f79be1d06e1a96b870ab9e645
 ```
 
 ### Issue #11132 — MySQL DOUBLE accepts deprecated params that dont propagate from the base DOUBLE type, document this caveat
@@ -447,7 +407,7 @@ git cherry-pick b9bcad398bcec0172d6a587f0c585498f14efd54 68897644127ab814809d732
 - Apply:
 
 ```bash
-git cherry-pick 46eba5f3a6e0245fbd727d6a06e9954b0fa53317
+git cherry-pick d78abd7a9a169312b344be822152567e429220df
 ```
 
 ### Issue #11620 — Deprecate MSSQL enable_identity_insert by default, gate it behind a flag
@@ -467,7 +427,7 @@ git cherry-pick ee59fb86d67ed4ecee7abec8b6328ae5ecf172d4
 - Apply:
 
 ```bash
-git cherry-pick 803936d6dbdc5c32bf9f8583c89242a8821cf549 315e3d475255761c4b1094f6e434f82c4c38512f ea620f8c0f3a00ec9df247548b543c526a616d0d 1cf88365165d2b415adcb58016f334e313e8f04a b6a7da10e1144ffa6d75b6845f49d3aeddbb3837
+git cherry-pick ec10bde77ab7d062e2c54b67279c7c16836d00a0 b1ac92a48293c27edb0cbb81d05b1a5a053cca7d c81f57b8626485009fdf20c6e983f78f9f0c2a10 b6e57ace6847e3b9c6ebaf3d7ebcf5e37825401e b060340fee665bf8159773b19403fae05dfd45e9
 ```
 
 ### Issue #13049 — Provide an implementation for avg / abs function with proper type
@@ -487,7 +447,7 @@ git cherry-pick aa4a415f689599ba872d3c026f94d4f3fb42cbde
 - Apply:
 
 ```bash
-git cherry-pick f123dac425868ae9451d22c809e100797276fa78 600851433f2bb7c940d6ad62e14dc5803698ac7b 6a61ed52aacd28a9ad96155ec785408262c9d748 ba644bdba114e2c74788d6af66fd29327f609976 7d839925d0132a801f2822c02a95cd34929da1a7
+git cherry-pick 8681259072f6727a8c185e2ad0d78924a7ebccbd 7a2c4655c32be43f790187e8289dde06b2de066e 7a4bd805f4033f66602f19db9ea7b7d951639311 caf35a749a29330334adffa8358a46b06e4ed96f 79bb5f3855ab434d9110864bc467bda66de08a2c
 ```
 
 ### Issue #13169 — Connection pool soft invalidation uses `time.time()` comparison that can silently fail on low-resolution clocks (e.g. Windows ~16 ms)
@@ -497,7 +457,7 @@ git cherry-pick f123dac425868ae9451d22c809e100797276fa78 600851433f2bb7c940d6ad6
 - Apply:
 
 ```bash
-git cherry-pick 91feee81b9b077bf41f47b8f757120e293f767f6
+git cherry-pick 6aac317f3dcf166cc042ed5a085d826b9238da8b
 ```
 
 ### Issue #13227 — WriteOnlyMapped: default_factory=list broken in 2.1 due to new declarative_scan validation
@@ -507,7 +467,7 @@ git cherry-pick 91feee81b9b077bf41f47b8f757120e293f767f6
 - Apply:
 
 ```bash
-git cherry-pick b723c4396d31fa1daca7028125bd1a4a523ea1bc f6eb1429a6bc7b38d0928c1b4b79d0c34e3f8f18 90f8d18ce7af306d5ee23af4c0ac9c5bcc13975f
+git cherry-pick 13257b9d85d0748e2a2c6ab44f0717c69cf2d15b 1ff47f96d70078a9e2d2f658e14015e44747542a d645e101e771785d8c93981e2d21148cc559de1e
 ```
 
 ### Issue #13406 — use new _raw_all_tuples with subqueryloads
@@ -547,7 +507,7 @@ git cherry-pick 0652cc62247eef64d95b1ded25cab707e382aa17 fc50a9837fd50334450ee6c
 - Apply:
 
 ```bash
-git cherry-pick 009aa8de09dd28370a1671f3d23a4b118e76b4b1 275db93c787cf64163d922d545d52054bc4e6c17
+git cherry-pick 3cc7f8f9bae3c588bbf8d2443e69343c6889bc2a f1d6b6a4a82afef454837d5f6081b73085af88aa
 ```
 
 ### Issue #13451 — [mssql] reflection sets a spurious length on TEXT/NTEXT columns, yielding invalid TEXT(16) DDL
@@ -557,7 +517,7 @@ git cherry-pick 009aa8de09dd28370a1671f3d23a4b118e76b4b1 275db93c787cf64163d922d
 - Apply:
 
 ```bash
-git cherry-pick dffe45ac22539cc70f2307133829f4a63ce07ff1 d5b1fb13635a3c4534faeaf335b59c0833b2b686 d1ecaa664201282920618461bc4383cb51bc64f4
+git cherry-pick 87ad77f1a560d08bc2c74a1e141d5388fa464f48 e42e39d67e19206a79c800a5b0fddb9808367b80 7a95286d2c1a18cdadb4efc806c5bbea210e1a06
 ```
 
 ## Already present (3)
@@ -712,8 +672,30 @@ These are verified branch-state outcomes, not isolated patch claims.
 - Closure mode: `revalidated_acceptance_probe`
 - Why no command: the closure is a verified branch-state probe, not an isolated patch
 
-## No exact unit asserted (0)
+## No exact unit asserted (4)
 
 The frozen evidence does not justify an isolated command.
 
-None.
+### Issue #5123 — apply informative re-raise if a result processor function fails
+
+- Review unit: none
+- Closure mode: `verified_local_option_closure`
+- Why no command: the available commit series does not apply cleanly from the frozen upstream base, so no standalone apply command is asserted
+
+### Issue #7517 — Better document `expanding=True` on a bind parameter
+
+- Review unit: none
+- Closure mode: `verified_local_option_closure`
+- Why no command: the available commit series does not apply cleanly from the frozen upstream base, so no standalone apply command is asserted
+
+### Issue #10835 — sqlalchemy.util.OrderedSet does not work with v2 in ORM mappings
+
+- Review unit: none
+- Closure mode: `verified_local_option_closure`
+- Why no command: the available commit series does not apply cleanly from the frozen upstream base, so no standalone apply command is asserted
+
+### Issue #11677 — SQLITE: SQLiteDialect.get_check_constraints incorrectly reflects multiline check constraints
+
+- Review unit: none
+- Closure mode: `verified_local_option_closure`
+- Why no command: no standalone technical unit is asserted by the frozen evidence

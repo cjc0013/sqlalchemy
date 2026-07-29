@@ -22,7 +22,7 @@ This fork publishes a reviewable option set. It does not claim upstream acceptan
 - Collapsed residual work units: 100
 - Current upstream pull requests integrated locally: 24
 - Pull-request packets with direct apply commands: 23
-- Issue outcomes with direct apply commands: 55
+- Issue outcomes with direct apply commands: 51
 - PR packets with passing focused validation: 21
 - Commits after the frozen base: 148
 

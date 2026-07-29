@@ -26,11 +26,11 @@ Run commands from a clean review branch based on the maintainer's current target
 
 `issue_pick_commands.tsv` contains all 79 locally closed issue rows:
 
-- Standalone commit options: 40
+- Standalone commit options: 36
 - Pull-request-backed options: 15
 - No pick needed because the behavior is already present: 3
 - Validation-only closures with no isolated patch claim: 21
-- Rows where the frozen evidence does not justify an exact unit: 0
+- Rows where the frozen evidence does not justify an exact unit: 4
 
 Blank commands are deliberate. They prevent a branch-state validation result or already-present behavior from being presented as a patch.
 

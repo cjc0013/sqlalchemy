@@ -9,8 +9,8 @@ The TSV and JSONL files remain the machine source of truth. These pages are a re
 - Pull-request objectives represented: 24
 - Pull-request packets with direct apply commands: 23
 - Issue outcomes represented: 79
-- Issue rows with direct apply commands: 55 (54 unique commands)
-- Standalone issue commit options: 40
+- Issue rows with direct apply commands: 51 (50 unique commands)
+- Standalone issue commit options: 36
 - Pull-request-backed issue options: 15
 - Already-present issue outcomes: 3
 - Validation-only issue outcomes: 21
@@ -25,7 +25,7 @@ See `ISSUE_REVIEW_INDEX.md` for every issue outcome, including all direct comman
 
 - [PR 13312](review_packets/PR-13312.md) — test: add coverage for delete with nested alias exists (SQL compiler / DELETE compilation; one test commit; focused validation: passed)
 - [PR 13323](review_packets/PR-13323.md) — Apply tuple bind expressions to expanding IN values (SQL expression language; one source commit; focused validation: passed)
-- [PR 13368](review_packets/PR-13368.md) — Document deprecated MySQL (M,D) float syntax and improve error message (mysql dialect; one source commit; focused validation: passed)
+- [PR 13368](review_packets/PR-13368.md) — Document deprecated MySQL (M,D) float syntax and improve error message (MySQL dialect / numeric types; one source commit; focused validation: passed)
 - [PR 13404](review_packets/PR-13404.md) — Subqueryload without per-row Row construction — ~26% on subqueryload (ORM; exact integrated net delta; focused validation: passed)
 - [PR 13405](review_packets/PR-13405.md) — # Cython batch instance processor — ~10–30% on most loads (collection joinedload −5%) (ORM, SQLAlchemy core; exact integrated net delta; focused validation: passed)
 - [PR 13415](review_packets/PR-13415.md) — scalars/mappings performance improvement. (SQL expression language, SQLAlchemy core, asyncio extension, engine; 6 source commits; focused validation: passed)
@@ -60,7 +60,7 @@ These outcomes are retained as evidence and are not missing cherry-pick commands
 
 - `no-pick-needed` (3): Issue 6468, Issue 10742, Issue 12341
 - `validation-only` (21): Issue 4567, Issue 4784, Issue 5139, Issue 5564, Issue 5846, Issue 6084, Issue 7149, Issue 7732, Issue 8341, Issue 8693, Issue 9147, Issue 9348, Issue 9839, Issue 9930, Issue 10094, Issue 10380, Issue 10527, Issue 11284, Issue 12561, Issue 13204, Issue 13210
-- `no-exact-unit` (0): None
+- `no-exact-unit` (4): Issue 5123, Issue 7517, Issue 10835, Issue 11677
 
 ## Gerrit handoff boundary
 
