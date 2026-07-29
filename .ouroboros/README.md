@@ -1,6 +1,6 @@
 # SQLAlchemy option integration - 2026-07-28
 
-**ONGOING WORK IN PROGRESS. IF YOU ARE LOOKING AT THIS NOW, IT IS NOT YET FINISHED. PLEASE WAIT UNTIL IT IS FINISHED TO JUDGE. THANK YOU. IT SHOULD BE FINISHED SOMETIME TODAY.**
+**ONGOING WORK IN PROGRESS. IF YOU ARE LOOKING AT THIS NOW, IT IS NOT YET FINISHED. PLEASE WAIT UNTIL IT IS FINISHED TO JUDGE. THANK YOU. IT SHOULD BE FINISHED SOMETIME SOON.**
 
 This fork publishes a reviewable option set. It does not claim upstream acceptance and it does not create or link upstream pull requests, issues, comments, or reviewer mentions.
 
