@@ -2,16 +2,16 @@
   "all_branch": "ouroboros/all-20260728",
   "artifacts": {
     "ISSUE_REVIEW_INDEX.md": {
-      "bytes": 21714,
-      "sha256": "a8ecc5c8f4c83331738fea7af523e52c25730927a458e6f83d4c9dca76f272ec"
+      "bytes": 32907,
+      "sha256": "4b0bbf44d402b5ee1e1ad7926eaa5c7f625a560e7e8a3610f4517729320d6ea9"
     },
     "MAINTAINER_REVIEW_INDEX.md": {
       "bytes": 7051,
       "sha256": "9c85b7925444bba218bbeafa018204ee682b2cdec9d199ac078c53f9e7af3829"
     },
     "README.md": {
-      "bytes": 3250,
-      "sha256": "ff380515d36e93bffcdebd33a163ff0bc817858f697da5636e3dfb14fbb6ee6f"
+      "bytes": 3249,
+      "sha256": "9cfa44a4b4cb9da76d208b79f5e1b471c4c0ea4b36268affd8812d557bf31120"
     },
     "REVIEW_GUIDE.md": {
       "bytes": 3424,
@@ -34,8 +34,8 @@
       "sha256": "6778e2df216dc1f7f985307844a92958bb1b701045106d50a9007a8bb90439a9"
     },
     "issue_pick_commands.tsv": {
-      "bytes": 17721,
-      "sha256": "7f2c6e538429cd7cfc7a576ab2d0b441c27f49178ed59324ac8d7986ea45fbca"
+      "bytes": 27021,
+      "sha256": "6fbbc506026183a5a84f9178e1450e5a9c8a27fe1cea142fbadc67239d6a9c7d"
     },
     "pr_coverage.jsonl": {
       "bytes": 7913,
@@ -162,7 +162,7 @@
   "commit_count": 148,
   "focused_validation_index_sha256": "ae76edd645d113214c8a6f38b14d9b3a2433c9913608947620463b8cf7faedbe",
   "option_closure_spec_sha256": "",
-  "prior_catalog_manifest_sha256": "96bb4b04746a6b7f84081e32a6e128400b85bc19157c58bda6505ade8149b11b",
+  "prior_catalog_manifest_sha256": "7d1678e1c0740c90fcc213cee6aa0169367213bbf424d951768c0656e718da87",
   "prior_pr_dispositions_sha256": "",
   "public_actions": {
     "creates_upstream_comment": false,
