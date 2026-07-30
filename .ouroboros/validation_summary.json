@@ -1,0 +1,67 @@
+{
+  "base_sha": "d9b44cb731bd27e6e82c99a3c0fb598214e8e7ff",
+  "head_sha": "9eb6026dad03a987f891af03395f6eb49260edbd",
+  "issue_number": 13447,
+  "receipts": {
+    "compiler_operator_types": {
+      "errors": 0,
+      "failures": 0,
+      "passed": 4743,
+      "sha256": "15dc728556d4212f664c7f0bfd617732e77f091c2fec3d7f706be4c05b58bea7",
+      "skipped": 5,
+      "tests": 4748
+    },
+    "new_no_database": {
+      "errors": 0,
+      "failures": 0,
+      "passed": 5,
+      "sha256": "f3b8b69212cadd4dce653267efaeaf2ca8f969887b5a72cd1b9a9c8b06f15f0f",
+      "skipped": 0,
+      "tests": 5
+    },
+    "new_postgresql": {
+      "errors": 0,
+      "failures": 0,
+      "passed": 1,
+      "sha256": "378a12b6a2efdebc40882a82bb1b38857b1f0a9faa0c16d4f31db210cd74a4c0",
+      "skipped": 0,
+      "tests": 1
+    },
+    "postgresql_reflection_types": {
+      "errors": 0,
+      "failures": 0,
+      "passed": 9480,
+      "sha256": "77987bb6e9c9159469877217d5caaf7077d3c88495c7ed3de1f4a17e81518b17",
+      "skipped": 3,
+      "tests": 9483
+    },
+    "typing": {
+      "errors": 0,
+      "failures": 1,
+      "passed": 75,
+      "sha256": "392b8295cd7fecf683a25c77f8405d0ed98ead1db59b98c6ba2eaca56df2824f",
+      "skipped": 0,
+      "tests": 76
+    },
+    "typing_baseline_exact": {
+      "errors": 0,
+      "failures": 1,
+      "passed": 0,
+      "sha256": "6ab9349a29590b135884e2c4f36ae1e05e60adfba5913014d317e20586ced2fd",
+      "skipped": 0,
+      "tests": 1
+    }
+  },
+  "session_full_non_typing": {
+    "errors": 0,
+    "failures": 0,
+    "passed": 25456,
+    "receipt_kind": "same-head session result; no JUnit attachment",
+    "skipped": 1500
+  },
+  "typing_failure_matches_frozen_base": true,
+  "typing_failure_shape": {
+    "mypy_import_not_found": true,
+    "string_templatelib_missing": true
+  }
+}

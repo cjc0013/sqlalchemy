@@ -1,0 +1,22 @@
+{
+  "artifacts": {
+    "ISSUE-13447.md": {
+      "sha256": "96f85d9ff8295de0cc8350492a4d763c8d6651f2b73fcae7efb0066e96554554"
+    },
+    "validation_summary.json": {
+      "sha256": "91df8f9cb5e7444b4049d6a9c23abfbea65ed9d615d773d15b87dd481d5c473e"
+    }
+  },
+  "base_sha": "d9b44cb731bd27e6e82c99a3c0fb598214e8e7ff",
+  "branch": "ouroboros/issue-13447-review-20260730",
+  "changed_file_count": 18,
+  "commits": [
+    "7836a24696b6592594827f7f23391af4eb39c163",
+    "cb0d965aa39a1cfb23c730b985c96c091f40d690",
+    "9eb6026dad03a987f891af03395f6eb49260edbd"
+  ],
+  "head_sha": "9eb6026dad03a987f891af03395f6eb49260edbd",
+  "issue_number": 13447,
+  "public_actions": false,
+  "version": "sqlalchemy_issue_option_packet_v1"
+}
