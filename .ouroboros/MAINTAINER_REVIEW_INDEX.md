@@ -9,7 +9,8 @@ The TSV and JSONL files remain the machine source of truth. These pages are a re
 - Pull-request objectives represented: 24
 - Pull-request packets with direct apply commands: 23
 - Issue outcomes represented: 79
-- Issue rows with direct apply commands: 51 (50 unique commands)
+- Transferable issue outcomes: 51
+- Unique transferable technical units: 50
 - Standalone issue commit options: 36
 - Pull-request-backed issue options: 15
 - Already-present issue outcomes: 3

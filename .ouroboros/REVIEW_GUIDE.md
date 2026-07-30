@@ -26,6 +26,8 @@ Run commands from a clean review branch based on the maintainer's current target
 
 `issue_pick_commands.tsv` contains all 79 locally closed issue rows:
 
+- Transferable issue outcomes: 51
+- Unique transferable technical units: 50
 - Standalone commit options: 36
 - Pull-request-backed options: 15
 - No pick needed because the behavior is already present: 3
@@ -33,6 +35,8 @@ Run commands from a clean review branch based on the maintainer's current target
 - Rows where the frozen evidence does not justify an exact unit: 4
 
 Blank commands are deliberate. They prevent a branch-state validation result or already-present behavior from being presented as a patch.
+When multiple issue rows share one technical unit, the shared packet and
+``apply_once`` field identify one command to run once.
 
 ## Gerrit workflow boundary
 

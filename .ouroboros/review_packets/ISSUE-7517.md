@@ -1,0 +1,52 @@
+# Issue review unit â€” Better document `expanding=True` on a bind parameter
+
+- **Covered issues:** #7517
+- **Review unit:** `none`
+- **Shape:** no-exact-unit
+- **Apply once:** not shared
+- **Frozen base:** `aa1a5575358d3aa14953b04dced02f4763fed2e7`
+- **Suggested target:** Maintainer choice; this unit has no changelog fragment
+- **Subsystem:** mixed or repository-level
+
+## Problem and intended behavior
+
+- **Issue #7517:** Better document `expanding=True` on a bind parameter
+
+## Scope and provenance
+
+- Issue #7517: `verified_local_option_closure`
+
+Changed files:
+
+No isolated changed-file set is asserted.
+
+Overlapping review units: none identified
+
+## Validation
+
+No separate focused receipt is borrowed for this issue unit. Changed test files
+are listed below, and the complete publication-tree validation is reported
+without turning it into an issue-specific claim.
+
+Changed test files:
+
+No issue-specific test file is isolated.
+
+- Non-typing suite: 25800 passed, 1502 skipped, 0 failed, 0 errors.
+- Typing suite: 77 passed; its recorded failure boundary matches the frozen upstream baseline.
+
+Changelog files:
+
+No issue-specific changelog file is isolated.
+
+## Apply
+
+the available commit series does not apply cleanly from the frozen upstream base, so no standalone apply command is asserted
+
+Inspect:
+
+No isolated inspection command is asserted.
+
+## Consumption note
+
+Use the command only for this listed technical unit; blank commands are deliberate evidence boundaries.
