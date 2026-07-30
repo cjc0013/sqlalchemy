@@ -2360,9 +2360,13 @@ class SelectTest(fixtures.TestBase, AssertsCompiledSQL):
             "SELECT x COLLATE bar AS anon_1",
         )
 
-        # schema-qualified
+        # dotted names are one identifier unless a schema is explicit
         self.assert_compile(
             select(column("x").collate("ns.coll")),
+            'SELECT x COLLATE "ns.coll" AS anon_1',
+        )
+        self.assert_compile(
+            select(column("x").collate("coll", collation_schema="ns")),
             "SELECT x COLLATE ns.coll AS anon_1",
         )
 

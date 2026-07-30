@@ -1113,7 +1113,9 @@ class SQLCoreOperations(Generic[_T_co], ColumnOperators, TypingOnly):
 
         def nullslast(self) -> UnaryExpression[_T_co]: ...
 
-        def collate(self, collation: str) -> CollationClause: ...
+        def collate(
+            self, collation: str, collation_schema: Optional[str] = None
+        ) -> CollationClause: ...
 
         def between(
             self, cleft: Any, cright: Any, symmetric: bool = False
@@ -5634,19 +5636,15 @@ class CollationClause(ColumnElement[str]):
     @classmethod
     @util.preload_module("sqlalchemy.sql.sqltypes")
     def _create_collation_expression(
-        cls, expression: _ColumnExpressionArgument[str], collation: str
+        cls,
+        expression: _ColumnExpressionArgument[str],
+        collation: str,
+        collation_schema: Optional[str] = None,
     ) -> BinaryExpression[str]:
 
         sqltypes = util.preloaded.sql_sqltypes
 
         expr = coercions.expect(roles.ExpressionElementRole[str], expression)
-
-        try:
-            collation_schema, collation = collation.split(".")
-        except ValueError:
-            if "." in collation:
-                raise ValueError(f"Invalid collation {collation}") from None
-            collation_schema = None
 
         if expr.type._type_affinity is sqltypes.String:
             collate_type = expr.type._with_collation(
@@ -5662,7 +5660,7 @@ class CollationClause(ColumnElement[str]):
             type_=collate_type,
         )
 
-    def __init__(self, collation, collation_schema=None):
+    def __init__(self, collation: str, collation_schema: Optional[str] = None):
         self.collation = collation
         self.collation_schema = collation_schema
 

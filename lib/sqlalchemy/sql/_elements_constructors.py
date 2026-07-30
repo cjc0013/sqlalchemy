@@ -378,7 +378,9 @@ def asc(
 
 
 def collate(
-    expression: _ColumnExpressionArgument[str], collation: str
+    expression: _ColumnExpressionArgument[str],
+    collation: str,
+    collation_schema: Optional[str] = None,
 ) -> BinaryExpression[str]:
     """Return the clause ``expression COLLATE collation``.
 
@@ -394,13 +396,18 @@ def collate(
 
     The collation expression is also quoted if it is a case sensitive
     identifier, e.g. contains uppercase characters.
-    It may also be schema-qualified.
+
+    :param collation_schema: optional schema containing the collation.  The
+      schema and collation names are quoted independently; ``collation`` is
+      never parsed as a dotted identifier.
     """
     if isinstance(expression, operators.ColumnOperators):
-        return expression.collate(collation)  # type: ignore[return-value]
+        return expression.collate(  # type: ignore[return-value]
+            collation, collation_schema=collation_schema
+        )
     else:
         return CollationClause._create_collation_expression(
-            expression, collation
+            expression, collation, collation_schema
         )
 
 

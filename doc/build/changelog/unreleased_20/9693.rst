@@ -1,5 +1,0 @@
-.. change::
-    :tags: usecase, postgresql
-    :tickets: 9693
-
-    Added support for schema-qualified collation names in types for PostgreSQL.

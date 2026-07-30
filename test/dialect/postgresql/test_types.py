@@ -672,8 +672,8 @@ class NamedTypeTest(
                                 "check": r"VALUE ~ '[^@]+@[^@]+\.[^@]+'::text",
                             }
                         ],
-                        "collation": "default",
-                        "collation_schema": "pg_catalog",
+                        "collation": None,
+                        "collation_schema": None,
                     }
                 ],
             )

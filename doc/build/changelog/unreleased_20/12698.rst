@@ -1,5 +1,0 @@
-.. change::
-    :tags: usecase, postgresql
-    :tickets: 9693
-
-    Handle schema-qualified collation value passed to :func:`_sql.collate`.

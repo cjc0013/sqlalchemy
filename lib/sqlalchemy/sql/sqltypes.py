@@ -239,7 +239,9 @@ class String(Concatenable, TypeEngine[str]):
             {printsql}SELECT CAST(:param_1 AS VARCHAR COLLATE utf8) AS anon_1
 
         :param collation_schema: Optional, the name of the schema in which the
-          collation is defined.
+          collation is defined.  The schema and collation names are kept
+          separate and quoted independently.  This argument currently has
+          semantic effect on PostgreSQL.
 
         .. note::
 
@@ -258,7 +260,7 @@ class String(Concatenable, TypeEngine[str]):
             )
         self.collation_schema = collation_schema
 
-    def _with_collation(self, collation, collation_schema):
+    def _with_collation(self, collation, collation_schema=None):
         new_type = self.copy()
         new_type.collation = collation
         new_type.collation_schema = collation_schema

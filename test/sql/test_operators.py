@@ -320,13 +320,24 @@ class DefaultColumnComparatorTest(
             collate(left, right)
         )
 
-    def test_collate_invalid_collation(self):
+    def test_collate_schema_traversal_and_cache_key(self):
         left = column("left")
         right = "some.inva-lid.collation"
-        with expect_raises_message(ValueError, "Invalid collation"):
-            collate(left, right)
-        with expect_raises_message(ValueError, "Invalid collation"):
-            left.comparator.operate(operators.collate, right)
+        unqualified = collate(left, right)
+        qualified = collate(left, right, collation_schema="schema")
+
+        eq_(unqualified.right.collation, right)
+        is_(unqualified.right.collation_schema, None)
+        eq_(qualified.right.collation, right)
+        eq_(qualified.right.collation_schema, "schema")
+        ne_(
+            unqualified._generate_cache_key(),
+            qualified._generate_cache_key(),
+        )
+
+        left.comparator.operate(
+            operators.collate, right, collation_schema="schema"
+        ).compare(qualified)
 
     def test_default_adapt(self):
         class TypeOne(TypeEngine):

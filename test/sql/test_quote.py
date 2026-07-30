@@ -576,8 +576,14 @@ class QuoteTest(fixtures.TestBase, AssertsCompiledSQL):
         )
 
         self.assert_compile(
-            column("foo").collate("sch-e-ma.custom"),
+            column("foo").collate("custom", collation_schema="sch-e-ma"),
             'foo COLLATE "sch-e-ma".custom',
+            dialect="postgresql",
+        )
+
+        self.assert_compile(
+            column("foo").collate("sch-e-ma.custom"),
+            'foo COLLATE "sch-e-ma.custom"',
             dialect="postgresql",
         )
 

@@ -1926,7 +1926,9 @@ class ColumnOperators(OrderingOperators):
             flags=flags,
         )
 
-    def collate(self, collation: str) -> ColumnOperators:
+    def collate(
+        self, collation: str, collation_schema: Optional[str] = None
+    ) -> ColumnOperators:
         """Produce a :func:`_expression.collate` clause against
         the parent object, given the collation string.
 
@@ -1934,8 +1936,13 @@ class ColumnOperators(OrderingOperators):
 
             :func:`_expression.collate`
 
+        :param collation_schema: optional schema containing the collation.
+          The schema and collation names are quoted independently.
+
         """
-        return self.operate(collate, collation)
+        return self.operate(
+            collate, collation, collation_schema=collation_schema
+        )
 
     def __radd__(self, other: Any) -> ColumnOperators:
         """Implement the ``+`` operator in reverse.
@@ -2230,8 +2237,8 @@ else:
 
 
 @_operator_fn
-def collate(a: Any, b: Any) -> Any:
-    return a.collate(b)
+def collate(a: Any, b: Any, collation_schema: Optional[str] = None) -> Any:
+    return a.collate(b, collation_schema=collation_schema)
 
 
 @_operator_fn

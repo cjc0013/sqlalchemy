@@ -3649,7 +3649,7 @@ class ExpressionTest(
         (lambda c1: c1.like("qpr"), "q LIKE :q_1->BINDCAST->[TEXT]"),
         (
             lambda c2: c2.like("qpr"),
-            'q LIKE :q_1->BINDCAST->[TEXT COLLATE "xyz"]',
+            "q LIKE :q_1->BINDCAST->[TEXT COLLATE xyz]",
         ),
         (
             # new behavior, a type with no collation passed into collate()
@@ -3657,11 +3657,11 @@ class ExpressionTest(
             # on the right side bind-cast. previous to #11576 we'd only
             # get TEXT for the bindcast.
             lambda c1: collate(c1, "abc").like("qpr"),
-            '(q COLLATE abc) LIKE :param_1->BINDCAST->[TEXT COLLATE "abc"]',
+            "(q COLLATE abc) LIKE :param_1->BINDCAST->[TEXT COLLATE abc]",
         ),
         (
             lambda c2: collate(c2, "abc").like("qpr"),
-            '(q COLLATE abc) LIKE :param_1->BINDCAST->[TEXT COLLATE "abc"]',
+            "(q COLLATE abc) LIKE :param_1->BINDCAST->[TEXT COLLATE abc]",
         ),
         argnames="testcase,expected",
     )
@@ -3706,7 +3706,7 @@ class ExpressionTest(
         )
         self.assert_compile(
             c2.like("qpr"),
-            'q LIKE :q_1->BINDCAST->[TEXT COLLATE "xyz"]',
+            "q LIKE :q_1->BINDCAST->[TEXT COLLATE xyz]",
             dialect=renders_bind_cast,
         )
 
@@ -4169,6 +4169,8 @@ class CompileTest(fixtures.TestBase, AssertsCompiledSQL):
         self.assert_compile(
             String(50, collation="FOO"), 'VARCHAR(50) COLLATE "FOO"'
         )
+
+        self.assert_compile(String(collation="foo"), "VARCHAR COLLATE foo")
 
     def test_string_collation_schema_no_collation(self):
         with expect_raises_message(

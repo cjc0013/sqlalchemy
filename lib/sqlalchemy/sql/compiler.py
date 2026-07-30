@@ -7710,10 +7710,12 @@ class GenericTypeCompiler(TypeCompiler):
         if length:
             text += f"({length})"
         if collation:
-            if collation_schema is not None:
-                text += f' COLLATE "{collation_schema}"."{collation}"'
-            else:
-                text += f' COLLATE "{collation}"'
+            text += (
+                " COLLATE "
+                + self.dialect.identifier_preparer.format_collation(
+                    collation, collation_schema
+                )
+            )
         return text
 
     def visit_CHAR(self, type_: sqltypes.CHAR, **kw: Any) -> str:
@@ -8119,7 +8121,7 @@ class IdentifierPreparer:
         else:
             return ident
 
-    def format_collation(self, collation_name, collation_schema):
+    def format_collation(self, collation_name, collation_schema=None):
         if self.quote_case_sensitive_collations:
             name = self.quote(collation_name)
         else:

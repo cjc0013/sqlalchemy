@@ -1,0 +1,10 @@
+.. change::
+    :tags: usecase, postgresql
+    :tickets: 6511, 9693, 13447
+
+    Added explicit schema-qualified collation support.  String types,
+    :func:`_sql.collate`, and PostgreSQL :class:`_postgresql.DOMAIN` accept a
+    separate ``collation_schema`` argument, and PostgreSQL reflection now
+    preserves collation names and schemas independently for columns and
+    domains while omitting inherited default collations.  Dotted collation
+    names are never split.  Original pull requests courtesy Denis Laxalde.

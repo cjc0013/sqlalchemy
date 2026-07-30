@@ -2721,14 +2721,12 @@ class PGDDLCompiler(compiler.DDLCompiler):
 
         options = []
         if domain.collation is not None:
-            collation = self.preparer.quote(domain.collation)
-            if domain.collation_schema is not None:
-                collation = (
-                    self.preparer.quote(domain.collation_schema)
-                    + "."
-                    + collation
+            options.append(
+                "COLLATE "
+                + self.preparer.format_collation(
+                    domain.collation, domain.collation_schema
                 )
-            options.append(f"COLLATE {collation}")
+            )
         if domain.default is not None:
             default = self.render_default_string(domain.default)
             options.append(f"DEFAULT {default}")
@@ -5661,6 +5659,7 @@ class PGDialect(default._BackendsMultiReflection, default.DefaultDialect):
 
     @lru_cache()
     def _domain_query(self, schema):
+        domain_base_type = pg_catalog.pg_type.alias("domain_base_type")
         collation_namespace = pg_catalog.pg_namespace.alias(
             "collation_namespace"
         )
@@ -5709,9 +5708,17 @@ class PGDialect(default._BackendsMultiReflection, default.DefaultDialect):
                 == pg_catalog.pg_type.c.typnamespace,
             )
             .outerjoin(
+                domain_base_type,
+                pg_catalog.pg_type.c.typbasetype == domain_base_type.c.oid,
+            )
+            .outerjoin(
                 pg_catalog.pg_collation,
-                pg_catalog.pg_type.c.typcollation
-                == pg_catalog.pg_collation.c.oid,
+                sql.and_(
+                    pg_catalog.pg_type.c.typcollation
+                    == pg_catalog.pg_collation.c.oid,
+                    pg_catalog.pg_type.c.typcollation
+                    != domain_base_type.c.typcollation,
+                ),
             )
             .outerjoin(
                 collation_namespace,

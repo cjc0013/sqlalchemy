@@ -810,8 +810,8 @@ class DomainReflectionTest(fixtures.TestBase, AssertsExecutionResults):
                     "type": "text",
                     "default": None,
                     "constraints": [],
-                    "collation": "default",
-                    "collation_schema": "pg_catalog",
+                    "collation": None,
+                    "collation_schema": None,
                 },
                 {
                     "visible": True,
