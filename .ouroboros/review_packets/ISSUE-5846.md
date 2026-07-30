@@ -1,11 +1,11 @@
-# Issue review unit â€” Support reverse bitwise operations
+# Issue review unit: Support reverse bitwise operations
 
 - **Covered issues:** #5846
 - **Review unit:** `none`
 - **Shape:** validation-only
 - **Apply once:** not shared
 - **Frozen base:** `aa1a5575358d3aa14953b04dced02f4763fed2e7`
-- **Suggested target:** Maintainer choice; this unit has no changelog fragment
+- **Frozen option target:** Maintainer choice; this unit has no changelog fragment
 - **Subsystem:** mixed or repository-level
 
 ## Problem and intended behavior
@@ -14,13 +14,18 @@
 
 ## Scope and provenance
 
-- Issue #5846: `revalidated_acceptance_probe`
+- **Issue #5846:** revalidated_acceptance_probe
 
 Changed files:
 
 No isolated changed-file set is asserted.
 
-Overlapping review units: none identified
+Overlap summary: none identified
+
+Exact overlap identifiers remain available in `issue_review_packet_index.jsonl`
+and `evidence_bundle.json`; they are not expanded here unless needed for a
+selection decision.
+
 
 ## Validation
 
@@ -50,3 +55,7 @@ No isolated inspection command is asserted.
 ## Consumption note
 
 Use the command only for this listed technical unit; blank commands are deliberate evidence boundaries.
+
+Questions, requested changes, preferences, and rejection reasons can be sent
+through the [fork-only feedback path](../FEEDBACK.md). Include review unit
+`none`; no upstream mention is required.

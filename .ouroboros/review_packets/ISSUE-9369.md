@@ -1,11 +1,11 @@
-# Issue review unit â€” allow_unmapped seems to not be honored in all cases
+# Issue review unit: allow_unmapped seems to not be honored in all cases
 
 - **Covered issues:** #9369
 - **Review unit:** `COMMIT-f22279bfce1370cca4801a6b14119ac0833f9a84`
 - **Shape:** standalone-commit
 - **Apply once:** not shared
 - **Frozen base:** `aa1a5575358d3aa14953b04dced02f4763fed2e7`
-- **Suggested target:** SQLAlchemy 2.1
+- **Frozen option target:** SQLAlchemy 2.1
 - **Subsystem:** ORM
 
 ## Problem and intended behavior
@@ -14,7 +14,7 @@
 
 ## Scope and provenance
 
-- Issue #9369: `verified_local_option_closure`
+- **Issue #9369:** verified_local_option_closure
 
 Changed files:
 
@@ -23,7 +23,12 @@ Changed files:
 - `test/orm/declarative/test_tm_future_annotations_sync.py`
 - `test/orm/declarative/test_typed_mapping.py`
 
-Overlapping review units: PR-13289
+Overlap summary: PR packets: PR-13289
+
+Exact overlap identifiers remain available in `issue_review_packet_index.jsonl`
+and `evidence_bundle.json`; they are not expanded here unless needed for a
+selection decision.
+
 
 ## Validation
 
@@ -59,3 +64,7 @@ git show f22279bfce1370cca4801a6b14119ac0833f9a84
 ## Consumption note
 
 Use the command only for this listed technical unit; blank commands are deliberate evidence boundaries.
+
+Questions, requested changes, preferences, and rejection reasons can be sent
+through the [fork-only feedback path](../FEEDBACK.md). Include review unit
+`COMMIT-f22279bfce1370cca4801a6b14119ac0833f9a84`; no upstream mention is required.

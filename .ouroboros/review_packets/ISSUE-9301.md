@@ -1,11 +1,11 @@
-# Issue review unit â€” Support mapped attributes that have deferred definitions
+# Issue review unit: Support mapped attributes that have deferred definitions
 
 - **Covered issues:** #9301
 - **Review unit:** `COMMIT-bf08cd63b4401bc315d64a1f05c0b98c4d07ccec`
 - **Shape:** standalone-commit
 - **Apply once:** not shared
 - **Frozen base:** `aa1a5575358d3aa14953b04dced02f4763fed2e7`
-- **Suggested target:** Maintainer choice; this unit has no changelog fragment
+- **Frozen option target:** Maintainer choice; this unit has no changelog fragment
 - **Subsystem:** typing
 
 ## Problem and intended behavior
@@ -14,14 +14,19 @@
 
 ## Scope and provenance
 
-- Issue #9301: `verified_local_option_closure`
+- **Issue #9301:** verified_local_option_closure
 
 Changed files:
 
 - `doc/build/orm/mapped_sql_expr.rst`
 - `test/typing/plain_files/orm/late_mapped_attribute.py`
 
-Overlapping review units: none identified
+Overlap summary: none identified
+
+Exact overlap identifiers remain available in `issue_review_packet_index.jsonl`
+and `evidence_bundle.json`; they are not expanded here unless needed for a
+selection decision.
+
 
 ## Validation
 
@@ -56,3 +61,7 @@ git show bf08cd63b4401bc315d64a1f05c0b98c4d07ccec
 ## Consumption note
 
 Use the command only for this listed technical unit; blank commands are deliberate evidence boundaries.
+
+Questions, requested changes, preferences, and rejection reasons can be sent
+through the [fork-only feedback path](../FEEDBACK.md). Include review unit
+`COMMIT-bf08cd63b4401bc315d64a1f05c0b98c4d07ccec`; no upstream mention is required.

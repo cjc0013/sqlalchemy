@@ -1,11 +1,11 @@
-# Issue review unit â€” Reflect don't recognize foreign tables in postgresql
+# Issue review unit: Reflect don't recognize foreign tables in postgresql
 
 - **Covered issues:** #9944
 - **Review unit:** `COMMIT-483d715186d7a0d176dc749bb358861f6b31d81d`
 - **Shape:** standalone-commit
 - **Apply once:** not shared
 - **Frozen base:** `aa1a5575358d3aa14953b04dced02f4763fed2e7`
-- **Suggested target:** SQLAlchemy 2.1
+- **Frozen option target:** SQLAlchemy 2.1
 - **Subsystem:** postgresql dialect
 
 ## Problem and intended behavior
@@ -14,14 +14,19 @@
 
 ## Scope and provenance
 
-- Issue #9944: `verified_local_option_closure`
+- **Issue #9944:** verified_local_option_closure
 
 Changed files:
 
 - `doc/build/changelog/unreleased_21/9944.rst`
 - `lib/sqlalchemy/dialects/postgresql/base.py`
 
-Overlapping review units: COLLATION-SCHEMA, PR-13303, PR-13455
+Overlap summary: PR packets: PR-13303, PR-13455
+
+Exact overlap identifiers remain available in `issue_review_packet_index.jsonl`
+and `evidence_bundle.json`; they are not expanded here unless needed for a
+selection decision.
+
 
 ## Validation
 
@@ -56,3 +61,7 @@ git show 483d715186d7a0d176dc749bb358861f6b31d81d
 ## Consumption note
 
 Use the command only for this listed technical unit; blank commands are deliberate evidence boundaries.
+
+Questions, requested changes, preferences, and rejection reasons can be sent
+through the [fork-only feedback path](../FEEDBACK.md). Include review unit
+`COMMIT-483d715186d7a0d176dc749bb358861f6b31d81d`; no upstream mention is required.

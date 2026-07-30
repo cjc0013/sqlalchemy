@@ -1,11 +1,11 @@
-# Issue review unit â€” extend_existing will add copies of indexes, constraints, etc. as there is no deduplication on name
+# Issue review unit: extend_existing will add copies of indexes, constraints, etc. as there is no deduplication on name
 
 - **Covered issues:** #7366
 - **Review unit:** `COMMIT-43136535d03a5f190275ea389cb8c5fe380df672`
 - **Shape:** standalone-commit
 - **Apply once:** not shared
 - **Frozen base:** `aa1a5575358d3aa14953b04dced02f4763fed2e7`
-- **Suggested target:** SQLAlchemy 2.1
+- **Frozen option target:** SQLAlchemy 2.1
 - **Subsystem:** engine
 
 ## Problem and intended behavior
@@ -14,7 +14,7 @@
 
 ## Scope and provenance
 
-- Issue #7366: `verified_local_option_closure`
+- **Issue #7366:** verified_local_option_closure
 
 Changed files:
 
@@ -22,7 +22,12 @@ Changed files:
 - `lib/sqlalchemy/engine/reflection.py`
 - `test/engine/test_reflection.py`
 
-Overlapping review units: COLLATION-SCHEMA
+Overlap summary: none identified
+
+Exact overlap identifiers remain available in `issue_review_packet_index.jsonl`
+and `evidence_bundle.json`; they are not expanded here unless needed for a
+selection decision.
+
 
 ## Validation
 
@@ -57,3 +62,7 @@ git show 43136535d03a5f190275ea389cb8c5fe380df672
 ## Consumption note
 
 Use the command only for this listed technical unit; blank commands are deliberate evidence boundaries.
+
+Questions, requested changes, preferences, and rejection reasons can be sent
+through the [fork-only feedback path](../FEEDBACK.md). Include review unit
+`COMMIT-43136535d03a5f190275ea389cb8c5fe380df672`; no upstream mention is required.

@@ -1,11 +1,11 @@
-# Issue review unit â€” Cannot build SQL expression NOT(x IS NULL) on Postgres
+# Issue review unit: Cannot build SQL expression NOT(x IS NULL) on Postgres
 
 - **Covered issues:** #6612
 - **Review unit:** `COMMIT-d5244bbb9527a9161a7fc08cc21d5fb240f1dd42`
 - **Shape:** standalone-commit
 - **Apply once:** not shared
 - **Frozen base:** `aa1a5575358d3aa14953b04dced02f4763fed2e7`
-- **Suggested target:** SQLAlchemy 2.1
+- **Frozen option target:** SQLAlchemy 2.1
 - **Subsystem:** SQL expression language
 
 ## Problem and intended behavior
@@ -14,7 +14,7 @@
 
 ## Scope and provenance
 
-- Issue #6612: `verified_local_option_closure`
+- **Issue #6612:** verified_local_option_closure
 
 Changed files:
 
@@ -23,7 +23,12 @@ Changed files:
 - `lib/sqlalchemy/sql/sqltypes.py`
 - `test/sql/test_operators.py`
 
-Overlapping review units: COLLATION-SCHEMA, COMMIT-0d62dfb5241d64999750e68d5896df60e47c490e, COMMIT-27f4a913f99cc99fdf40491746e78d4b71d03d3b, COMMIT-ac07c1976b5e3860ff070c078d044995a28c3918
+Overlap summary: 3 standalone exact-file overlaps
+
+Exact overlap identifiers remain available in `issue_review_packet_index.jsonl`
+and `evidence_bundle.json`; they are not expanded here unless needed for a
+selection decision.
+
 
 ## Validation
 
@@ -58,3 +63,7 @@ git show d5244bbb9527a9161a7fc08cc21d5fb240f1dd42
 ## Consumption note
 
 Use the command only for this listed technical unit; blank commands are deliberate evidence boundaries.
+
+Questions, requested changes, preferences, and rejection reasons can be sent
+through the [fork-only feedback path](../FEEDBACK.md). Include review unit
+`COMMIT-d5244bbb9527a9161a7fc08cc21d5fb240f1dd42`; no upstream mention is required.

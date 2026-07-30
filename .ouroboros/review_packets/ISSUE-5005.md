@@ -1,11 +1,11 @@
-# Issue review unit â€” alter ORM-level "returned rows" checks to only warn if driver returns -1 or None
+# Issue review unit: alter ORM-level "returned rows" checks to only warn if driver returns -1 or None
 
 - **Covered issues:** #5005
 - **Review unit:** `COMMIT-cb16d59854e4fa8bcbbeeed6f4938996c1763481`
 - **Shape:** standalone-commit
 - **Apply once:** not shared
 - **Frozen base:** `aa1a5575358d3aa14953b04dced02f4763fed2e7`
-- **Suggested target:** SQLAlchemy 2.1
+- **Frozen option target:** SQLAlchemy 2.1
 - **Subsystem:** ORM
 
 ## Problem and intended behavior
@@ -14,7 +14,7 @@
 
 ## Scope and provenance
 
-- Issue #5005: `verified_local_option_closure`
+- **Issue #5005:** verified_local_option_closure
 
 Changed files:
 
@@ -23,7 +23,12 @@ Changed files:
 - `lib/sqlalchemy/orm/persistence.py`
 - `test/orm/test_unitofworkv2.py`
 
-Overlapping review units: COMMIT-019dfdaddee18c126a416ae920debc966400e68b
+Overlap summary: 1 standalone exact-file overlap
+
+Exact overlap identifiers remain available in `issue_review_packet_index.jsonl`
+and `evidence_bundle.json`; they are not expanded here unless needed for a
+selection decision.
+
 
 ## Validation
 
@@ -58,3 +63,7 @@ git show cb16d59854e4fa8bcbbeeed6f4938996c1763481
 ## Consumption note
 
 Use the command only for this listed technical unit; blank commands are deliberate evidence boundaries.
+
+Questions, requested changes, preferences, and rejection reasons can be sent
+through the [fork-only feedback path](../FEEDBACK.md). Include review unit
+`COMMIT-cb16d59854e4fa8bcbbeeed6f4938996c1763481`; no upstream mention is required.

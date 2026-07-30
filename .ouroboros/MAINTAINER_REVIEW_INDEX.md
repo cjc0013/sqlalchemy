@@ -1,8 +1,8 @@
 # Maintainer review queue
 
-This is the human entry point for the option catalog. Each pull-request packet is sized as a coherent local review unit and carries scope, commit order, overlap, tests, changelog handling, and copy-paste inspection commands. Nothing here uploads to Gerrit or creates a GitHub pull request, issue, comment, mention, or notification.
+This is the detailed pull-request selection queue. Start with [the unified evidence hub](EVIDENCE_HUB.md) for purpose, current work, joined evidence, and feedback. Each packet remains a coherent review unit with scope, commit order, overlap, tests, changelog handling, and copy-paste inspection commands.
 
-The TSV and JSONL files remain the machine source of truth. These pages are a review layer generated from those exact rows.
+The TSV, JSONL, and `evidence_bundle.json` files remain the machine source of truth. These pages are a review layer generated from those exact rows. [Fork-only feedback](FEEDBACK.md) is optional and creates no upstream object.
 
 ## Complete accounting
 

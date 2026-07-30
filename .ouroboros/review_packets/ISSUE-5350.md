@@ -1,11 +1,11 @@
-# Issue review unit â€” `NoReferencedColumnError` when using `referred_column_0[[_]N]_name` in FK naming convention
+# Issue review unit: `NoReferencedColumnError` when using `referred_column_0[[_]N]_name` in FK naming convention
 
 - **Covered issues:** #5350
 - **Review unit:** `COMMIT-908451977266e19296ca8059bf42ce8d50a20f92`
 - **Shape:** standalone-commit
 - **Apply once:** not shared
 - **Frozen base:** `aa1a5575358d3aa14953b04dced02f4763fed2e7`
-- **Suggested target:** Maintainer choice; this unit has no changelog fragment
+- **Frozen option target:** Maintainer choice; this unit has no changelog fragment
 - **Subsystem:** SQL expression language
 
 ## Problem and intended behavior
@@ -14,13 +14,18 @@
 
 ## Scope and provenance
 
-- Issue #5350: `verified_local_option_closure`
+- **Issue #5350:** verified_local_option_closure
 
 Changed files:
 
 - `test/sql/test_metadata.py`
 
-Overlapping review units: COMMIT-70e6b730b53852e27ec5699f6309eba92e820c8c
+Overlap summary: 1 standalone exact-file overlap
+
+Exact overlap identifiers remain available in `issue_review_packet_index.jsonl`
+and `evidence_bundle.json`; they are not expanded here unless needed for a
+selection decision.
+
 
 ## Validation
 
@@ -55,3 +60,7 @@ git show 908451977266e19296ca8059bf42ce8d50a20f92
 ## Consumption note
 
 Use the command only for this listed technical unit; blank commands are deliberate evidence boundaries.
+
+Questions, requested changes, preferences, and rejection reasons can be sent
+through the [fork-only feedback path](../FEEDBACK.md). Include review unit
+`COMMIT-908451977266e19296ca8059bf42ce8d50a20f92`; no upstream mention is required.

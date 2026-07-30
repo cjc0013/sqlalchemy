@@ -1,11 +1,11 @@
-# Issue review unit â€” MappedAsDataclass inherits dataclasses attributes, while the spec says they don't
+# Issue review unit: MappedAsDataclass inherits dataclasses attributes, while the spec says they don't
 
 - **Covered issues:** #9493
 - **Review unit:** `COMMIT-245794ed686f9e165121f7e53d69fbcd806b2b45`
 - **Shape:** standalone-commit
 - **Apply once:** not shared
 - **Frozen base:** `aa1a5575358d3aa14953b04dced02f4763fed2e7`
-- **Suggested target:** SQLAlchemy 2.1
+- **Frozen option target:** SQLAlchemy 2.1
 - **Subsystem:** ORM
 
 ## Problem and intended behavior
@@ -14,7 +14,7 @@
 
 ## Scope and provenance
 
-- Issue #9493: `verified_local_option_closure`
+- **Issue #9493:** verified_local_option_closure
 
 Changed files:
 
@@ -23,7 +23,12 @@ Changed files:
 - `test/orm/declarative/test_dc_transforms.py`
 - `test/orm/declarative/test_dc_transforms_future_anno_sync.py`
 
-Overlapping review units: PR-13436
+Overlap summary: PR packets: PR-13436
+
+Exact overlap identifiers remain available in `issue_review_packet_index.jsonl`
+and `evidence_bundle.json`; they are not expanded here unless needed for a
+selection decision.
+
 
 ## Validation
 
@@ -59,3 +64,7 @@ git show 245794ed686f9e165121f7e53d69fbcd806b2b45
 ## Consumption note
 
 Use the command only for this listed technical unit; blank commands are deliberate evidence boundaries.
+
+Questions, requested changes, preferences, and rejection reasons can be sent
+through the [fork-only feedback path](../FEEDBACK.md). Include review unit
+`COMMIT-245794ed686f9e165121f7e53d69fbcd806b2b45`; no upstream mention is required.

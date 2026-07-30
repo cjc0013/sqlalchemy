@@ -1,11 +1,11 @@
-# Issue review unit â€” Documentation: use ORM declarative attributes in .values instead of kwargs in "ORM-enabled UPDATE statements"?
+# Issue review unit: Documentation: use ORM declarative attributes in .values instead of kwargs in "ORM-enabled UPDATE statements"?
 
 - **Covered issues:** #6332
 - **Review unit:** `COMMIT-6f8bb8dc84b27dc8bd9e5048de3d1d5152ddb132`
 - **Shape:** standalone-commit
 - **Apply once:** not shared
 - **Frozen base:** `aa1a5575358d3aa14953b04dced02f4763fed2e7`
-- **Suggested target:** Maintainer choice; this unit has no changelog fragment
+- **Frozen option target:** Maintainer choice; this unit has no changelog fragment
 - **Subsystem:** SQL expression language
 
 ## Problem and intended behavior
@@ -14,14 +14,19 @@
 
 ## Scope and provenance
 
-- Issue #6332: `verified_local_option_closure`
+- **Issue #6332:** verified_local_option_closure
 
 Changed files:
 
 - `doc/build/orm/queryguide/dml.rst`
 - `lib/sqlalchemy/sql/dml.py`
 
-Overlapping review units: none identified
+Overlap summary: none identified
+
+Exact overlap identifiers remain available in `issue_review_packet_index.jsonl`
+and `evidence_bundle.json`; they are not expanded here unless needed for a
+selection decision.
+
 
 ## Validation
 
@@ -56,3 +61,7 @@ git show 6f8bb8dc84b27dc8bd9e5048de3d1d5152ddb132
 ## Consumption note
 
 Use the command only for this listed technical unit; blank commands are deliberate evidence boundaries.
+
+Questions, requested changes, preferences, and rejection reasons can be sent
+through the [fork-only feedback path](../FEEDBACK.md). Include review unit
+`COMMIT-6f8bb8dc84b27dc8bd9e5048de3d1d5152ddb132`; no upstream mention is required.

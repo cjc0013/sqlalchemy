@@ -1,22 +1,22 @@
-# Issue review unit â€” PostgreSQL schema-qualified collation reflection
+# Shared review unit: PostgreSQL schema-qualified collation reflection
 
 - **Covered issues:** #6511, #9693
 - **Review unit:** `COLLATION-SCHEMA`
 - **Shape:** standalone-commit
 - **Apply once:** yes
 - **Frozen base:** `aa1a5575358d3aa14953b04dced02f4763fed2e7`
-- **Suggested target:** SQLAlchemy 2.0
-- **Subsystem:** SQL expression language, engine, postgresql dialect
+- **Frozen option target:** SQLAlchemy 2.0
+- **Subsystem:** PostgreSQL dialect / collation DDL and reflection
 
 ## Problem and intended behavior
 
-- **Issue #6511:** Poster at issue 6507 requested PostgreSQL however this can be implemented for as many backends as is feasible.
-- **Issue #9693:** support DDL / SQL time rendering of collation schema across all constructs that include a collation
+- **Issue #6511:** Adds PostgreSQL support for carrying an explicit collation schema through reflection and SQL or DDL rendering while keeping the representation extensible to other dialects.
+- **Issue #9693:** Carries a collation schema separately from the collation name across SQL and DDL constructs, avoiding dotted-name parsing and preserving identifier quoting.
 
 ## Scope and provenance
 
-- Issue #6511: `verified_local_option_closure`
-- Issue #9693: `carried_dropped_pr_repair_objective`
+- **Issue #6511:** Standalone frozen-base implementation option.
+- **Issue #9693:** Recovered objective from earlier pull-request work.
 
 Changed files:
 
@@ -39,7 +39,21 @@ Changed files:
 - `test/sql/test_quote.py`
 - `test/sql/test_types.py`
 
-Overlapping review units: COMMIT-0d62dfb5241d64999750e68d5896df60e47c490e, COMMIT-27f4a913f99cc99fdf40491746e78d4b71d03d3b, COMMIT-32b7e6e7e186a23923692e53faf9cb1110b620d4, COMMIT-43136535d03a5f190275ea389cb8c5fe380df672, COMMIT-483d715186d7a0d176dc749bb358861f6b31d81d, COMMIT-82fd41fc014568568babf5b6868d058541173572, COMMIT-ac07c1976b5e3860ff070c078d044995a28c3918, COMMIT-d5244bbb9527a9161a7fc08cc21d5fb240f1dd42, PR-13303, PR-13323, PR-13455, PR-13465
+Overlap summary: PR packets: PR-13303, PR-13323, PR-13455, PR-13465; 8 standalone exact-file overlaps
+
+Exact overlap identifiers remain available in `issue_review_packet_index.jsonl`
+and `evidence_bundle.json`; they are not expanded here unless needed for a
+selection decision.
+
+
+## Current-upstream alternative
+
+This is the frozen SQLAlchemy 2.0 option. The newer [issue 13447 review
+packet](https://github.com/cjc0013/sqlalchemy/blob/ouroboros/issue-13447-review-20260730/.ouroboros/ISSUE-13447.md) carries the same problem family against a current
+upstream base with an explicit collation-schema design. For new review, start
+with the [current code branch](https://github.com/cjc0013/sqlalchemy/tree/ouroboros/issue-13447-20260730); retain this unit when the
+older frozen-base shape is specifically useful.
+
 
 ## Validation
 
@@ -83,3 +97,7 @@ git show da97028686f10cbceae7ea1e27480919a7b3287f
 ## Consumption note
 
 This command covers all listed issues. Apply it once even when entering through more than one issue row.
+
+Questions, requested changes, preferences, and rejection reasons can be sent
+through the [fork-only feedback path](../FEEDBACK.md). Include review unit
+`COLLATION-SCHEMA`; no upstream mention is required.

@@ -1,11 +1,11 @@
-# Issue review unit â€” Always include where cluases in delete statements -- at least in test cleanup
+# Issue review unit: Always include where cluases in delete statements -- at least in test cleanup
 
 - **Covered issues:** #6505
 - **Review unit:** `COMMIT-f9cd575cde82631b4c621d46956906f1430a6eb4`
 - **Shape:** standalone-commit
 - **Apply once:** not shared
 - **Frozen base:** `aa1a5575358d3aa14953b04dced02f4763fed2e7`
-- **Suggested target:** Maintainer choice; this unit has no changelog fragment
+- **Frozen option target:** Maintainer choice; this unit has no changelog fragment
 - **Subsystem:** SQLAlchemy core
 
 ## Problem and intended behavior
@@ -14,14 +14,19 @@
 
 ## Scope and provenance
 
-- Issue #6505: `verified_local_option_closure`
+- **Issue #6505:** verified_local_option_closure
 
 Changed files:
 
 - `lib/sqlalchemy/testing/provision.py`
 - `test/base/test_provision.py`
 
-Overlapping review units: none identified
+Overlap summary: none identified
+
+Exact overlap identifiers remain available in `issue_review_packet_index.jsonl`
+and `evidence_bundle.json`; they are not expanded here unless needed for a
+selection decision.
+
 
 ## Validation
 
@@ -56,3 +61,7 @@ git show f9cd575cde82631b4c621d46956906f1430a6eb4
 ## Consumption note
 
 Use the command only for this listed technical unit; blank commands are deliberate evidence boundaries.
+
+Questions, requested changes, preferences, and rejection reasons can be sent
+through the [fork-only feedback path](../FEEDBACK.md). Include review unit
+`COMMIT-f9cd575cde82631b4c621d46956906f1430a6eb4`; no upstream mention is required.

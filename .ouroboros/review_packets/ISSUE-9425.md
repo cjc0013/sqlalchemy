@@ -1,11 +1,11 @@
-# Issue review unit â€” tighten up compoundselect + textualselect use cases
+# Issue review unit: tighten up compoundselect + textualselect use cases
 
 - **Covered issues:** #9425
 - **Review unit:** `COMMIT-82fd41fc014568568babf5b6868d058541173572`
 - **Shape:** standalone-commit
 - **Apply once:** not shared
 - **Frozen base:** `aa1a5575358d3aa14953b04dced02f4763fed2e7`
-- **Suggested target:** SQLAlchemy 2.1
+- **Frozen option target:** SQLAlchemy 2.1
 - **Subsystem:** SQL expression language
 
 ## Problem and intended behavior
@@ -14,7 +14,7 @@
 
 ## Scope and provenance
 
-- Issue #9425: `verified_local_option_closure`
+- **Issue #9425:** verified_local_option_closure
 
 Changed files:
 
@@ -22,7 +22,12 @@ Changed files:
 - `lib/sqlalchemy/sql/compiler.py`
 - `test/sql/test_compiler.py`
 
-Overlapping review units: COLLATION-SCHEMA, PR-13323
+Overlap summary: PR packets: PR-13323
+
+Exact overlap identifiers remain available in `issue_review_packet_index.jsonl`
+and `evidence_bundle.json`; they are not expanded here unless needed for a
+selection decision.
+
 
 ## Validation
 
@@ -57,3 +62,7 @@ git show 82fd41fc014568568babf5b6868d058541173572
 ## Consumption note
 
 Use the command only for this listed technical unit; blank commands are deliberate evidence boundaries.
+
+Questions, requested changes, preferences, and rejection reasons can be sent
+through the [fork-only feedback path](../FEEDBACK.md). Include review unit
+`COMMIT-82fd41fc014568568babf5b6868d058541173572`; no upstream mention is required.

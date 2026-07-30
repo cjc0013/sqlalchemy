@@ -1,11 +1,11 @@
-# Issue review unit â€” synonym descriptors automatically blend existing properties - undocumented?
+# Issue review unit: synonym descriptors automatically blend existing properties - undocumented?
 
 - **Covered issues:** #4706
 - **Review unit:** `COMMIT-278cf421a6b18c01ef463e9b97b9cd245082e9de`
 - **Shape:** standalone-commit
 - **Apply once:** not shared
 - **Frozen base:** `aa1a5575358d3aa14953b04dced02f4763fed2e7`
-- **Suggested target:** Maintainer choice; this unit has no changelog fragment
+- **Frozen option target:** Maintainer choice; this unit has no changelog fragment
 - **Subsystem:** ORM
 
 ## Problem and intended behavior
@@ -14,13 +14,18 @@
 
 ## Scope and provenance
 
-- Issue #4706: `verified_local_option_closure`
+- **Issue #4706:** verified_local_option_closure
 
 Changed files:
 
 - `lib/sqlalchemy/orm/_orm_constructors.py`
 
-Overlapping review units: none identified
+Overlap summary: none identified
+
+Exact overlap identifiers remain available in `issue_review_packet_index.jsonl`
+and `evidence_bundle.json`; they are not expanded here unless needed for a
+selection decision.
+
 
 ## Validation
 
@@ -55,3 +60,7 @@ git show 278cf421a6b18c01ef463e9b97b9cd245082e9de
 ## Consumption note
 
 Use the command only for this listed technical unit; blank commands are deliberate evidence boundaries.
+
+Questions, requested changes, preferences, and rejection reasons can be sent
+through the [fork-only feedback path](../FEEDBACK.md). Include review unit
+`COMMIT-278cf421a6b18c01ef463e9b97b9cd245082e9de`; no upstream mention is required.

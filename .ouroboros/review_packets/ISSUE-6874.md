@@ -1,11 +1,11 @@
-# Issue review unit â€” Please work harder to figure out parameter types for sequences
+# Issue review unit: Please work harder to figure out parameter types for sequences
 
 - **Covered issues:** #6874
 - **Review unit:** `COMMIT-27f4a913f99cc99fdf40491746e78d4b71d03d3b`
 - **Shape:** standalone-commit
 - **Apply once:** not shared
 - **Frozen base:** `aa1a5575358d3aa14953b04dced02f4763fed2e7`
-- **Suggested target:** SQLAlchemy 2.1
+- **Frozen option target:** SQLAlchemy 2.1
 - **Subsystem:** SQL expression language
 
 ## Problem and intended behavior
@@ -14,7 +14,7 @@
 
 ## Scope and provenance
 
-- Issue #6874: `verified_local_option_closure`
+- **Issue #6874:** verified_local_option_closure
 
 Changed files:
 
@@ -22,7 +22,12 @@ Changed files:
 - `lib/sqlalchemy/sql/elements.py`
 - `test/sql/test_types.py`
 
-Overlapping review units: COLLATION-SCHEMA, COMMIT-d5244bbb9527a9161a7fc08cc21d5fb240f1dd42
+Overlap summary: 1 standalone exact-file overlap
+
+Exact overlap identifiers remain available in `issue_review_packet_index.jsonl`
+and `evidence_bundle.json`; they are not expanded here unless needed for a
+selection decision.
+
 
 ## Validation
 
@@ -57,3 +62,7 @@ git show 27f4a913f99cc99fdf40491746e78d4b71d03d3b
 ## Consumption note
 
 Use the command only for this listed technical unit; blank commands are deliberate evidence boundaries.
+
+Questions, requested changes, preferences, and rejection reasons can be sent
+through the [fork-only feedback path](../FEEDBACK.md). Include review unit
+`COMMIT-27f4a913f99cc99fdf40491746e78d4b71d03d3b`; no upstream mention is required.

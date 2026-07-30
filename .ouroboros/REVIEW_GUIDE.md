@@ -6,7 +6,10 @@ Nothing in this catalog needs an upstream pull request, issue, comment, or menti
 git fetch https://github.com/cjc0013/sqlalchemy.git refs/heads/ouroboros/all-20260728:refs/remotes/ouroboros/options
 ```
 
-Start with `MAINTAINER_REVIEW_INDEX.md`. It accounts for every PR and issue outcome, then separates coherent technical-review units, units that still need a design or branch decision, and evidence-only outcomes. `ISSUE_REVIEW_INDEX.md` lists every issue result and every direct issue command.
+Start with `EVIDENCE_HUB.md`. It explains the purpose, highlights the current
+issue 13447 option, joins the evidence surfaces, and links the fork-only feedback
+path. `MAINTAINER_REVIEW_INDEX.md` and `ISSUE_REVIEW_INDEX.md` remain the detailed
+selection queues.
 
 ## Pull-request options
 

@@ -1,11 +1,11 @@
-# Issue review unit â€” Some tests for dialect ignores lack of support of CHECK CONSTRAINT
+# Issue review unit: Some tests for dialect ignores lack of support of CHECK CONSTRAINT
 
 - **Covered issues:** #8805
 - **Review unit:** `COMMIT-8ed8f153ee55da01b8c2667d5b87460bf2b2053f`
 - **Shape:** standalone-commit
 - **Apply once:** not shared
 - **Frozen base:** `aa1a5575358d3aa14953b04dced02f4763fed2e7`
-- **Suggested target:** SQLAlchemy 2.1
+- **Frozen option target:** SQLAlchemy 2.1
 - **Subsystem:** documentation
 
 ## Problem and intended behavior
@@ -14,14 +14,19 @@
 
 ## Scope and provenance
 
-- Issue #8805: `verified_local_option_closure`
+- **Issue #8805:** verified_local_option_closure
 
 Changed files:
 
 - `README.dialects.rst`
 - `doc/build/changelog/unreleased_21/8805.rst`
 
-Overlapping review units: none identified
+Overlap summary: none identified
+
+Exact overlap identifiers remain available in `issue_review_packet_index.jsonl`
+and `evidence_bundle.json`; they are not expanded here unless needed for a
+selection decision.
+
 
 ## Validation
 
@@ -56,3 +61,7 @@ git show 8ed8f153ee55da01b8c2667d5b87460bf2b2053f
 ## Consumption note
 
 Use the command only for this listed technical unit; blank commands are deliberate evidence boundaries.
+
+Questions, requested changes, preferences, and rejection reasons can be sent
+through the [fork-only feedback path](../FEEDBACK.md). Include review unit
+`COMMIT-8ed8f153ee55da01b8c2667d5b87460bf2b2053f`; no upstream mention is required.

@@ -1,11 +1,11 @@
-# Issue review unit â€” Expression index does not list all the columns
+# Issue review unit: Expression index does not list all the columns
 
 - **Covered issues:** #9233
 - **Review unit:** `COMMIT-c004cf4aabfa967ae4a38f2569b318b0de4923db`
 - **Shape:** standalone-commit
 - **Apply once:** not shared
 - **Frozen base:** `aa1a5575358d3aa14953b04dced02f4763fed2e7`
-- **Suggested target:** SQLAlchemy 2.1
+- **Frozen option target:** SQLAlchemy 2.1
 - **Subsystem:** SQL expression language
 
 ## Problem and intended behavior
@@ -14,7 +14,7 @@
 
 ## Scope and provenance
 
-- Issue #9233: `verified_local_option_closure`
+- **Issue #9233:** verified_local_option_closure
 
 Changed files:
 
@@ -22,7 +22,12 @@ Changed files:
 - `lib/sqlalchemy/sql/schema.py`
 - `test/sql/test_constraints.py`
 
-Overlapping review units: PR-13399
+Overlap summary: PR packets: PR-13399
+
+Exact overlap identifiers remain available in `issue_review_packet_index.jsonl`
+and `evidence_bundle.json`; they are not expanded here unless needed for a
+selection decision.
+
 
 ## Validation
 
@@ -57,3 +62,7 @@ git show c004cf4aabfa967ae4a38f2569b318b0de4923db
 ## Consumption note
 
 Use the command only for this listed technical unit; blank commands are deliberate evidence boundaries.
+
+Questions, requested changes, preferences, and rejection reasons can be sent
+through the [fork-only feedback path](../FEEDBACK.md). Include review unit
+`COMMIT-c004cf4aabfa967ae4a38f2569b318b0de4923db`; no upstream mention is required.

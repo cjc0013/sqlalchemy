@@ -1,0 +1,38 @@
+{
+  "channel": {
+    "kind": "fork_issue",
+    "label": "ouroboros-feedback",
+    "new_feedback_url": "https://github.com/cjc0013/sqlalchemy/issues/new?title=Option+feedback%3A+%3Creview+unit%3E&body=Review+unit%3A+%3Cpacket+ID%2C+issue+number%2C+or+commit%3E%0ACommit%3A+%3Ccommit+SHA+or+unknown%3E%0ADisposition%3A+question%0AFeedback%3A+%3Cwhat+should+change%2C+or+what+needs+explanation%3E%0AFile+or+symbol%3A+%3Coptional%3E%0ASuggested+change%3A+%3Coptional%3E%0A&labels=ouroboros-feedback",
+    "repository": "cjc0013/sqlalchemy",
+    "upstream_action_required": false
+  },
+  "dedupe_key": [
+    "repository",
+    "issue_number",
+    "updated_at"
+  ],
+  "dispositions": [
+    "question",
+    "revise",
+    "prefer",
+    "accept-as-option",
+    "decline",
+    "blocked"
+  ],
+  "lifecycle": {
+    "with_feedback": "A new catalog release records the feedback, revises the option when appropriate, and preserves the earlier commit evidence.",
+    "without_feedback": "The published snapshot remains static and cherry-pickable."
+  },
+  "natural_language_allowed": true,
+  "optional_fields": [
+    "commit",
+    "disposition",
+    "file_or_symbol",
+    "suggested_change"
+  ],
+  "required_fields": [
+    "review_unit",
+    "feedback"
+  ],
+  "version": "sqlalchemy_option_feedback_v1"
+}

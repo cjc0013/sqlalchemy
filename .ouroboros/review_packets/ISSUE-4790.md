@@ -1,11 +1,11 @@
-# Issue review unit â€” Improve error messages on create_table
+# Issue review unit: Improve error messages on create_table
 
 - **Covered issues:** #4790
 - **Review unit:** `COMMIT-70e6b730b53852e27ec5699f6309eba92e820c8c`
 - **Shape:** standalone-commit
 - **Apply once:** not shared
 - **Frozen base:** `aa1a5575358d3aa14953b04dced02f4763fed2e7`
-- **Suggested target:** SQLAlchemy 2.1
+- **Frozen option target:** SQLAlchemy 2.1
 - **Subsystem:** SQL expression language
 
 ## Problem and intended behavior
@@ -14,7 +14,7 @@
 
 ## Scope and provenance
 
-- Issue #4790: `verified_local_option_closure`
+- **Issue #4790:** verified_local_option_closure
 
 Changed files:
 
@@ -22,7 +22,12 @@ Changed files:
 - `lib/sqlalchemy/sql/naming.py`
 - `test/sql/test_metadata.py`
 
-Overlapping review units: COMMIT-908451977266e19296ca8059bf42ce8d50a20f92
+Overlap summary: 1 standalone exact-file overlap
+
+Exact overlap identifiers remain available in `issue_review_packet_index.jsonl`
+and `evidence_bundle.json`; they are not expanded here unless needed for a
+selection decision.
+
 
 ## Validation
 
@@ -57,3 +62,7 @@ git show 70e6b730b53852e27ec5699f6309eba92e820c8c
 ## Consumption note
 
 Use the command only for this listed technical unit; blank commands are deliberate evidence boundaries.
+
+Questions, requested changes, preferences, and rejection reasons can be sent
+through the [fork-only feedback path](../FEEDBACK.md). Include review unit
+`COMMIT-70e6b730b53852e27ec5699f6309eba92e820c8c`; no upstream mention is required.

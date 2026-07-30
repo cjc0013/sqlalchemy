@@ -1,11 +1,11 @@
-# Issue review unit â€” Improve documentation to make classes use the "public" module
+# Issue review unit: Improve documentation to make classes use the "public" module
 
 - **Covered issues:** #8894
 - **Review unit:** `COMMIT-09385c459627b0cb24d72e616bb718bd10a57e81`
 - **Shape:** standalone-commit
 - **Apply once:** not shared
 - **Frozen base:** `aa1a5575358d3aa14953b04dced02f4763fed2e7`
-- **Suggested target:** SQLAlchemy 2.1
+- **Frozen option target:** SQLAlchemy 2.1
 - **Subsystem:** documentation
 
 ## Problem and intended behavior
@@ -14,7 +14,7 @@
 
 ## Scope and provenance
 
-- Issue #8894: `verified_local_option_closure`
+- **Issue #8894:** verified_local_option_closure
 
 Changed files:
 
@@ -40,7 +40,12 @@ Changed files:
 - `doc/build/orm/extensions/asyncio.rst`
 - `doc/build/orm/persistence_techniques.rst`
 
-Overlapping review units: none identified
+Overlap summary: none identified
+
+Exact overlap identifiers remain available in `issue_review_packet_index.jsonl`
+and `evidence_bundle.json`; they are not expanded here unless needed for a
+selection decision.
+
 
 ## Validation
 
@@ -80,3 +85,7 @@ git show 09385c459627b0cb24d72e616bb718bd10a57e81
 ## Consumption note
 
 Use the command only for this listed technical unit; blank commands are deliberate evidence boundaries.
+
+Questions, requested changes, preferences, and rejection reasons can be sent
+through the [fork-only feedback path](../FEEDBACK.md). Include review unit
+`COMMIT-09385c459627b0cb24d72e616bb718bd10a57e81`; no upstream mention is required.

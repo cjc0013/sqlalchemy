@@ -1,11 +1,11 @@
-# Issue review unit â€” document dataclass gotchas so far
+# Issue review unit: document dataclass gotchas so far
 
 - **Covered issues:** #9410
 - **Review unit:** `COMMIT-168923e135fc82b0b5a01b2b91a69725c7b7ecf5`
 - **Shape:** standalone-commit
 - **Apply once:** not shared
 - **Frozen base:** `aa1a5575358d3aa14953b04dced02f4763fed2e7`
-- **Suggested target:** Maintainer choice; this unit has no changelog fragment
+- **Frozen option target:** Maintainer choice; this unit has no changelog fragment
 - **Subsystem:** documentation
 
 ## Problem and intended behavior
@@ -14,13 +14,18 @@
 
 ## Scope and provenance
 
-- Issue #9410: `verified_local_option_closure`
+- **Issue #9410:** verified_local_option_closure
 
 Changed files:
 
 - `doc/build/orm/dataclasses.rst`
 
-Overlapping review units: none identified
+Overlap summary: none identified
+
+Exact overlap identifiers remain available in `issue_review_packet_index.jsonl`
+and `evidence_bundle.json`; they are not expanded here unless needed for a
+selection decision.
+
 
 ## Validation
 
@@ -55,3 +60,7 @@ git show 168923e135fc82b0b5a01b2b91a69725c7b7ecf5
 ## Consumption note
 
 Use the command only for this listed technical unit; blank commands are deliberate evidence boundaries.
+
+Questions, requested changes, preferences, and rejection reasons can be sent
+through the [fork-only feedback path](../FEEDBACK.md). Include review unit
+`COMMIT-168923e135fc82b0b5a01b2b91a69725c7b7ecf5`; no upstream mention is required.

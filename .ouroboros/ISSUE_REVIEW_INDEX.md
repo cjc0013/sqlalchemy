@@ -1,13 +1,16 @@
 # Issue review index
 
 - Frozen upstream base: `aa1a5575358d3aa14953b04dced02f4763fed2e7`
-- Catalog release: `20260728.1`
+- Catalog release: `20260730.1`
 - Outcomes: 79
 - Transferable issue outcomes: 51
 - Unique transferable units: 50
 - Already present: 3
 - Validation-only: 21
 - No exact transferable unit: 4
+
+- [Unified evidence hub](EVIDENCE_HUB.md)
+- [Fork-only maintainer feedback](FEEDBACK.md)
 
 Every issue entry links to its full human-readable packet. Shared units are applied once even when they cover multiple issue outcomes.
 

@@ -1,11 +1,11 @@
-# Issue review unit â€” Make the new PG Range aware of the its bounds data type
+# Issue review unit: Make the new PG Range aware of the its bounds data type
 
 - **Covered issues:** #8936
 - **Review unit:** `COMMIT-32b7e6e7e186a23923692e53faf9cb1110b620d4`
 - **Shape:** standalone-commit
 - **Apply once:** not shared
 - **Frozen base:** `aa1a5575358d3aa14953b04dced02f4763fed2e7`
-- **Suggested target:** SQLAlchemy 2.1
+- **Frozen option target:** SQLAlchemy 2.1
 - **Subsystem:** postgresql dialect
 
 ## Problem and intended behavior
@@ -14,7 +14,7 @@
 
 ## Scope and provenance
 
-- Issue #8936: `verified_local_option_closure`
+- **Issue #8936:** verified_local_option_closure
 
 Changed files:
 
@@ -22,7 +22,12 @@ Changed files:
 - `lib/sqlalchemy/dialects/postgresql/ranges.py`
 - `test/dialect/postgresql/test_types.py`
 
-Overlapping review units: COLLATION-SCHEMA
+Overlap summary: none identified
+
+Exact overlap identifiers remain available in `issue_review_packet_index.jsonl`
+and `evidence_bundle.json`; they are not expanded here unless needed for a
+selection decision.
+
 
 ## Validation
 
@@ -57,3 +62,7 @@ git show 32b7e6e7e186a23923692e53faf9cb1110b620d4
 ## Consumption note
 
 Use the command only for this listed technical unit; blank commands are deliberate evidence boundaries.
+
+Questions, requested changes, preferences, and rejection reasons can be sent
+through the [fork-only feedback path](../FEEDBACK.md). Include review unit
+`COMMIT-32b7e6e7e186a23923692e53faf9cb1110b620d4`; no upstream mention is required.

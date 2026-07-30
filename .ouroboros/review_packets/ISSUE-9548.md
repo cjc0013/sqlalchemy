@@ -1,11 +1,11 @@
-# Issue review unit â€” relationship loader options do a "recursive" thing inconsistently
+# Issue review unit: relationship loader options do a "recursive" thing inconsistently
 
 - **Covered issues:** #9548
 - **Review unit:** `COMMIT-626eb012e7adecec2516a20ee8a515b4e1cb6250`
 - **Shape:** standalone-commit
 - **Apply once:** not shared
 - **Frozen base:** `aa1a5575358d3aa14953b04dced02f4763fed2e7`
-- **Suggested target:** SQLAlchemy 2.1
+- **Frozen option target:** SQLAlchemy 2.1
 - **Subsystem:** ORM
 
 ## Problem and intended behavior
@@ -14,7 +14,7 @@
 
 ## Scope and provenance
 
-- Issue #9548: `verified_local_option_closure`
+- **Issue #9548:** verified_local_option_closure
 
 Changed files:
 
@@ -24,7 +24,12 @@ Changed files:
 - `lib/sqlalchemy/orm/strategy_options.py`
 - `test/orm/test_default_strategies.py`
 
-Overlapping review units: none identified
+Overlap summary: none identified
+
+Exact overlap identifiers remain available in `issue_review_packet_index.jsonl`
+and `evidence_bundle.json`; they are not expanded here unless needed for a
+selection decision.
+
 
 ## Validation
 
@@ -59,3 +64,7 @@ git show 626eb012e7adecec2516a20ee8a515b4e1cb6250
 ## Consumption note
 
 Use the command only for this listed technical unit; blank commands are deliberate evidence boundaries.
+
+Questions, requested changes, preferences, and rejection reasons can be sent
+through the [fork-only feedback path](../FEEDBACK.md). Include review unit
+`COMMIT-626eb012e7adecec2516a20ee8a515b4e1cb6250`; no upstream mention is required.
