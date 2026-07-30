@@ -7,6 +7,9 @@ workload. It makes alternatives easy to inspect, test, cherry-pick, revise, or
 decline. A packet is evidence and an implementation possibility, not a claim
 that the change is perfect, accepted upstream, or ready to merge unchanged.
 
+Nothing in this repository modifies or notifies upstream unless a maintainer
+explicitly chooses to adopt a change.
+
 ## Current option: issue 13447
 
 The newest option addresses **PostgreSQL schema-qualified collation support**
@@ -31,9 +34,25 @@ packets and 79 issue outcomes. Of those issue outcomes,
 51 have commands representing
 50 unique transferable units.
 
-## Unified evidence
+## Evidence
 
-- Non-typing suite: 25800 passed, 1502 skipped,
+### Current #13447 option
+
+- New regression tests: 6 passed.
+- Compiler/operator/type sweep: 4,743 passed,
+  5 skipped.
+- PostgreSQL reflection/type sweep: 9,480 passed,
+  3 skipped.
+- Full non-typing suite: 25,456 passed,
+  1,500 skipped,
+  0 failed, 0 errors.
+- Typing: 75 passed; the sole environment failure
+  reproduced on the #13447 frozen base.
+
+### Frozen catalog snapshot
+
+- Non-typing suite: 25,800 passed,
+  1,502 skipped,
   0 failed, 0 errors.
 - Typing suite: 77 passed; its recorded failure boundary matches
   the frozen upstream baseline.
@@ -44,8 +63,12 @@ packets and 79 issue outcomes. Of those issue outcomes,
 
 ## Feedback and lifecycle
 
-No maintainer interaction is required. Without feedback, this release remains a
-static, usable snapshot and every exact commit stays cherry-pickable.
+Each release is an immutable, usable snapshot. Feedback may produce a new
+release without altering the previous one. No maintainer interaction is
+required, and every exact commit stays cherry-pickable.
+
+Feedback → review-unit rehydration → revised implementation → focused and
+repository validation → new immutable release
 
 If a maintainer asks why something was done, requests a different shape, prefers
 one option, or rejects an approach, that feedback can drive a new release while

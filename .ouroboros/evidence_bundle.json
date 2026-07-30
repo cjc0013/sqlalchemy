@@ -1,5 +1,5 @@
 {
-  "catalog_release": "20260730.2",
+  "catalog_release": "20260730.3",
   "current_option": {
     "apply_command": "git cherry-pick 7836a24696b6592594827f7f23391af4eb39c163 cb0d965aa39a1cfb23c730b985c96c091f40d690 9eb6026dad03a987f891af03395f6eb49260edbd",
     "base_sha": "d9b44cb731bd27e6e82c99a3c0fb598214e8e7ff",
@@ -17,7 +17,31 @@
     "review_branch": "ouroboros/issue-13447-review-20260730",
     "review_head": "287ebb4e69ada117d8224ee4e601085371f7677d",
     "review_url": "https://github.com/cjc0013/sqlalchemy/tree/ouroboros/issue-13447-review-20260730",
-    "title": "PostgreSQL schema-qualified collation support"
+    "title": "PostgreSQL schema-qualified collation support",
+    "validation": {
+      "compiler_operator_types": {
+        "passed": 4743,
+        "skipped": 5
+      },
+      "full_non_typing": {
+        "errors": 0,
+        "failures": 0,
+        "passed": 25456,
+        "skipped": 1500
+      },
+      "new_regression_tests": {
+        "passed": 6
+      },
+      "postgresql_reflection_types": {
+        "passed": 9480,
+        "skipped": 3
+      },
+      "typing": {
+        "environment_failure_count": 1,
+        "failure_reproduced_on_frozen_base": true,
+        "passed": 75
+      }
+    }
   },
   "feedback": {
     "channel": {
@@ -1109,5 +1133,5 @@
       "tests": 1
     }
   },
-  "version": "sqlalchemy_unified_evidence_bundle_v1"
+  "version": "sqlalchemy_unified_evidence_bundle_v2"
 }

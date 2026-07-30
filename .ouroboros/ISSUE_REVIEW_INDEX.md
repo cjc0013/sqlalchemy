@@ -1,7 +1,7 @@
 # Issue review index
 
 - Frozen upstream base: `aa1a5575358d3aa14953b04dced02f4763fed2e7`
-- Catalog release: `20260730.2`
+- Catalog release: `20260730.3`
 - Outcomes: 79
 - Transferable issue outcomes: 51
 - Unique transferable units: 50

@@ -8,10 +8,13 @@ These packets are not claims of upstream acceptance or perfection. Some may be
 ready unchanged; others may need a maintainer's preferred shape. No upstream
 pull request, issue, comment, or reviewer mention is created by this catalog.
 
+Nothing in this repository modifies or notifies upstream unless a maintainer
+explicitly chooses to adopt a change.
+
 ## Start here
 
 - **[Unified maintainer evidence hub](EVIDENCE_HUB.md)**
-- Catalog release: `20260730.2`
+- Catalog release: `20260730.3`
 - Complete code branch: `ouroboros/all-20260728`
 - Catalog branch: `ouroboros/catalog-20260728`
 - Notification canary: `ouroboros/canary-no-notify-9425-20260728`
@@ -26,12 +29,15 @@ The newest option provides PostgreSQL schema-qualified collation support against
 a current upstream base. It is newer than the frozen catalog below and is the
 preferred starting point for this problem family.
 
+Its validation is reported separately from the frozen catalog in the unified
+evidence hub.
+
 - [Human review packet](https://github.com/cjc0013/sqlalchemy/blob/ouroboros/issue-13447-review-20260730/.ouroboros/ISSUE-13447.md)
 - [Clean code branch](https://github.com/cjc0013/sqlalchemy/tree/ouroboros/issue-13447-20260730)
 - Code head: `9eb6026dad03a987f891af03395f6eb49260edbd`
 - Apply: `git cherry-pick 7836a24696b6592594827f7f23391af4eb39c163 cb0d965aa39a1cfb23c730b985c96c091f40d690 9eb6026dad03a987f891af03395f6eb49260edbd`
 
-## Coverage
+## Frozen catalog coverage
 
 - Current upstream issues represented: 180
 - Issues with local closure options: 79
@@ -44,7 +50,7 @@ preferred starting point for this problem family.
 - PR packets with passing focused validation: 21
 - Commits after the frozen base: 148
 
-## Validation
+## Frozen catalog validation
 
 - Non-typing suite: 25800 passed, 1502 skipped, 0 failed, 0 errors.
 - Typing suite: 77 passed with one failure matching the stored upstream baseline.
@@ -66,8 +72,9 @@ focused validation, commit order, CI attribution, coverage, and residual work.
 
 ## Feedback and change policy
 
-Maintainer interaction is optional. If nobody responds, this release remains a
-static, usable snapshot and its commits remain cherry-pickable.
+Each release is an immutable, usable snapshot. Feedback may produce a new
+release without altering the previous one. Maintainer interaction is optional,
+and every exact commit remains cherry-pickable.
 
 If maintainers ask questions or request changes, the next release can revise the
 relevant option while preserving the old commit and receipt trail. Use the

@@ -2,8 +2,8 @@
   "all_branch": "ouroboros/all-20260728",
   "artifacts": {
     "EVIDENCE_HUB.md": {
-      "bytes": 3093,
-      "sha256": "7e2ce77ac38549faf5c21f84112a8d0342f2380f879720a943c5d816398b47cd"
+      "bytes": 3768,
+      "sha256": "5b4d8b549d5564c9aa69baf131f4645ba4c2b8a5d3b4e32dc4336ca811804ede"
     },
     "FEEDBACK.md": {
       "bytes": 1688,
@@ -11,15 +11,15 @@
     },
     "ISSUE_REVIEW_INDEX.md": {
       "bytes": 40173,
-      "sha256": "ce9ee05df17230f95146221265e0613c6d625b4cdeae40bacd2c1cd8b5425845"
+      "sha256": "64d86008ec6e2985014f6a701a0953d9fd61cf0e007010f0bbf4af40652a3c71"
     },
     "MAINTAINER_REVIEW_INDEX.md": {
       "bytes": 7071,
       "sha256": "25c7cbb3a78bcecc61e5e10c9c853e7cea33e37458e51e772ae8d05a854cf82a"
     },
     "README.md": {
-      "bytes": 4074,
-      "sha256": "932167a2c9acbfd8751bd25052d3c9180f1be5bbeb0834d34a4fb1bc52936138"
+      "bytes": 4370,
+      "sha256": "cc60cebb810a823a264826babd2fd0a0551f499cf796262e2d337dd92edaaa2e"
     },
     "REVIEW_GUIDE.md": {
       "bytes": 3545,
@@ -34,8 +34,8 @@
       "sha256": "bb396173034ee79be5c9df8addbab6b921e3c1c154480fd873c710ff45595929"
     },
     "evidence_bundle.json": {
-      "bytes": 39466,
-      "sha256": "5a8253d69e37acbec34250ba8532e68b2a4b50f4e52a57cf85218e83319d511c"
+      "bytes": 40003,
+      "sha256": "d275c178f523bb9a34a592cf47e5b9484d845e0135451abbc86e31c4ff59e94b"
     },
     "feedback_contract.json": {
       "bytes": 1286,
@@ -430,7 +430,7 @@
   "base_sha": "aa1a5575358d3aa14953b04dced02f4763fed2e7",
   "canary_branch": "ouroboros/canary-no-notify-9425-20260728",
   "catalog_branch": "ouroboros/catalog-20260728",
-  "catalog_release": "20260730.2",
+  "catalog_release": "20260730.3",
   "ci_attribution_reference_summary_sha256": "",
   "commit_count": 148,
   "current_option_issue_number": 13447,
@@ -464,7 +464,7 @@
   "source_integration_head_sha": "c64be3b26036fcd3798ced1279b30d8440e39a82",
   "source_ledger_summary_sha256": "eb7b7f395fe18b6e69bd9bf9432ebe653b1aa5b2444a3ba99d7123c6d3b627bb",
   "transferable_issue_outcome_count": 51,
-  "unified_evidence_bundle_version": "sqlalchemy_unified_evidence_bundle_v1",
+  "unified_evidence_bundle_version": "sqlalchemy_unified_evidence_bundle_v2",
   "unique_transferable_issue_unit_count": 50,
   "upstream_repository": "sqlalchemy/sqlalchemy",
   "version": "sqlalchemy_publication_catalog_v7"
