@@ -1,10 +1,10 @@
 {
   "artifacts": {
     "ISSUE-13447.md": {
-      "sha256": "96f85d9ff8295de0cc8350492a4d763c8d6651f2b73fcae7efb0066e96554554"
+      "sha256": "2bf560ed0edfc2d6196308c8f4f889c38f29e43b4d1c697a1164b044506c82ad"
     },
-    "validation_summary.json": {
-      "sha256": "91df8f9cb5e7444b4049d6a9c23abfbea65ed9d615d773d15b87dd481d5c473e"
+    "artifacts/validation_summary.json": {
+      "sha256": "cfbaf8930798ce5a263d7a007cf72b1d1394049bfe1790e46975d2868a955e71"
     }
   },
   "base_sha": "d9b44cb731bd27e6e82c99a3c0fb598214e8e7ff",
@@ -18,5 +18,5 @@
   "head_sha": "9eb6026dad03a987f891af03395f6eb49260edbd",
   "issue_number": 13447,
   "public_actions": false,
-  "version": "sqlalchemy_issue_option_packet_v1"
+  "version": "sqlalchemy_issue_option_packet_v2"
 }

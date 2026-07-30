@@ -1,5 +1,10 @@
 {
   "base_sha": "d9b44cb731bd27e6e82c99a3c0fb598214e8e7ff",
+  "environment": {
+    "postgresql_driver": "psycopg 3.3.3",
+    "postgresql_server": "17.10",
+    "python": "3.11.5"
+  },
   "head_sha": "9eb6026dad03a987f891af03395f6eb49260edbd",
   "issue_number": 13447,
   "receipts": {
@@ -51,6 +56,12 @@
       "skipped": 0,
       "tests": 1
     }
+  },
+  "reproduction_commands": {
+    "compiler_operator_types": "python -m pytest -q test/sql/test_quote.py test/sql/test_compiler.py test/sql/test_operators.py test/sql/test_types.py test/dialect/postgresql/test_compiler.py",
+    "new_no_database": "python -m pytest -q test/sql/test_operators.py::DefaultColumnComparatorTest::test_collate_schema_traversal_and_cache_key test/sql/test_types.py::CompileTest::test_string_collation_schema_no_collation test/sql/test_types.py::CompileTest::test_string_collation_schema test/sql/test_types.py::CompileTest::test_char_collation_schema test/sql/test_types.py::CompileTest::test_text_collation_schema",
+    "new_postgresql": "python -m pytest -q test/dialect/postgresql/test_types.py::DomainTest::test_domain_collation_collation_schema --dburi \"$SQLALCHEMY_POSTGRESQL_TEST_URL\"",
+    "postgresql_reflection_types": "python -m pytest -q test/dialect/postgresql/test_reflection.py test/dialect/postgresql/test_types.py --dburi \"$SQLALCHEMY_POSTGRESQL_TEST_URL\""
   },
   "session_full_non_typing": {
     "errors": 0,
