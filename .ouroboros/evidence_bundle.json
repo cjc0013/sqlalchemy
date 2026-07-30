@@ -1,5 +1,5 @@
 {
-  "catalog_release": "20260730.1",
+  "catalog_release": "20260730.2",
   "current_option": {
     "apply_command": "git cherry-pick 7836a24696b6592594827f7f23391af4eb39c163 cb0d965aa39a1cfb23c730b985c96c091f40d690 9eb6026dad03a987f891af03395f6eb49260edbd",
     "base_sha": "d9b44cb731bd27e6e82c99a3c0fb598214e8e7ff",
@@ -15,7 +15,7 @@
     "issue_number": 13447,
     "packet_url": "https://github.com/cjc0013/sqlalchemy/blob/ouroboros/issue-13447-review-20260730/.ouroboros/ISSUE-13447.md",
     "review_branch": "ouroboros/issue-13447-review-20260730",
-    "review_head": "4ff7110e329a839aca120d081fcb638b5456e612",
+    "review_head": "9d6a9c934685ce55c897b7a3ef5545aa0e9c4c25",
     "review_url": "https://github.com/cjc0013/sqlalchemy/tree/ouroboros/issue-13447-review-20260730",
     "title": "PostgreSQL schema-qualified collation support"
   },

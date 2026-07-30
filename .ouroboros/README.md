@@ -11,7 +11,7 @@ pull request, issue, comment, or reviewer mention is created by this catalog.
 ## Start here
 
 - **[Unified maintainer evidence hub](EVIDENCE_HUB.md)**
-- Catalog release: `20260730.1`
+- Catalog release: `20260730.2`
 - Complete code branch: `ouroboros/all-20260728`
 - Catalog branch: `ouroboros/catalog-20260728`
 - Notification canary: `ouroboros/canary-no-notify-9425-20260728`

@@ -6,12 +6,12 @@
       "sha256": "0e81cae303116c36f1dda9eeed849fd0928ad58561758e91e48ea360e9795f1f"
     },
     "FEEDBACK.md": {
-      "bytes": 1743,
-      "sha256": "bdc488fe81a01320fc1d6b788a2783356ceb76f77e08cb20f9802c414f11b368"
+      "bytes": 1719,
+      "sha256": "fbc02f93004465f30ba6ff8f3296844d304a20e318541f50a559a291c65b8211"
     },
     "ISSUE_REVIEW_INDEX.md": {
       "bytes": 41325,
-      "sha256": "fdcb36e681f1ce4c53285225d6e2097d85c97a095f73f9d0ca158dbe3f53be8b"
+      "sha256": "e29f1dc83b9e1035281c8a459b92c05ebc21fa7968b8ff3450ca19c488406c68"
     },
     "MAINTAINER_REVIEW_INDEX.md": {
       "bytes": 7139,
@@ -19,7 +19,7 @@
     },
     "README.md": {
       "bytes": 4156,
-      "sha256": "d557a2fa9eef4a16f73a4b5df7be6480204bb458002a2f79599fd600a4433507"
+      "sha256": "ecc2ba3ba6f98cc0a7e8d0a59a1987d01e2ca12283be4086369afb15a4b4cbfd"
     },
     "REVIEW_GUIDE.md": {
       "bytes": 3603,
@@ -35,7 +35,7 @@
     },
     "evidence_bundle.json": {
       "bytes": 40579,
-      "sha256": "f5310fc9b740e63768a389bfaae878fed1c4d5288fe94a3d4fe7645d0b445b4e"
+      "sha256": "6c8c33ac354d889367d29704923b1889bebf6f9a619e2a559ab7f131802405ad"
     },
     "feedback_contract.json": {
       "bytes": 1324,
@@ -430,11 +430,11 @@
   "base_sha": "aa1a5575358d3aa14953b04dced02f4763fed2e7",
   "canary_branch": "ouroboros/canary-no-notify-9425-20260728",
   "catalog_branch": "ouroboros/catalog-20260728",
-  "catalog_release": "20260730.1",
+  "catalog_release": "20260730.2",
   "ci_attribution_reference_summary_sha256": "",
   "commit_count": 148,
   "current_option_issue_number": 13447,
-  "current_option_review_head": "4ff7110e329a839aca120d081fcb638b5456e612",
+  "current_option_review_head": "9d6a9c934685ce55c897b7a3ef5545aa0e9c4c25",
   "feedback_contract_version": "sqlalchemy_option_feedback_v1",
   "focused_validation_index_sha256": "ae76edd645d113214c8a6f38b14d9b3a2433c9913608947620463b8cf7faedbe",
   "option_closure_spec_sha256": "",

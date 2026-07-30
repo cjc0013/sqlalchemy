@@ -24,7 +24,7 @@ are optional. Useful dispositions are `question`, `revise`, `prefer`,
 Ouroboros normalizes labeled fork feedback into `sqlalchemy_option_feedback_v1`,
 deduplicates it by issue and update time, associates it with the review unit and
 commit, and marks the option for explanation, revision, replacement, or no
-change. No maintainer behavior model is published or required.
+change. No special syntax is required.
 
 The machine contract is `feedback_contract.json`. Feedback can also be relayed
 through another channel using the same field names; opening a fork issue is
