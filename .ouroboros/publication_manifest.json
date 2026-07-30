@@ -2,428 +2,428 @@
   "all_branch": "ouroboros/all-20260728",
   "artifacts": {
     "EVIDENCE_HUB.md": {
-      "bytes": 3156,
-      "sha256": "0e81cae303116c36f1dda9eeed849fd0928ad58561758e91e48ea360e9795f1f"
+      "bytes": 3093,
+      "sha256": "7e2ce77ac38549faf5c21f84112a8d0342f2380f879720a943c5d816398b47cd"
     },
     "FEEDBACK.md": {
-      "bytes": 1719,
-      "sha256": "fbc02f93004465f30ba6ff8f3296844d304a20e318541f50a559a291c65b8211"
+      "bytes": 1688,
+      "sha256": "630b3b23b49d9754baecde287a316426201f2b720ace857defcf8bbec3934980"
     },
     "ISSUE_REVIEW_INDEX.md": {
-      "bytes": 41325,
-      "sha256": "e29f1dc83b9e1035281c8a459b92c05ebc21fa7968b8ff3450ca19c488406c68"
+      "bytes": 40173,
+      "sha256": "ce9ee05df17230f95146221265e0613c6d625b4cdeae40bacd2c1cd8b5425845"
     },
     "MAINTAINER_REVIEW_INDEX.md": {
-      "bytes": 7139,
-      "sha256": "dad16126a33b441c9938260943090a6a1684a64ea1980de3520eb8d3d1556032"
+      "bytes": 7071,
+      "sha256": "25c7cbb3a78bcecc61e5e10c9c853e7cea33e37458e51e772ae8d05a854cf82a"
     },
     "README.md": {
-      "bytes": 4156,
-      "sha256": "ecc2ba3ba6f98cc0a7e8d0a59a1987d01e2ca12283be4086369afb15a4b4cbfd"
+      "bytes": 4074,
+      "sha256": "932167a2c9acbfd8751bd25052d3c9180f1be5bbeb0834d34a4fb1bc52936138"
     },
     "REVIEW_GUIDE.md": {
-      "bytes": 3603,
-      "sha256": "c9077ef0f1d8c54fe0c7d30aad8c9d7478a0d4267856e4dafd3569fefa36f7a5"
+      "bytes": 3545,
+      "sha256": "95e1aeadd11dad682d11c86b9b04ac27b7406ca1c8c6a78fef9242d640b8b896"
     },
     "ci_attribution.jsonl": {
-      "bytes": 3620,
-      "sha256": "c22d96ce7e123838d682997e2d74e86a0660264663d019029ae1bcef9de78296"
+      "bytes": 3596,
+      "sha256": "1ae7ab9cc62f23fbe412f3f81d336ad98beff95f82f90cfa354ac3bddd92abed"
     },
     "commit_series.tsv": {
-      "bytes": 23912,
-      "sha256": "d667ed9ed10cd5e00485de4eb5249060aec991c12bdd02bfc6127caba1a03bc1"
+      "bytes": 23763,
+      "sha256": "bb396173034ee79be5c9df8addbab6b921e3c1c154480fd873c710ff45595929"
     },
     "evidence_bundle.json": {
-      "bytes": 40579,
-      "sha256": "6c8c33ac354d889367d29704923b1889bebf6f9a619e2a559ab7f131802405ad"
+      "bytes": 39466,
+      "sha256": "5a8253d69e37acbec34250ba8532e68b2a4b50f4e52a57cf85218e83319d511c"
     },
     "feedback_contract.json": {
-      "bytes": 1324,
-      "sha256": "c10ed8418b1223b3c4a5650b00295578a4b516a3058cbf49d4879b585de03591"
+      "bytes": 1286,
+      "sha256": "ad8dc7d6bb9dcc1b4675070535320b3d1d0c5010931094f9a556d254a2ca1651"
     },
     "focused_validation.jsonl": {
-      "bytes": 21519,
-      "sha256": "ae76edd645d113214c8a6f38b14d9b3a2433c9913608947620463b8cf7faedbe"
+      "bytes": 21495,
+      "sha256": "89e047f8919da8331acf7b9cd84fa70e67e0abb80eabaef8715e1a43beea0e7d"
     },
     "issue_coverage.jsonl": {
-      "bytes": 45988,
-      "sha256": "6778e2df216dc1f7f985307844a92958bb1b701045106d50a9007a8bb90439a9"
+      "bytes": 45808,
+      "sha256": "199a489e81de7ede3156a71ae2afc76dab08cfbeba59135e8ab8cffb28c51c33"
     },
     "issue_pick_commands.tsv": {
-      "bytes": 39342,
-      "sha256": "edf78df2cf32e52f0a823654ffcb49aba1915f052d147da67f0e1d9a9f93c714"
+      "bytes": 39262,
+      "sha256": "4ebd469dfa5ee3dafa2e96c9b56dd9af8bf6fc3a3bb2af8df6e9aa6b7ab0e575"
     },
     "issue_review_packet_index.jsonl": {
-      "bytes": 43745,
-      "sha256": "d7f36a81e0c9414f8569253f9b2aa2b691e2b4debd040e5b4641076dd90f8e6e"
+      "bytes": 43666,
+      "sha256": "8c0492257a075c78e9d929dad0fec27690b9f01a9ad4e15225ee01d4daaf6ab3"
     },
     "pr_coverage.jsonl": {
-      "bytes": 7913,
-      "sha256": "86d76d5bbef00b7e30be482d6ce2cea21d7a041a95c0ca52be00ed3da9a90c01"
+      "bytes": 7889,
+      "sha256": "1a59aaefd84f555a470d69d84aa118f9f55393b9fdf4eec7d307ceff705fb016"
     },
     "pr_pick_commands.tsv": {
-      "bytes": 22813,
-      "sha256": "75bf8a9ae92d2069fe63a8af7fe1009864f0036572c8906d340aaf972dc770ad"
+      "bytes": 22788,
+      "sha256": "883ea235a2687bd4685c6f866b109d10c925580265e875e20546ca9413a7e9a2"
     },
     "residual_work_units.jsonl": {
-      "bytes": 30125,
-      "sha256": "eaca65c91e74a6171a5d4c1e5aaf9f490f44e02217cf3cc378178ffce47ad593"
+      "bytes": 30025,
+      "sha256": "8489cc7b57814b8dd141c562839d83220a04e4ea569adddc6ef8a0605a372d27"
     },
     "review_packet_index.jsonl": {
-      "bytes": 104993,
-      "sha256": "19ed98db0527c85e2bf3ea94264d6c9966b986b43282ff6cab1d6cb4b8d8bea8"
+      "bytes": 104969,
+      "sha256": "251e50c42f7a00cc9fa56742f07b396efeae3cc1da98eda0bcc8dc72c396c804"
     },
     "review_packets/ISSUE-10094.md": {
-      "bytes": 1815,
-      "sha256": "237472e57152649f4126c734d30000852f8160e444eb76dc4bf85a2d76e3be85"
+      "bytes": 1754,
+      "sha256": "158af350b379826075e1f4486fcba2315ccd37f1f88e069305d184038ff26923"
     },
     "review_packets/ISSUE-10116.md": {
-      "bytes": 2090,
-      "sha256": "ea0b7aef26f02485d96661f7f621dd3873afe1462295d8c6c0f2e9b471036e7f"
+      "bytes": 2023,
+      "sha256": "d64b9447bcad01c09949d837a00a5a3401a234c997bb24396bbe19c4c7df7759"
     },
     "review_packets/ISSUE-10380.md": {
-      "bytes": 1976,
-      "sha256": "b3822d63778026f35b279a52ac78964303ce8045d057d0523feced20ec8b81bc"
+      "bytes": 1915,
+      "sha256": "2c364161f111d9a0991a75bb5cfc702ca84ab90f398c48e3119e5700a86a62e8"
     },
     "review_packets/ISSUE-10527.md": {
-      "bytes": 1858,
-      "sha256": "1778bdfb5de8ab9cd960a2c42fab64adbf5eca28b9f0f1e70f69fab4002fe986"
+      "bytes": 1797,
+      "sha256": "82379a751c9f3101239d57450d6f27b16deee494ff2e9301f3ca36552d707f50"
     },
     "review_packets/ISSUE-10541.md": {
-      "bytes": 2110,
-      "sha256": "4ba235260f874c32485a8d3eabbee08c9fb8a8dba0b95cac04abc624b1ea489a"
+      "bytes": 2042,
+      "sha256": "e84214768498c1b8633d8c407a2f3a7fab8166300df35e50231a312b9603a60d"
     },
     "review_packets/ISSUE-10544.md": {
-      "bytes": 2269,
-      "sha256": "a168bf9f437505d4cb1d64f897e02556ade65dc42be0f0ab80ab1d3c6cc5526d"
+      "bytes": 2200,
+      "sha256": "14d249df5ef18798b063ccb7fe9e4a314cbf1f8978fe0551b5ad6b85df099b5f"
     },
     "review_packets/ISSUE-10742.md": {
-      "bytes": 1868,
-      "sha256": "cfe7d777df4cf200430a95643cbc1a90b581de1931000a5a08a3b50f97143065"
+      "bytes": 1807,
+      "sha256": "62f31e6dd75d57e161ee33eedea67461f21f745ddfd53bdd07e07a6a6d214e7e"
     },
     "review_packets/ISSUE-10835.md": {
-      "bytes": 1936,
-      "sha256": "59736bafd2255822ecdbb66ae8c64606c4db50e0a7a8475db247c2d9bce07b03"
+      "bytes": 1875,
+      "sha256": "45290db30c139886b1886ccd4be69ce739e81d881898992aaf8b4c7f4a7b6cce"
     },
     "review_packets/ISSUE-10888.md": {
-      "bytes": 2175,
-      "sha256": "2b4e5630eeba1ef51ddb02c3a5a5d5e66d82c0713748d9d31da48ac4edcc99bb"
+      "bytes": 2107,
+      "sha256": "aa348e25cbefc469496bb3ae6071a3762177751e14423dfe504ea9e20bec8018"
     },
     "review_packets/ISSUE-10960.md": {
-      "bytes": 2157,
-      "sha256": "8d729f52ae5ef0e1dc093992fd96a4fa04076ff4943b74349c7d0253e0b101c5"
+      "bytes": 2089,
+      "sha256": "52bff715f90ba13457de9ccef398748e7adb891f60a74c9a36ed3190e98caa6d"
     },
     "review_packets/ISSUE-11062.md": {
-      "bytes": 1975,
-      "sha256": "0db129a4205de6d5779e5cd3fe251dd0de15e7f6901f9c2608602c5a38b2fea7"
+      "bytes": 1909,
+      "sha256": "1fdc237d064d68ef0c9961c9a6a8c9e83bed638ab3fc51024b630aef01ebd6a8"
     },
     "review_packets/ISSUE-11284.md": {
-      "bytes": 1792,
-      "sha256": "e5ccdc64fa2d69a6385e7d0065c1edf1f177df7b87c8a2e8b20f3c4e31d54524"
+      "bytes": 1731,
+      "sha256": "c1f2f7ecd2b362a097d17aa60c3931d827493eff005c155e44fd40347e6aed0a"
     },
     "review_packets/ISSUE-11597.md": {
-      "bytes": 2061,
-      "sha256": "4d70d9681b2681a3e6fe91df2bd7ee46d7369000ef67ca1549d4c6c2a101030e"
+      "bytes": 1993,
+      "sha256": "9ae31e893916b132a20c923aa0f5cf75a3a4b6409bf7d1c0a0860ac75a923a39"
     },
     "review_packets/ISSUE-11677.md": {
-      "bytes": 1931,
-      "sha256": "df4c3dde3b6b7b8c3555894495a3c5c9766e78e8115b318f0da3f14a25082a89"
+      "bytes": 1870,
+      "sha256": "e1c2d9042e28f48e8101716c125a7d314cc5dbf90747c682dc7d816462ec221f"
     },
     "review_packets/ISSUE-12097.md": {
-      "bytes": 2000,
-      "sha256": "6f1d8311a076c4b7c37d91b2ed785f337cf74caac8e54d4d51578bf3fceeb8a6"
+      "bytes": 1934,
+      "sha256": "6613c18d313889a7ea87b7693df15e23b8f5bae6cda1f0a3808bbfdea47a830e"
     },
     "review_packets/ISSUE-12341.md": {
-      "bytes": 1881,
-      "sha256": "35183ecfb2e0b8a2984e8765da0693deae07d21818f8d0065eea0b741eea98d2"
+      "bytes": 1820,
+      "sha256": "8e420d463a827fe85422c0b19477da494b53e5a90d6c63a786c75a7d9a9cc156"
     },
     "review_packets/ISSUE-12561.md": {
-      "bytes": 1929,
-      "sha256": "39dc8cfefec13242c87b44ec91b00fd4bdf814fc74c8d307d47fd25b3a014425"
+      "bytes": 1868,
+      "sha256": "c85931c6ec2bd00e3fdab2358c8cb8e68723c0527192772b7dfc08f8f953e59c"
     },
     "review_packets/ISSUE-12710.md": {
-      "bytes": 2048,
-      "sha256": "e8ad447e22479156e8888f2061cc0eb940185ab6c81f8947d3940a50fb5af255"
+      "bytes": 1980,
+      "sha256": "b81711f5ebb5ef856b5cac60597ae3d3ff6abf533f7d7ecc00d2b6b7a3fbf0ac"
     },
     "review_packets/ISSUE-13113.md": {
-      "bytes": 2094,
-      "sha256": "515f136a875d3b62d0935dcca7d7c8878bc3f2c9205455ea224279e1a213035c"
+      "bytes": 2026,
+      "sha256": "eb75f4c711cdf5c440fe294e8cd6061d22b6982fe5badb7cfef6ea6df6f1e4f2"
     },
     "review_packets/ISSUE-13204.md": {
-      "bytes": 1868,
-      "sha256": "975f830bef0586620c601631471eb6cf554f42d311c7efe1ea62074e42bd377d"
+      "bytes": 1807,
+      "sha256": "b0be2947270d3a1c58873db50b7391f0a327a8124411e6249d9d3bb3d10759f2"
     },
     "review_packets/ISSUE-13210.md": {
-      "bytes": 1952,
-      "sha256": "63c659180a7db8b4a60f6040181df303e7542ac9a7c2a503181678af9a7a4c50"
+      "bytes": 1891,
+      "sha256": "d0161aca413e0f65e99225b2843d112cbd9b640aa8b9de27c55949318c76e27f"
     },
     "review_packets/ISSUE-4567.md": {
-      "bytes": 1827,
-      "sha256": "bb4b9083a5d918072cb44fe55d85a8f76e0b20877fdd9edad47a364464159771"
+      "bytes": 1766,
+      "sha256": "17d1136e74c95f52ca17cd4a3a8a1a1dadcebfff6ff1c8e03b806f207095d834"
     },
     "review_packets/ISSUE-4706.md": {
-      "bytes": 2049,
-      "sha256": "853432bf2ba4abdb59bb3b4c2dba0765c2c5da459f844d1eff3907cc0cf5e189"
+      "bytes": 1983,
+      "sha256": "a3a631786f198cebd1513ae4e545435afe91a929647b9032e36bbf31289ba26b"
     },
     "review_packets/ISSUE-4784.md": {
-      "bytes": 1911,
-      "sha256": "9fc4cebbc25de3b2405205a7302b3d54f18d26bfeeeaab8ff4cf2e723e6d3e8a"
+      "bytes": 1850,
+      "sha256": "bd4f86b9471666af8f31be17389cdbed1596eaa0caf110a23f1f1f71c5b00791"
     },
     "review_packets/ISSUE-4790.md": {
-      "bytes": 2029,
-      "sha256": "fa1c078832d6c94c2a0bb7be1855355b8fa6ab16ec87d258c733f07a1ebaf7e4"
+      "bytes": 1961,
+      "sha256": "693d4871890293b7dac7f27ef96ccc5db3514346c428ea8c5ec6c94bb2d81e6b"
     },
     "review_packets/ISSUE-5005.md": {
-      "bytes": 2144,
-      "sha256": "daf4dd21e41f4ef50fe07001a804d7c9353baa8dbbc7720e14fe10268bcb4e45"
+      "bytes": 2075,
+      "sha256": "520c7fc5bb2055a035d166736d65ec8166918b8ac4ebaedc11b5eb7f10abc38b"
     },
     "review_packets/ISSUE-5123.md": {
-      "bytes": 1931,
-      "sha256": "deaff620323ad39c8027845b58c9dda5acc6104d88d13f009a0f79b26fdef1dc"
+      "bytes": 1870,
+      "sha256": "47d3624ed1376d2716802ec40e0e327091a9e8fc36639a9b626fc675471e274c"
     },
     "review_packets/ISSUE-5139.md": {
-      "bytes": 1887,
-      "sha256": "f9dcc98e838554663252b5e05d10543bae9d1684a5345066b8dca28ffb679008"
+      "bytes": 1826,
+      "sha256": "13b466d33215cb8651ae28d7e574b93b5f040b33548f9507ac63fb98ed1bc162"
     },
     "review_packets/ISSUE-5350.md": {
-      "bytes": 2092,
-      "sha256": "73f7c9447663ea2930602f40e5e73870eea71bf260867b70db499a6f8bdf9598"
+      "bytes": 2026,
+      "sha256": "d59dc4570d1062cb478aa7cfb8b8d56ba77903e704f30596a7346009e191da9b"
     },
     "review_packets/ISSUE-5564.md": {
-      "bytes": 1919,
-      "sha256": "5dfa1eb0bad3744ee7ff11ccbb8963d57365bf90b45673dc3548fd39b118cf73"
+      "bytes": 1858,
+      "sha256": "727cacc09a1ee90f79119887ec0ca8bc967ecf4e01dafe6ba4ddf36e33d41179"
     },
     "review_packets/ISSUE-5846.md": {
-      "bytes": 1817,
-      "sha256": "01794daefcfa13b70cecc36a7fe1efb637553281e357e9d1f3902da1fe063a5f"
+      "bytes": 1756,
+      "sha256": "4e0310fb35c35decea2511eee93517dc19e1cd4403f0a440a14f62152b1661de"
     },
     "review_packets/ISSUE-6084.md": {
-      "bytes": 2027,
-      "sha256": "ddfca5e1c7261fba7704819434d21adeedda32c5e1a5ffb2445cae0502582a67"
+      "bytes": 1966,
+      "sha256": "ec0d6f0542e2cea5d3b10ef902b8bfa250f228ebc79fc7d3900a1aabf0c0b30d"
     },
     "review_packets/ISSUE-6332.md": {
-      "bytes": 2163,
-      "sha256": "d3683c47e42d4f8cad26cead9e7704f32f856c04851e5e2b73905f2b9e54c738"
+      "bytes": 2096,
+      "sha256": "c1526589e0c589f17cd4b7bf2d2d8ff433e2c3dbeec09993bcdad486c1b956de"
     },
     "review_packets/ISSUE-6468.md": {
-      "bytes": 1925,
-      "sha256": "033e8e05c3c4fa6b5af06ed7fb082c317b99a5bcfe1899b54c19806c065e72fc"
+      "bytes": 1864,
+      "sha256": "7d4a2994fb008bf1eb2806597f875a2b5faba6e2337e653ed093be0871341e2a"
     },
     "review_packets/ISSUE-6505.md": {
-      "bytes": 2085,
-      "sha256": "0988f09f274991f5e65662df338c5eb204a8405bf6c4994ef30436217670bf3d"
+      "bytes": 2018,
+      "sha256": "6e219f6d1942771e526a777f375a10fb088433b8181e41fa4b325fd724bae9d9"
     },
     "review_packets/ISSUE-6612.md": {
-      "bytes": 2102,
-      "sha256": "6a3559b02708821753ba230f27c4adeb50ed7a662bc4476491a1f81e7ea873a6"
+      "bytes": 2033,
+      "sha256": "108ce2fca9af57636364cee5474aa60f499b76942b394fe6f3102ac3c67a7e00"
     },
     "review_packets/ISSUE-6860.md": {
-      "bytes": 1981,
-      "sha256": "a9ca2678e2a95df2094d9e50d2d1ac01c72ef3f29fb608e5bd4926fe05ff0b1b"
+      "bytes": 1913,
+      "sha256": "15b0d00d0833439a36b8243b940d42194666d7afcb51e575537b939084f2e299"
     },
     "review_packets/ISSUE-6874.md": {
-      "bytes": 2073,
-      "sha256": "730bb9eadf6b8dd2eb3782000396a4a73634c640467e8cbfd36c866cc18a348c"
+      "bytes": 2005,
+      "sha256": "e5d14bcc0897cbdd054f9a13cc9655d60b0f5b606bbc72cb7b04c82f031eebf1"
     },
     "review_packets/ISSUE-7149.md": {
-      "bytes": 1893,
-      "sha256": "54ea4c804dff996776c75e9c5b36ba748e133e2e78658d29414eb77369294062"
+      "bytes": 1832,
+      "sha256": "929c41b0a399d64de5af0135b3629831a5fab934601498f7265e1c705cb96b86"
     },
     "review_packets/ISSUE-7360.md": {
-      "bytes": 2259,
-      "sha256": "250dabe827e2aca5f21841b3af5bdaa0a4d82e75f52126abfafe4b909dfb31b1"
+      "bytes": 2189,
+      "sha256": "474e3aa1a0fee3514a060656d459da988c8b709914cc3373f76463e29549aca8"
     },
     "review_packets/ISSUE-7366.md": {
-      "bytes": 2133,
-      "sha256": "ca1504a99f12fc89f5872c014251213185a004a9e303886bcaefc1951e490629"
+      "bytes": 2065,
+      "sha256": "ab1a430c0c65434b24d9811354671a7b0d27168909e7494803b84ee47c5f1a46"
     },
     "review_packets/ISSUE-7517.md": {
-      "bytes": 1909,
-      "sha256": "d7d0a72298f7755d90d132ab459ff9a087dcbfa860b8e88132a8267a47df325c"
+      "bytes": 1848,
+      "sha256": "d531c7ffcef9959b2db1e9acdbcd100a6cb7afe357a361b90195973000c08c65"
     },
     "review_packets/ISSUE-7732.md": {
-      "bytes": 1873,
-      "sha256": "aec65bdda04d64b1f51a8bc8109a9c4d96ecfde7a14bb1c3c7fecbe0d2e02547"
+      "bytes": 1812,
+      "sha256": "9e57aaa9df0fcb7d1cc2f4b2a71764d73220b0ca629e79bff427343fd2d0a84b"
     },
     "review_packets/ISSUE-8341.md": {
-      "bytes": 1889,
-      "sha256": "a9a1de00894d6ad03eaf884b50beca77168514cb4c596e05d7a2c87ce04d44f5"
+      "bytes": 1828,
+      "sha256": "028e518f54da598153698af4107211329c3b1efaf1655740891200dace4a0edf"
     },
     "review_packets/ISSUE-8693.md": {
-      "bytes": 1887,
-      "sha256": "0eadfb3ebd3e0496288a7f5c3aa509cc50d7029e6ae9cc14f5b6fab17bc01c62"
+      "bytes": 1826,
+      "sha256": "34fd3b02ff3bc512b6d3b3fe75f18725458f189fc9e5239330d171d0c7403e44"
     },
     "review_packets/ISSUE-8805.md": {
-      "bytes": 2030,
-      "sha256": "74f340c375b993b669d728b9e7b2fcd09b81efc4bc6b760b1bacc38bcd1a6418"
+      "bytes": 1963,
+      "sha256": "04b9478c45cc5331de755768f258695b21145083ae465436e3e061a5fad78744"
     },
     "review_packets/ISSUE-8894.md": {
-      "bytes": 2921,
-      "sha256": "172e402712a9968ae62565c2f0fdd11f72a801bf258dda5a034de3c589ac0fab"
+      "bytes": 2830,
+      "sha256": "ef6cd25fe54cffcd5c56b001a9ac3ee909664c8af49ddf117914a666a094fc76"
     },
     "review_packets/ISSUE-8936.md": {
-      "bytes": 2082,
-      "sha256": "2b050cf308d42651de8fb292f3382532d560615e6beb76c0df902ea0746ff8a6"
+      "bytes": 2014,
+      "sha256": "3418d8815740349973546007edcade7ab7c14a13d520fdaa725452d06b28f969"
     },
     "review_packets/ISSUE-9082.md": {
-      "bytes": 2104,
-      "sha256": "7833bdb12f39a53477c24cc7b566505210e234fe4406101033cce2ce9b4e74f9"
+      "bytes": 2036,
+      "sha256": "e71ad4737ee115bf9e648b6d5484fc631d511256addea842fa2ec4f7e0a74168"
     },
     "review_packets/ISSUE-9147.md": {
-      "bytes": 1927,
-      "sha256": "3bfd8d699ddabd3c3b4e9c8d1e5c9577d75955e87663eb4221f10c1303ca53be"
+      "bytes": 1866,
+      "sha256": "27d5a7c72de806d7f646460531b36a6b36f58c1f26d2b269678989eb84b5c955"
     },
     "review_packets/ISSUE-9212.md": {
-      "bytes": 2091,
-      "sha256": "2ad6770acb8c969527b385146f959a71cda7ce3a72d5e37bc1a293669154e058"
+      "bytes": 2025,
+      "sha256": "5ffc4b4f1d5dafa6da5f608eb5f57228e4973bd4a2f07880db2b9808c1f8a556"
     },
     "review_packets/ISSUE-9233.md": {
-      "bytes": 2040,
-      "sha256": "6262ef207a13f2653ab7763b3d186372996b02cafd40f58ded865ae95e9f988d"
+      "bytes": 1972,
+      "sha256": "1f09b36997bbb11eb00135eaa731b3481b4981b933e314a73d160b23afca096d"
     },
     "review_packets/ISSUE-9301.md": {
-      "bytes": 2082,
-      "sha256": "c3716362cbadf1cb73099c5b49868ad2110cf2eb26e1c06761afd3dc922d57fd"
+      "bytes": 2015,
+      "sha256": "6564297d91f99c8722439fb85645cd2438b222ea4db01ad54a16fc1577dd1e43"
     },
     "review_packets/ISSUE-9348.md": {
-      "bytes": 1923,
-      "sha256": "8ac399017fa29f606c26d48ff3204801ddfa2c38bbcf88d2cea036695267383d"
+      "bytes": 1862,
+      "sha256": "1a8766447f2e13beebe21167b56e88785b2777ce789a4354286b6481e6b7cf73"
     },
     "review_packets/ISSUE-9369.md": {
-      "bytes": 2183,
-      "sha256": "017b83298ccc58d71ef2d5d341c1251cd5a0405e1b6e56017bcff85bad832bc4"
+      "bytes": 2113,
+      "sha256": "0495e8c674fe710f8f2a3939c60aae54a586dadfdf9e9db4ddca691c16cc0dd5"
     },
     "review_packets/ISSUE-9410.md": {
-      "bytes": 1965,
-      "sha256": "d42813b4303b2906de204c5d17d393f9e2ee2c4a374ee61daa980c92e598b431"
+      "bytes": 1899,
+      "sha256": "6f162c72214548f09625501d25204d0d1210a09b6ee46be91ce89f57cbe588ec"
     },
     "review_packets/ISSUE-9425.md": {
-      "bytes": 2047,
-      "sha256": "bd9b66e84d663cac45135c8571126f4ebc08448897acfd68135517a1ab3e6968"
+      "bytes": 1979,
+      "sha256": "dd8b325e76be3b619f76567b3b510d50bc4dfbb46ba94964f56e891c15c653f1"
     },
     "review_packets/ISSUE-9493.md": {
-      "bytes": 2250,
-      "sha256": "66b250ae9d806c89d72f68cd2c9dd80d4466c406c62826bf8f1f932da4eb512e"
+      "bytes": 2180,
+      "sha256": "2644acc31461b1766a95f8a219cebd819850e4dd1d0f9c928bab12eaf58e03ce"
     },
     "review_packets/ISSUE-9548.md": {
-      "bytes": 2166,
-      "sha256": "5fed0edf23a35d01c976e0856167b561a07e6642760881993f529f188dd3c164"
+      "bytes": 2096,
+      "sha256": "df02180e78a3f28b6c0a9ae6d3cd933df0932787c7185f984f9c11632225dfc4"
     },
     "review_packets/ISSUE-9839.md": {
-      "bytes": 1855,
-      "sha256": "e4bc839b5ff62849fc02ca75675bc252821a76d35db6ec2943c210c6c18c7f2b"
+      "bytes": 1794,
+      "sha256": "fc5865ab857cda2b5b511c898cb5075a5ebe8393cf33fe912e08844329418168"
     },
     "review_packets/ISSUE-9930.md": {
-      "bytes": 1863,
-      "sha256": "bf13ab2f4bab59fb27c94b1001e05c5ed6bed3e5ad93d5a656aff0daa5aa6cd6"
+      "bytes": 1802,
+      "sha256": "8507142e6611fb1a4095591235171bcb53629a31a940371896b2a06120bee487"
     },
     "review_packets/ISSUE-9944.md": {
-      "bytes": 2045,
-      "sha256": "6310f72c027f6bf68dbb0fcd50eeaf8c6433cc67894a6d849991709a57d4368c"
+      "bytes": 1978,
+      "sha256": "fc6af3ee573e2af7b2803d6be82b140c03cab11a15f675af8e1a1790e089b7aa"
     },
     "review_packets/ISSUE-UNIT-COLLATION-SCHEMA.md": {
-      "bytes": 3977,
-      "sha256": "0b86d0954b65e9d42faf520824db97480a02f897921cfd48271c96955b5f5ded"
+      "bytes": 3874,
+      "sha256": "a3efa4de38b1c2f8bacab132e9c4a230b59d3752615d545063218a4764576bfe"
     },
     "review_packets/PR-11437.md": {
-      "bytes": 6819,
-      "sha256": "004fc039cad8d568975b591fa277b9bda827c8e14acc5b2ed1bbaa52e15ec606"
+      "bytes": 6654,
+      "sha256": "b74fa765a514f8b11cf87ec86cb0722974ad2ebcde2803fce9e702b4c03016d7"
     },
     "review_packets/PR-12297.md": {
-      "bytes": 3102,
-      "sha256": "a08089a2c7393a4e277fb2d42bb3e05527641194dd838c89f57963f0c0eb03c2"
+      "bytes": 3004,
+      "sha256": "25b0e572ecb2346c59fbe14e07605f67d9202bf1a600fa9d341d3443d31d5cb6"
     },
     "review_packets/PR-12731.md": {
-      "bytes": 2614,
-      "sha256": "bf6de4fe02881b2e26d1dc4a64693ea627cd522a423093c361ff866f6a097f96"
+      "bytes": 2520,
+      "sha256": "127017734bf07e0aa05b4e562342d551f745387315b832574517ae758a3b967a"
     },
     "review_packets/PR-13051.md": {
-      "bytes": 2645,
-      "sha256": "337cc198ac91c76075dc9f2f6f952041c8d68918505c63e6b625f7088df31e01"
+      "bytes": 2539,
+      "sha256": "b7eadcbaa08b94c359bd02952c33e3e832ee82796caca4c127149ab81ced1bf5"
     },
     "review_packets/PR-13288.md": {
-      "bytes": 3134,
-      "sha256": "315d62e063360659269bbb8d68e1ff9cdc83b353b50ce2acc2f242f64d0b5a04"
+      "bytes": 3038,
+      "sha256": "cd908586374f6d1c834824fa7b0284c7699cc1fb70c1cdd9fcd2110bcfe50237"
     },
     "review_packets/PR-13289.md": {
-      "bytes": 4140,
-      "sha256": "b2f6dd0a54ffcd600f597b58508fc07349720f195c5e97829a307b58993f58b2"
+      "bytes": 4039,
+      "sha256": "698d039567b35c69caf945df7fbf62c54c6dfea916d36c9389c2fb885b43a498"
     },
     "review_packets/PR-13303.md": {
-      "bytes": 4751,
-      "sha256": "322e80ab8bdd1cb29667e591b957b72144f673f2de70f5b33685fe51d93ea150"
+      "bytes": 4635,
+      "sha256": "2847651518e7abb8ec8ecf33be27ed094411be4574bfd0a66527c0489abd400f"
     },
     "review_packets/PR-13312.md": {
-      "bytes": 2683,
-      "sha256": "b1fe87576b13c4d67cbdf0dcd09fa1ae8251beb4764a192894b4a36a65e65454"
+      "bytes": 2585,
+      "sha256": "d6f1abdf4686734e12b2ded3bf5a3f290322b8c6504ee71ea01742c3d46aeba4"
     },
     "review_packets/PR-13323.md": {
-      "bytes": 2734,
-      "sha256": "cde7daa791047ba986b6cf337214bd26c8597260e91122a5e9c2e4731a6fd6f6"
+      "bytes": 2635,
+      "sha256": "e42bfb7df51f4f36d6d340413c71175f7bb61d0046c91d34463ad143dd6d9b9f"
     },
     "review_packets/PR-13368.md": {
-      "bytes": 4415,
-      "sha256": "9a4d55dc764d9cd7a12756838cc9a7299c17b064ea9cb2614c1e2bb6a7228103"
+      "bytes": 4272,
+      "sha256": "c481035381a327a50bd5b011164df1a1edd322d9ef8d0b697011c3ca9b05faea"
     },
     "review_packets/PR-13399.md": {
-      "bytes": 4349,
-      "sha256": "911bb9a13b39bc56671562826727260e39c65b705dd9c3efb85e2ffb786c8f81"
+      "bytes": 4245,
+      "sha256": "c8e95e2e31213a0768175278ab36a782b41ba5a201d95b80f795393fc7961161"
     },
     "review_packets/PR-13404.md": {
-      "bytes": 3711,
-      "sha256": "fa1e95fd4b4484312429640b53e85de42d089363d727c9ea1ceda85b0e00cca8"
+      "bytes": 3612,
+      "sha256": "cb7728d2fbf7a526b5742d4af686b87d93571d81fd1d87f970759358bab010d2"
     },
     "review_packets/PR-13405.md": {
-      "bytes": 4213,
-      "sha256": "31ddacc4d8747d508d7affcd80ebd075619861bdea08d1c502ad275adb3018c8"
+      "bytes": 4098,
+      "sha256": "79393fa8f265e55c63e940a58d33b7cab838fd329c2457e75d17de08b69f99d9"
     },
     "review_packets/PR-13415.md": {
-      "bytes": 5310,
-      "sha256": "ddc3503731c12c067d6234cbfc01579d3c67c3d1d1c69818c5f05302ed677417"
+      "bytes": 5193,
+      "sha256": "414ad9cf3b2d06c2cff9073a675974c6623e6e0ca177073afab195feb55b911e"
     },
     "review_packets/PR-13416.md": {
-      "bytes": 4755,
-      "sha256": "cb816ee04fadaaccea71f840ab6dc468a79e98f2b00a7ba97e2ab6109d5c4437"
+      "bytes": 4651,
+      "sha256": "53b3a203c70efc8732243bbafdc68b912457544f21e9ddd8d6cc2f03b819bd58"
     },
     "review_packets/PR-13435.md": {
-      "bytes": 3795,
-      "sha256": "9b468d9f9e317cb7ca0a5406b7f5a159e3a8b4a9f83283ec23cf79f50b271d4b"
+      "bytes": 3687,
+      "sha256": "b06097f17bbfeb5447eae9990069bc4f09e820c6beb03bf13497eb4955369017"
     },
     "review_packets/PR-13436.md": {
-      "bytes": 3704,
-      "sha256": "e8f657e4caca78463a0ed4a53f40927c7418719e7afaa3fd274f06b7b79279d6"
+      "bytes": 3601,
+      "sha256": "33a043032f2887879cb655647a993a03ea25ab88cfb799d409511146aa791fab"
     },
     "review_packets/PR-13442.md": {
-      "bytes": 2824,
-      "sha256": "6434b24fd3c73fcba4d751776483b9c396eb0ee2c11033d17362d0499c84e52b"
+      "bytes": 2724,
+      "sha256": "876f567f79fe825f213ad4fe4791cdd7fac4cb19a4d20ff6c4b4ba5949341be5"
     },
     "review_packets/PR-13452.md": {
-      "bytes": 3868,
-      "sha256": "bfb038711ce2a13d153c343f5f5b923f54b4f7b5bc195ba3fab8db29074ce34e"
+      "bytes": 3759,
+      "sha256": "30fce39a232b2af13c9a21d90aeff919fae6f2f2e88d72a5ab092bd9a3deac9e"
     },
     "review_packets/PR-13453.md": {
-      "bytes": 3372,
-      "sha256": "197d93329720e84bd1e2556ddcbaf2733f6455d63bf11672f6c5a2b16598c723"
+      "bytes": 3275,
+      "sha256": "f2eb3e357667b9a2e32f9cdc0ed6fcb0d4d900a02725567706d0d96bae8423d5"
     },
     "review_packets/PR-13455.md": {
-      "bytes": 5523,
-      "sha256": "7da29c8f683835816114f69051f65920ed262f06bb42919a2d1d08741d0e0cf9"
+      "bytes": 5407,
+      "sha256": "8798d026312a868ba60d9921b4257999491fac51c1f65ea62394d2b7e116b0fc"
     },
     "review_packets/PR-13457.md": {
-      "bytes": 4275,
-      "sha256": "a9985dd0197b4003a3a04086c884d969f7e474ff129ef3a51f2ed5b0603cdfcc"
+      "bytes": 4153,
+      "sha256": "f4a3960f880d54d2722dd3a3a2e045ce3ad85a5723be6c1af9122c1f12a0bf5a"
     },
     "review_packets/PR-13461.md": {
-      "bytes": 3724,
-      "sha256": "1304c8bfe879dd3ba4a49cdc968b2e71260c574a2466ccadb2bdfa23ea844fd2"
+      "bytes": 3617,
+      "sha256": "dea18c0ba2a3c6f21f7013869c4c7b79982643e63fe360f57df502c48c8a150c"
     },
     "review_packets/PR-13465.md": {
-      "bytes": 4360,
-      "sha256": "c7bf74cfaa493d20a06bf31fe974ef0888ea7ec50133c908928edac7bc0a1776"
+      "bytes": 4239,
+      "sha256": "1be518ce6b2c2a31e185532bf285606591e88d02a5f78e32c14b63b60754ca40"
     },
     "validation_summary.json": {
-      "bytes": 819,
-      "sha256": "bebefe40abaa8b4263897c8dac0550a3f553a5dea9d7b7cf62add37500c11476"
+      "bytes": 791,
+      "sha256": "454a50bd049e2bc66a659ae07d25b7f18e76ff616f0e5f65afe9556c6a6594be"
     }
   },
   "backlog_packet_sha256": "865a3d1bd9f222785f0fc7aa251fbca2d8794255a87335814c9cc5a3f663b484",
@@ -434,7 +434,7 @@
   "ci_attribution_reference_summary_sha256": "",
   "commit_count": 148,
   "current_option_issue_number": 13447,
-  "current_option_review_head": "9d6a9c934685ce55c897b7a3ef5545aa0e9c4c25",
+  "current_option_review_head": "287ebb4e69ada117d8224ee4e601085371f7677d",
   "feedback_contract_version": "sqlalchemy_option_feedback_v1",
   "focused_validation_index_sha256": "ae76edd645d113214c8a6f38b14d9b3a2433c9913608947620463b8cf7faedbe",
   "option_closure_spec_sha256": "",
